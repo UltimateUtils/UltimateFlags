@@ -4,6 +4,31 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>UltimateFlags.EF.Relational</PackageId>
+        <Version>0.0.5</Version>
+        <Authors>Soonil Hong</Authors>
+        <Company>MySmallMapleTree</Company>
+        <PackageDescription>Ultimate FeatureFlags EF Relational</PackageDescription>
+        <RepositoryUrl>https://github.com/UltimateUtils/UltimateUtils</RepositoryUrl>
+        <PackageTags>featureflag featuretoggle flag toggle</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\UltimateFlags.EF\UltimateFlags.EF.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.12"/>
+    </ItemGroup>
 
 </Project>

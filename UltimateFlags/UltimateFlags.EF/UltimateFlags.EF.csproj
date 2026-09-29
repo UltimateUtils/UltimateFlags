@@ -4,6 +4,32 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>UltimateFlags.EF</PackageId>
+        <Version>0.0.5</Version>
+        <Authors>Soonil Hong</Authors>
+        <Company>MySmallMapleTree</Company>
+        <PackageDescription>Ultimate FeatureFlags EF</PackageDescription>
+        <RepositoryUrl>https://github.com/UltimateUtils/UltimateUtils</RepositoryUrl>
+        <PackageTags>featureflag featuretoggle flag toggle</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\UltimateFlags\UltimateFlags.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12"/>
+        <PackageReference Include="UltimatePagination.EF" Version="1.1.0"/>
+    </ItemGroup>
 
 </Project>

@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Examples/">
+    <Project Path="Examples/UltimateFlags.Api/UltimateFlags.Api.csproj" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/UltimateFlags.EF.IntegrationTests/UltimateFlags.EF.IntegrationTests.csproj" />
     <Project Path="Tests/UltimateFlags.EF.UnitTests/UltimateFlags.EF.UnitTests.csproj" />

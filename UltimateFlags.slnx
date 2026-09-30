@@ -1,4 +1,10 @@
 <Solution>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/UltimateFlags.EF.IntegrationTests/UltimateFlags.EF.IntegrationTests.csproj" />
+    <Project Path="Tests/UltimateFlags.EF.UnitTests/UltimateFlags.EF.UnitTests.csproj" />
+    <Project Path="Tests/UltimateFlags.IntegrationTests/UltimateFlags.IntegrationTests.csproj" />
+    <Project Path="Tests/UltimateFlags.UnitTests/UltimateFlags.UnitTests.csproj" />
+  </Folder>
   <Folder Name="/UltimateFlags/">
     <Project Path="UltimateFlags/UltimateFlags.Abstraction/UltimateFlags.Abstraction.csproj" />
     <Project Path="UltimateFlags/UltimateFlags.EF.Relational/UltimateFlags.EF.Relational.csproj" />

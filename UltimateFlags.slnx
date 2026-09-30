@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/UltimateFlags/">
+    <Project Path="UltimateFlags/UltimateFlags.Abstraction/UltimateFlags.Abstraction.csproj" />
+    <Project Path="UltimateFlags/UltimateFlags.EF.Relational/UltimateFlags.EF.Relational.csproj" />
+    <Project Path="UltimateFlags/UltimateFlags.EF/UltimateFlags.EF.csproj" />
+    <Project Path="UltimateFlags/UltimateFlags/UltimateFlags.csproj" />
+  </Folder>
+  <Folder Name="/_SolutionItems/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="UltimateFlags.sln.DotSettings" />
+  </Folder>
+</Solution>

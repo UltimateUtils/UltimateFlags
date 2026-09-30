@@ -375,6 +375,4 @@ FodyWeavers.xsd
 .idea/
 
 # SQLite
-/UltimateFlags/Examples/UltimateFlags.Api.v8/MyFlagsDBv8.*
-/UltimateFlags/Examples/UltimateFlags.Api.v9/MyFlagsDBv9.*
-/UltimateFlags/Examples/UltimateFlags.Api.v10/MyFlagsDBv10.*
+/Examples/UltimateFlags.Api/MyFlagsDB.*

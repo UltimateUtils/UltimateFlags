@@ -58,6 +58,32 @@ public class FlagQueryStorage : IFlagQueryStorage
                         && flag.ParentId == parentId);
     }
 
+    public IQueryable<Flag> ReadAllAncestors(string key, bool inclusive)
+    {
+        List<string> ancestorKeys = _getAncestorKeys(key, inclusive);
+
+        return
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .Where(
+                    flag =>
+                        ancestorKeys.Contains(flag.Key)
+                        && _flagDbContext.Flags.Any(leaf => leaf.Key == key));
+
+        static List<string> _getAncestorKeys(string key, bool inclusive)
+        {
+            string[] names = key.Split(Utils.Constants.KeyDelimiter);
+
+            IEnumerable<string> ancestorNames =
+                inclusive
+                    ? names.Select((_, index) => string.Join(Utils.Constants.KeyDelimiter, names[..(index + 1)]))
+                    : names.Take(names.Length - 1).Select((_, index) => string.Join(Utils.Constants.KeyDelimiter, names[..(index + 1)]));
+
+            return [.. ancestorNames];
+        }
+    }
+
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted = false)
     {
         IQueryable<Flag> flagsQuery = _flagDbContext.Flags.AsNoTracking();
@@ -86,21 +112,6 @@ public class FlagQueryStorage : IFlagQueryStorage
                         flag.DeletedAt.HasValue
                         && (fromInclusive == null || flag.DeletedAt.Value >= fromInclusive)
                         && (toInclusive == null || flag.DeletedAt.Value <= toInclusive));
-    }
-
-    public virtual IQueryable<Flag> ReadAllAncestors(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual IQueryable<Flag> ReadAllAncestors(string key)
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual IQueryable<Flag> ReadAllAncestors(string name, Guid? parentId)
-    {
-        throw new NotImplementedException();
     }
 
     public IPagedList<Flag> List(string? searchString, bool? isOn, int pageNumber, int pageSize)

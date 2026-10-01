@@ -272,24 +272,17 @@ public class FlagManager : IFlagManager
         return entity.IsOn;
     }
 
-    public virtual bool IsOn(string key)
+    public bool IsOn(string key)
     {
-        string[] names = key.Split(Constants.KeyDelimiter);
+        bool[] flags =
+        [
+            .. _flagQueryStorage
+                .ReadAllAncestors(key, inclusive: true)
+                .Select(f => f.IsOn)
+        ];
 
-        Guid? parentId = null;
-        Flag? currentFlag = null;
-
-        foreach (string name in names)
-        {
-            // todo - improve - projection
-            currentFlag = _flagQueryStorage.Read(name, parentId);
-            if (currentFlag is null || !currentFlag.IsOn)
-                return false;
-
-            parentId = currentFlag.Id;
-        }
-
-        return currentFlag?.IsOn ?? false;
+        return flags.Length != 0
+            && flags.All(x => x);
     }
 
     public int SaveChanges()

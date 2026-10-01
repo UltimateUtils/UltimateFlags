@@ -16,27 +16,17 @@ public class FlagQueryStorage : IFlagQueryStorage
         throw new NotImplementedException();
     }
 
+    public IQueryable<Flag> ReadAllAncestors(string key, bool inclusive)
+    {
+        throw new NotImplementedException();
+    }
+
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted)
     {
         throw new NotImplementedException();
     }
 
     public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive, DateTime? toInclusive)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IQueryable<Flag> ReadAllAncestors(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IQueryable<Flag> ReadAllAncestors(string key)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IQueryable<Flag> ReadAllAncestors(string name, Guid? parentId)
     {
         throw new NotImplementedException();
     }

@@ -30,6 +30,14 @@ public interface IFlagQueryStorage
     public Flag? Read(string name, Guid? parentId);
 
     /// <summary>
+    ///     Retrieves ancestor flags
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <param name="inclusive">Including the flag specified by the KEY if true</param>
+    /// <returns>Ancestor FLAGs of the one specified by the KEY</returns>
+    public IQueryable<Flag> ReadAllAncestors(string key, bool inclusive);
+
+    /// <summary>
     ///     Retrieves children of the specified FLAG.
     /// </summary>
     /// <param name="parentId">ParentID</param>
@@ -44,12 +52,6 @@ public interface IFlagQueryStorage
     /// <param name="toInclusive">TO deleted time (inclusive)</param>
     /// <returns></returns>
     public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive, DateTime? toInclusive);
-
-    public IQueryable<Flag> ReadAllAncestors(Guid id);
-
-    public IQueryable<Flag> ReadAllAncestors(string key);
-
-    public IQueryable<Flag> ReadAllAncestors(string name, Guid? parentId);
 
     /// <summary>
     ///     Searches and retrieves FLAGs.

@@ -18,6 +18,17 @@ public interface IFlagQueryStorage
     public Flag? Read(Guid id, bool? deleted = false);
 
     /// <summary>
+    ///     Retrieves a readonly FLAG with NO TRACKING by the KEY.
+    /// </summary>
+    /// <remarks>
+    ///     This method has No TRACKING when used with EF context.
+    ///     With non-EF context, this method is the same as Get().
+    /// </remarks>
+    /// <param name="key">KEY</param>
+    /// <returns>FLAG entity if found / null if not found</returns>
+    public Flag? Read(string key);
+
+    /// <summary>
     ///     Retrieves a readonly FLAG with NO TRACKING by the NAME and the ParentId.
     /// </summary>
     /// <remarks>

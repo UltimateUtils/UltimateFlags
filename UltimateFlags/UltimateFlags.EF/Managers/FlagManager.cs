@@ -8,7 +8,6 @@ using UltimateFlags.Abstraction.Exceptions.ServerFaults;
 using UltimateFlags.Abstraction.Managers;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Helpers;
-using UltimateFlags.Utils;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.Managers;
@@ -240,20 +239,6 @@ public class FlagManager : IFlagManager
         {
             Area = $"{nameof(FlagManager)}.{nameof(Disable)}(name, parentId)",
         };
-    }
-
-    public bool IsOn(Guid id)
-    {
-        // todo - improve - projection
-
-        Flag entity =
-            _flagQueryStorage.Read(id)
-            ?? throw new FlagNotFound
-            {
-                Area = $"{nameof(FlagManager)}.{nameof(IsOn)}(id)",
-            };
-
-        return entity.IsOn;
     }
 
     public bool IsOn(string key)

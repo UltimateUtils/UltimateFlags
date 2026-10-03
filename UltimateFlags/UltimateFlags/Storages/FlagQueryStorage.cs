@@ -50,14 +50,4 @@ public class FlagQueryStorage : IFlagQueryStorage
     {
         throw new NotImplementedException();
     }
-
-    public bool IsOn(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public bool IsOn(string name, Guid? parentId)
-    {
-        throw new NotImplementedException();
-    }
 }

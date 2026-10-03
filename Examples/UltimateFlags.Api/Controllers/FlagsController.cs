@@ -145,11 +145,4 @@ public class FlagsController : ControllerBase
     {
         return _flagService.IsOn(key);
     }
-
-    [HttpGet]
-    [Route("{id:guid}/is-on")]
-    public bool IsOnByKey([FromRoute] Guid id)
-    {
-        return _flagService.IsOn(id);
-    }
 }

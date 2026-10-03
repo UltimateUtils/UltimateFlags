@@ -2,9 +2,9 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimatePagination.Abstraction;
 
-namespace UltimateFlags.Abstraction.Managers;
+namespace UltimateFlags.EF.Managers;
 
-public interface IFlagManager
+internal interface IFlagManager
 {
     public Flag Create(Flag entity);
 

@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UltimateFlags.Abstraction.Config;
-using UltimateFlags.Abstraction.Managers;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Managers;

@@ -5,14 +5,13 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Exceptions.ServerFaults;
-using UltimateFlags.Abstraction.Managers;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Helpers;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.Managers;
 
-public class FlagManager : IFlagManager
+internal class FlagManager : IFlagManager
 {
     private readonly ILogger<FlagManager> _logger;
 

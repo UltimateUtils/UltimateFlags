@@ -5,9 +5,9 @@ using UltimateUtils.Extensions;
 
 namespace UltimateFlags.Converters;
 
-internal static class FlagConverter
+public static class FlagConverter
 {
-    internal static Flag ToEntity(this FlagCreationRequest creationRequest, string parentKey)
+    public static Flag ToEntity(this FlagCreationRequest creationRequest, string parentKey)
     {
         DateTime utcNow = DateTime.UtcNow;
 
@@ -34,7 +34,7 @@ internal static class FlagConverter
             };
     }
 
-    internal static FlagResponse ToContract(this Flag entity)
+    public static FlagResponse ToContract(this Flag entity)
     {
         return
             new FlagResponse
@@ -51,7 +51,7 @@ internal static class FlagConverter
             };
     }
 
-    internal static IEnumerable<FlagResponse> ToContracts(this IEnumerable<Flag> entities)
+    public static IEnumerable<FlagResponse> ToContracts(this IEnumerable<Flag> entities)
     {
         return entities.Select(ToContract);
     }

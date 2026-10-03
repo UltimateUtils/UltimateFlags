@@ -2,9 +2,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Services;
-using UltimateFlags.Managers;
+using UltimateFlags.EF.Managers;
 
-namespace UltimateFlags.Services;
+namespace UltimateFlags.EF.Services;
 
 internal class FlagService : IFlagService
 {
@@ -26,6 +26,6 @@ internal class FlagService : IFlagService
 
     public bool IsOn(string key)
     {
-        throw new NotImplementedException();
+        return _flagManager.IsOn(key);
     }
 }

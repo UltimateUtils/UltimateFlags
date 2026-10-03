@@ -46,8 +46,6 @@ public interface IFlagManager
 
     public void Disable(string name, Guid? parentId);
 
-    public bool IsOn(Guid id);
-
     public bool IsOn(string key);
 
     public int SaveChanges();

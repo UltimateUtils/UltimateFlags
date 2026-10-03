@@ -100,19 +100,4 @@ public interface IFlagQueryStorage
     /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
     /// <returns>TRUE if the flag exists. FALSE otherwise.</returns>
     public bool Exists(string name, Guid? parentId, bool? deleted = false);
-
-    /// <summary>
-    ///     Checks whether the FLAG is ON or OFF independent of its parent.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <returns>TRUE if the FLAG is ON / FALSE otherwise. Note that the result doesn't depend on the parent FLAG.</returns>
-    public bool IsOn(Guid id);
-
-    /// <summary>
-    ///     Checks whether the FLAG is ON or OFF taking the hierarchy into account.
-    /// </summary>
-    /// <param name="name">NAME</param>
-    /// <param name="parentId">ParentId</param>
-    /// <returns>TRUE if the FLAG is ON taking the hierarchy into account / FALSE otherwise</returns>
-    public bool IsOn(string name, Guid? parentId);
 }

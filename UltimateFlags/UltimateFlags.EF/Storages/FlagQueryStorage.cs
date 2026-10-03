@@ -169,29 +169,4 @@ public class FlagQueryStorage : IFlagQueryStorage
                     ? flagsQuery.IgnoreQueryFilters().Any(flag => flag.Name == name && flag.ParentId == parentId && flag.DeletedAt.HasValue)
                     : flagsQuery.Any(flag => flag.Name == name && flag.ParentId == parentId);
     }
-
-    public bool IsOn(Guid id)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .Where(flag => flag.Id == id)
-                .Select(flag => flag.IsOn)
-                .FirstOrDefault();
-    }
-
-    public bool IsOn(string name, Guid? parentId)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .Where(
-                    flag =>
-                        flag.Name == name
-                        && flag.ParentId == parentId)
-                .Select(flag => flag.IsOn)
-                .FirstOrDefault();
-    }
 }

@@ -24,11 +24,6 @@ public class FlagService : IFlagService
         _ultimateFlagConfiguration = options.Value;
     }
 
-    public bool IsOn(Guid id)
-    {
-        return _flagManager.IsOn(id);
-    }
-
     public bool IsOn(string key)
     {
         return _flagManager.IsOn(key);

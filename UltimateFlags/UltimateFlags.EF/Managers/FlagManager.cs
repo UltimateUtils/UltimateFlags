@@ -47,23 +47,7 @@ public class FlagManager : IFlagManager
 
     public Flag? Read(string key)
     {
-        string[] names = key.Split(Constants.KeyDelimiter);
-
-        Guid? parentId = null;
-        Flag? currentFlag = null;
-
-        foreach (string name in names)
-        {
-            // todo - improve - projection - maybe with ReadId(name, parentId)
-            currentFlag = _flagQueryStorage.Read(name, parentId);
-
-            if (currentFlag is null)
-                return null;
-
-            parentId = currentFlag.Id;
-        }
-
-        return currentFlag;
+        return _flagQueryStorage.Read(key);
     }
 
     public Flag? Read(string name, Guid? parentId)

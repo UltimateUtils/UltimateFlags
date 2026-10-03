@@ -22,7 +22,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFlagCommandStorage, FlagCommandStorage>();
         services.AddScoped<IFlagManager, FlagManager>();
         services.AddScoped<IFlagService, FlagService>();
-        services.AddScoped<IFlagManagementService, FlagManagementService>();
+        services.AddScoped<IFlagQueryService, FlagQueryService>();
+        services.AddScoped<IFlagCommandService, FlagCommandService>();
 
         return services;
     }
@@ -40,7 +41,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFlagCommandStorage, TC>();
         services.AddScoped<IFlagManager, FlagManager>();
         services.AddScoped<IFlagService, FlagService>();
-        services.AddScoped<IFlagManagementService, FlagManagementService>();
+        services.AddScoped<IFlagQueryService, FlagQueryService>();
+        services.AddScoped<IFlagCommandService, FlagCommandService>();
 
         return services;
     }

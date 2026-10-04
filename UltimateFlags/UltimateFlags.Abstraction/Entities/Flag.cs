@@ -1,12 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UltimateFlags.Abstraction.Entities;
 
 public record Flag
 {
     public Guid Id { get; init; }
 
-    // todo - name에 들어갈 수 있는 문자 종류 제한
+    [RegularExpression("^[^ .]*$", ErrorMessage = "Flag name may not have the following characters: dot(.), space(' ').")]
     public required string Name { get; init; }
 
+    [RegularExpression("^[^ ]*$", ErrorMessage = "Flag key may not have the following characters: space(' ').")]
     public required string Key { get; init; }
 
     public required bool IsOn { get; set; }

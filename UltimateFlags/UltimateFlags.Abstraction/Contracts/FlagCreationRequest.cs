@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UltimateFlags.Abstraction.Contracts;
 
 public record FlagCreationRequest
 {
-    // todo - Name에 들어갈 수 있는 문자 종류 제한
+    [RegularExpression("^[^ .]*$", ErrorMessage = "Flag name may not have the following characters: dot(.), space(' ').")]
     public required string Name { get; init; }
 
     public required Guid? ParentId { get; init; }

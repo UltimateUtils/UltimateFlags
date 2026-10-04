@@ -29,6 +29,8 @@ public class FlagsController : ControllerBase
     [Route("{id:guid}")]
     public FlagResponse GetById([FromRoute] Guid id)
     {
+        _logger.LogDebug("Getting flag with id: {id}", id);
+
         return _flagQueryService.GetRequired(id);
     }
 
@@ -36,6 +38,8 @@ public class FlagsController : ControllerBase
     [Route("")]
     public FlagResponse Get([FromQuery] string name, [FromQuery] Guid? parentId)
     {
+        _logger.LogDebug("Getting flag with name: {name}, parentId: {parentId}", name, parentId);
+
         return _flagQueryService.GetRequired(name, parentId);
     }
 
@@ -43,6 +47,8 @@ public class FlagsController : ControllerBase
     [Route("{key}")]
     public FlagResponse Get([FromRoute] string key)
     {
+        _logger.LogDebug("Getting flag with key: {key}", key);
+
         return _flagQueryService.GetRequired(key);
     }
 
@@ -54,6 +60,12 @@ public class FlagsController : ControllerBase
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 20)
     {
+        _logger.LogDebug("Listing flags with searchString: {searchString}, isOn: {isOn}, pageNumber: {pageNumber}, pageSize: {pageSize}",
+            searchString,
+            isOn,
+            pageNumber,
+            pageSize);
+
         return
             _flagQueryService
                 .List(
@@ -67,6 +79,8 @@ public class FlagsController : ControllerBase
     [Route("{key}/is-on")]
     public bool IsOnByKey([FromRoute] string key)
     {
+        _logger.LogDebug("Checking flag with key: {key}", key);
+
         return _flagService.IsOn(key);
     }
 }

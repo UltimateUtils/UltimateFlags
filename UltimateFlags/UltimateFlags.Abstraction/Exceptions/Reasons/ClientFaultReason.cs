@@ -15,4 +15,6 @@ public enum ClientFaultReason
     PaginationInfoInvalid,
 
     InvalidTimeRange,
+
+    InvalidFlagName
 }

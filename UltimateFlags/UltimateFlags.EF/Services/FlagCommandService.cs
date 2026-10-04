@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UltimateFlags.Abstraction.Config;
@@ -31,6 +32,8 @@ internal class FlagCommandService : IFlagCommandService
 
     public FlagResponse Create(FlagCreationRequest creationRequest)
     {
+        _validateFlagName();
+
         string parentKey = _getParentKey(creationRequest.ParentId);
 
         if (_flagManager.Exists(creationRequest.Name, creationRequest.ParentId, deleted: null))
@@ -43,6 +46,18 @@ internal class FlagCommandService : IFlagCommandService
         return _flagManager.SaveChanges() > 0
             ? createdEntity.ToContract()
             : throw new FlagCreationFailed { Area = $"{nameof(FlagService)}.{nameof(Create)}(contract)", };
+
+        void _validateFlagName()
+        {
+            string name = creationRequest.Name;
+            if (Regex.IsMatch(name, "[. ]"))
+            {
+                throw new InvalidFlagName("Flag name may not have the following characters: dot(.), space(' ').")
+                {
+                    Area = $"{nameof(FlagCommandService)}.{nameof(Create)}(creationRequest)",
+                };
+            }
+        }
 
         string _getParentKey(Guid? parentId)
         {

@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\UltimateFlags\UltimateFlags\UltimateFlags.csproj"/>
+        <ProjectReference Include="..\..\UltimateFlags\UltimateFlags.EF\UltimateFlags.EF.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

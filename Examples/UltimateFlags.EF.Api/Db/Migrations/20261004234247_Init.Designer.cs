@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UltimateFlags.Api.Db;
+using UltimateFlags.EF.Api.Db;
 
 #nullable disable
 
-namespace UltimateFlags.Api.Db.Migrations
+namespace UltimateFlags.EF.Api.Db.Migrations
 {
     [DbContext(typeof(MyFlagDbContext))]
-    partial class MyFlagDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261004234247_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");

@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Examples/">
     <Project Path="Examples/UltimateFlags.Api/UltimateFlags.Api.csproj" />
+    <Project Path="Examples/UltimateFlags.EF.Api/UltimateFlags.EF.Api.csproj" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/UltimateFlags.EF.IntegrationTests/UltimateFlags.EF.IntegrationTests.csproj" />

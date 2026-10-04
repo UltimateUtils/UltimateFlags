@@ -1,0 +1,6 @@
+@UltimateFlags_Api_HostAddress = https://localhost:7291
+
+GET {{UltimateFlags_Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

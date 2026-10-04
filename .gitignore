@@ -375,4 +375,4 @@ FodyWeavers.xsd
 .idea/
 
 # SQLite
-/Examples/UltimateFlags.Api/MyFlagsDB.*
+/Examples/*/MyFlagsDB.*

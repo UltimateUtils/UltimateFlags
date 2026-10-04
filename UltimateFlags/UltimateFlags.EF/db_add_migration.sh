@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run this script from your Host project's directory
-# after installing Microsoft.EntityFrameworkCore.Design nuget package
+# Installing Microsoft.EntityFrameworkCore.Design nuget package.
+# Run this script from your Host project's directory.
 
 dotnet ef migrations add <MigrationName> -o Db/Migrations

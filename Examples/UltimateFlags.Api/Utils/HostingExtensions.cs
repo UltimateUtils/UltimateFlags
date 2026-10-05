@@ -1,6 +1,4 @@
 using UltimateFlags.Api.Config;
-using UltimateFlags.Api.Services;
-using UltimateFlags.Api.Services.Abstraction;
 using UltimateFlags.DI;
 
 namespace UltimateFlags.Api.Utils;
@@ -52,7 +50,6 @@ internal static class HostingExtensions
     {
         services.Configure<ServiceConfiguration>(configuration.GetRequiredSection(ServiceConfiguration.SectionName));
 
-        services.AddTransient<IHealthCheckService, HealthCheckService>();
         services.AddUltimateFlags(configuration);
     }
 }

@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using UltimateFlags.EF.Api.Config;
 using UltimateFlags.EF.Api.Db;
-using UltimateFlags.EF.Api.Services;
-using UltimateFlags.EF.Api.Services.Abstraction;
 using UltimateFlags.EF.DI;
 
 namespace UltimateFlags.EF.Api.Utils;
@@ -54,7 +52,6 @@ internal static class HostingExtensions
     {
         services.Configure<ServiceConfiguration>(configuration.GetRequiredSection(ServiceConfiguration.SectionName));
 
-        services.AddTransient<IHealthCheckService, HealthCheckService>();
         services.AddUltimateFlags<MyFlagDbContext>(
             configuration,
             options => options.UseSqlite("name=ConnectionStrings:MyFlagsDb"));

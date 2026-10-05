@@ -1,8 +1,10 @@
+using UltimateFlags.Abstraction.Entities;
+
 namespace UltimateFlags.Abstraction.Config;
 
 public record UltimateFlagConfiguration
 {
     public const string SectionName = "UltimateFlags";
 
-    public Dictionary<string, FlagValue>? Flags { get; set; }
+    public IEnumerable<Flag>? Flags { get; set; }
 }

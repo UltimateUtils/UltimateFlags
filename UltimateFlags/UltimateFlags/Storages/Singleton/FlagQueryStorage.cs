@@ -5,17 +5,17 @@ using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimatePagination.Abstraction;
 
-namespace UltimateFlags.Storages;
+namespace UltimateFlags.Storages.Singleton;
 
 public class FlagQueryStorage : IFlagQueryStorage
 {
     private readonly ILogger<FlagQueryStorage> _logger;
 
-    private readonly IOptionsSnapshot<UltimateFlagConfiguration> _optionsSnapshot;
+    private readonly IOptionsMonitor<UltimateFlagConfiguration> _optionsSnapshot;
 
     public FlagQueryStorage(
         ILogger<FlagQueryStorage> logger,
-        IOptionsSnapshot<UltimateFlagConfiguration> optionsSnapshot)
+        IOptionsMonitor<UltimateFlagConfiguration> optionsSnapshot)
     {
         _logger = logger;
         _optionsSnapshot = optionsSnapshot;

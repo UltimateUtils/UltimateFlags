@@ -1,6 +1,4 @@
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.Managers;
@@ -14,16 +12,12 @@ internal class FlagQueryService : IFlagQueryService
 
     private readonly IFlagManager _flagManager;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
     public FlagQueryService(
         ILogger<FlagQueryService> logger,
-        IFlagManager flagManager,
-        IOptions<UltimateFlagConfiguration> options)
+        IFlagManager flagManager)
     {
         _logger = logger;
         _flagManager = flagManager;
-        _ultimateFlagConfiguration = options.Value;
     }
 
     public FlagResponse? Get(Guid id)

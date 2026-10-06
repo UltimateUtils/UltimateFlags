@@ -13,16 +13,12 @@ internal class FlagCommandService : IFlagCommandService
 
     private readonly IFlagManager _flagManager;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
     public FlagCommandService(
         ILogger<FlagCommandService> logger,
-        IFlagManager flagManager,
-        IOptions<UltimateFlagConfiguration> options)
+        IFlagManager flagManager)
     {
         _logger = logger;
         _flagManager = flagManager;
-        _ultimateFlagConfiguration = options.Value;
     }
 
     public FlagResponse Create(FlagCreationRequest creationRequest)

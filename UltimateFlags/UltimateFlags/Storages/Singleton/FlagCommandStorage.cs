@@ -5,17 +5,17 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 
-namespace UltimateFlags.Storages;
+namespace UltimateFlags.Storages.Singleton;
 
 public class FlagCommandStorage : IFlagCommandStorage
 {
     private readonly ILogger<FlagCommandStorage> _logger;
 
-    private readonly IOptionsSnapshot<UltimateFlagConfiguration> _optionsSnapshot;
+    private readonly IOptionsMonitor<UltimateFlagConfiguration> _optionsSnapshot;
 
     public FlagCommandStorage(
         ILogger<FlagCommandStorage> logger,
-        IOptionsSnapshot<UltimateFlagConfiguration> optionsSnapshot)
+        IOptionsMonitor<UltimateFlagConfiguration> optionsSnapshot)
     {
         _logger = logger;
         _optionsSnapshot = optionsSnapshot;

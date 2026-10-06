@@ -36,4 +36,28 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
+
+    public static IServiceCollection AddSingletonUltimateFlags<TContext>(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Action<DbContextOptionsBuilder>? optionsAction)
+        where TContext : FlagDbContext, IFlagDbContext
+    {
+        IConfigurationSection configurationSection = configuration.GetSection(UltimateFlagConfiguration.SectionName);
+
+        if (configurationSection.Exists())
+            services.Configure<UltimateFlagConfiguration>(configurationSection);
+
+        services.AddScoped<IFlagDbContext, TContext>();
+        services.AddDbContext<TContext>(optionsAction);
+
+        services.AddScoped<IFlagQueryStorage, FlagQueryStorage>();
+        services.AddScoped<IFlagCommandStorage, FlagCommandStorage>();
+        services.AddScoped<IFlagManager, FlagManager>();
+        services.AddSingleton<IFlagService, Services.Singleton.FlagService>();
+        services.AddSingleton<IFlagQueryService, Services.Singleton.FlagQueryService>();
+        services.AddSingleton<IFlagCommandService, Services.Singleton.FlagCommandService>();
+
+        return services;
+    }
 }

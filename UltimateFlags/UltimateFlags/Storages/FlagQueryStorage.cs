@@ -23,7 +23,31 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public Flag? Read(Guid id, bool? deleted)
     {
-        throw new NotImplementedException();
+        IEnumerable<Flag>? flags = _optionsSnapshot.Value.Flags;
+
+        if (flags is null)
+            return null;
+
+        Dictionary<Guid, Flag> flagsMap = flags.ToDictionary(f => f.Id);
+
+        if (deleted is null)
+        {
+            return flagsMap.GetValueOrDefault(id);
+        }
+
+        Flag? found = flagsMap.GetValueOrDefault(id);
+
+        if (found is null)
+            return null;
+
+        if (deleted.Value && found.DeletedAt is not null
+            || !deleted.Value && found.DeletedAt is null)
+        {
+            return found;
+        }
+
+        return null;
+
     }
 
     public Flag? Read(string key)

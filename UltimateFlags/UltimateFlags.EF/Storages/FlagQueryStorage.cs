@@ -79,8 +79,8 @@ public class FlagQueryStorage : IFlagQueryStorage
                 .AsNoTracking()
                 .Where(
                     flag =>
-                        ancestorKeys.Contains(flag.Key)
-                        && _flagDbContext.Flags.Any(leaf => leaf.Key == key));
+                        _flagDbContext.Flags.Any(leaf => leaf.Key == key)
+                        && ancestorKeys.Contains(flag.Key));
 
         static List<string> _getAncestorKeys(string key, bool inclusive)
         {

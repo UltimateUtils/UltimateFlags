@@ -6,5 +6,5 @@ public record UltimateFlagConfiguration
 {
     public const string SectionName = "UltimateFlags";
 
-    public IEnumerable<Flag>? Flags { get; set; }
+    public IEnumerable<Flag>? Flags { get; init; }
 }

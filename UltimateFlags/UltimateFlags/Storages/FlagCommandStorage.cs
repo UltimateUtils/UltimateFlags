@@ -4,6 +4,7 @@ using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.Config;
 
 namespace UltimateFlags.Storages;
 
@@ -11,14 +12,20 @@ public class FlagCommandStorage : IFlagCommandStorage
 {
     private readonly ILogger<FlagCommandStorage> _logger;
 
-    private readonly IOptionsSnapshot<UltimateFlagConfiguration> _optionsSnapshot;
+    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
+
+    private readonly Flag[] _flags;
+
+    private readonly FlagsComplex _flagsComplex;
 
     public FlagCommandStorage(
         ILogger<FlagCommandStorage> logger,
         IOptionsSnapshot<UltimateFlagConfiguration> optionsSnapshot)
     {
         _logger = logger;
-        _optionsSnapshot = optionsSnapshot;
+        _ultimateFlagConfiguration = optionsSnapshot.Value;
+        _flags = optionsSnapshot.Value.Flags?.ToArray() ?? [];
+        _flagsComplex = optionsSnapshot.Value.Flags.GetFlagsComplex();
     }
 
     public Flag? Get(Guid id, bool? deleted)

@@ -1,24 +1,23 @@
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.Config;
 
-namespace UltimateFlags.Storages.Singleton;
+namespace UltimateFlags.Storages.ReadOnly;
 
 public class FlagCommandStorage : IFlagCommandStorage
 {
     private readonly ILogger<FlagCommandStorage> _logger;
 
-    private readonly IOptionsMonitor<UltimateFlagConfiguration> _optionsSnapshot;
+    private readonly FlagsComplex _flagsComplex;
 
     public FlagCommandStorage(
         ILogger<FlagCommandStorage> logger,
-        IOptionsMonitor<UltimateFlagConfiguration> optionsSnapshot)
+        FlagsComplex flagsComplex)
     {
         _logger = logger;
-        _optionsSnapshot = optionsSnapshot;
+        _flagsComplex = flagsComplex;
     }
 
     public Flag? Get(Guid id, bool? deleted)

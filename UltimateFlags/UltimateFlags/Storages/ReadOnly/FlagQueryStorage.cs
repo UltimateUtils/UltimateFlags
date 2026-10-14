@@ -1,24 +1,23 @@
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.Config;
 using UltimatePagination.Abstraction;
 
-namespace UltimateFlags.Storages.Singleton;
+namespace UltimateFlags.Storages.ReadOnly;
 
 public class FlagQueryStorage : IFlagQueryStorage
 {
     private readonly ILogger<FlagQueryStorage> _logger;
 
-    private readonly IOptionsMonitor<UltimateFlagConfiguration> _optionsSnapshot;
+    private readonly FlagsComplex _flagsComplex;
 
     public FlagQueryStorage(
         ILogger<FlagQueryStorage> logger,
-        IOptionsMonitor<UltimateFlagConfiguration> optionsSnapshot)
+        FlagsComplex flagsComplex)
     {
         _logger = logger;
-        _optionsSnapshot = optionsSnapshot;
+        _flagsComplex = flagsComplex;
     }
 
     public Flag? Read(Guid id, bool? deleted)

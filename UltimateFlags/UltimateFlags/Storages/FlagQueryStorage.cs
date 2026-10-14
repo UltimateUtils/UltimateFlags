@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.Config;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.Storages;
@@ -11,14 +12,20 @@ public class FlagQueryStorage : IFlagQueryStorage
 {
     private readonly ILogger<FlagQueryStorage> _logger;
 
-    private readonly IOptionsSnapshot<UltimateFlagConfiguration> _optionsSnapshot;
+    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
+
+    private readonly Flag[] _flags;
+
+    private readonly FlagsComplex _flagsComplex;
 
     public FlagQueryStorage(
         ILogger<FlagQueryStorage> logger,
         IOptionsSnapshot<UltimateFlagConfiguration> optionsSnapshot)
     {
         _logger = logger;
-        _optionsSnapshot = optionsSnapshot;
+        _ultimateFlagConfiguration = optionsSnapshot.Value;
+        _flags = optionsSnapshot.Value.Flags?.ToArray() ?? [];
+        _flagsComplex = optionsSnapshot.Value.Flags.GetFlagsComplex();
     }
 
     public Flag? Read(Guid id, bool? deleted)

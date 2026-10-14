@@ -69,30 +69,14 @@ public class FlagQueryStorage : IFlagQueryStorage
                         && flag.ParentId == parentId);
     }
 
-    public IQueryable<Flag> ReadAllAncestors(string key, bool inclusive)
+    public IQueryable<Flag> ReadAll(IEnumerable<string> keys)
     {
-        List<string> ancestorKeys = _getAncestorKeys(key, inclusive);
-
         return
             _flagDbContext
                 .Flags
                 .AsNoTracking()
                 .Where(
-                    flag =>
-                        _flagDbContext.Flags.Any(leaf => leaf.Key == key)
-                        && ancestorKeys.Contains(flag.Key));
-
-        static List<string> _getAncestorKeys(string key, bool inclusive)
-        {
-            string[] names = key.Split(Utils.Constants.KeyDelimiter);
-
-            IEnumerable<string> ancestorNames =
-                inclusive
-                    ? names.Select((_, index) => string.Join(Utils.Constants.KeyDelimiter, names[..(index + 1)]))
-                    : names.Take(names.Length - 1).Select((_, index) => string.Join(Utils.Constants.KeyDelimiter, names[..(index + 1)]));
-
-            return [.. ancestorNames];
-        }
+                    flag =>keys.Contains(flag.Key));
     }
 
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted = false)

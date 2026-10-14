@@ -242,15 +242,18 @@ internal class FlagManager : IFlagManager
 
     public bool IsOn(string key)
     {
-        bool[] flags =
+        string[] ancestorKeys = [.. key.GetAncestorKeys(inclusive: true)];
+
+        bool[] isOns =
         [
             .. _flagQueryStorage
-                .ReadAllAncestors(key, inclusive: true)
-                .Select(f => f.IsOn)
+                .ReadAll(ancestorKeys)
+                /*.Where(x => x.IsOn)*/ // todo - performance check
+                .Select(x => x.IsOn)
         ];
 
-        return flags.Length != 0
-            && flags.All(x => x);
+        return isOns.Length == ancestorKeys.Length
+            && isOns.All(isOn => isOn);
     }
 
     public int SaveChanges()

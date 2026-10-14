@@ -36,7 +36,7 @@ public class FlagQueryStorage : IFlagQueryStorage
         throw new NotImplementedException();
     }
 
-    public IQueryable<Flag> ReadAllAncestors(string key, bool inclusive)
+    public IQueryable<Flag> ReadAll(IEnumerable<string> keys)
     {
         throw new NotImplementedException();
     }

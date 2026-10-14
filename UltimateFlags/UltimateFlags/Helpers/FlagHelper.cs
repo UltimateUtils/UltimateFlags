@@ -55,4 +55,16 @@ public static class FlagHelper
 
         return entity;
     }
+
+    public static IEnumerable<string> GetAncestorKeys(this string key, bool inclusive)
+    {
+        string[] names = key.Split(Utils.Constants.KeyDelimiter);
+
+        IEnumerable<string> x =
+            inclusive
+                ? names
+                : names.Take(names.Length - 1);
+
+        return x.Select((_, index) => string.Join(Utils.Constants.KeyDelimiter, names[..(index + 1)]));
+    }
 }

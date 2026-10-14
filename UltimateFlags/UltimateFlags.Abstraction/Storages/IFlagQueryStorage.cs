@@ -41,12 +41,12 @@ public interface IFlagQueryStorage
     public Flag? Read(string name, Guid? parentId);
 
     /// <summary>
-    ///     Retrieves ancestor flags
+    ///     Retrieves flags by KEYs.
+    ///     If the key is not found, it is ignored.
     /// </summary>
-    /// <param name="key">KEY</param>
-    /// <param name="inclusive">Including the flag specified by the KEY if true</param>
-    /// <returns>Ancestor FLAGs of the one specified by the KEY</returns>
-    public IQueryable<Flag> ReadAllAncestors(string key, bool inclusive);
+    /// <param name="keys">KEYs</param>
+    /// <returns>FLAGs that has any of the KEYs</returns>
+    public IQueryable<Flag> ReadAll(IEnumerable<string> keys);
 
     /// <summary>
     ///     Retrieves children of the specified FLAG.

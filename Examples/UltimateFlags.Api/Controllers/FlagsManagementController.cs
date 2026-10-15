@@ -5,7 +5,7 @@ using UltimateFlags.Abstraction.Services;
 namespace UltimateFlags.Api.Controllers;
 
 [ApiController]
-[Route("flags-management")]
+[Route("flags")]
 public class FlagsManagementController : ControllerBase
 {
     private readonly ILogger<FlagsManagementController> _logger;

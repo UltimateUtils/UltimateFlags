@@ -70,6 +70,11 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
+    public bool Restore(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
     public int Enable(Guid id)
     {
         throw new NotImplementedException();

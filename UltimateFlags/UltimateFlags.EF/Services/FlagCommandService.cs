@@ -148,7 +148,7 @@ internal class FlagCommandService : IFlagCommandService
 
     public IEnumerable<FlagResponse> Restore(Guid id)
     {
-        throw new NotImplementedException();
+        return _flagManager.Restore(id).ToContracts();
     }
 
     public void Enable(Guid id)

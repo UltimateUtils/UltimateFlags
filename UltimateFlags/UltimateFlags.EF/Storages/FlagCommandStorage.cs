@@ -138,6 +138,24 @@ public class FlagCommandStorage : IFlagCommandStorage
                 .ExecuteDelete();
     }
 
+    public bool Restore(Guid id)
+    {
+        int updatedCount =
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .IgnoreQueryFilters()
+                .Where(f => f.Id == id && f.DeletedAt.HasValue)
+                .ExecuteUpdate(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.DeletedAt,
+                                (DateTime?)null));
+
+        return updatedCount == 1;
+    }
+
     public int Enable(Guid id)
     {
         return

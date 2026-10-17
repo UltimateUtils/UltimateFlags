@@ -88,6 +88,13 @@ public interface IFlagCommandStorage
     public int ExecutePurge(IEnumerable<Guid> ids);
 
     /// <summary>
+    ///     Restores single deleted FLAG
+    /// </summary>
+    /// <param name="id">ID</param>
+    /// <returns>TRUE if successful. FALSE otherwise</returns>
+    public bool Restore(Guid id);
+
+    /// <summary>
     ///     Enables a FLAG by ID.
     /// </summary>
     /// <param name="id">ID</param>

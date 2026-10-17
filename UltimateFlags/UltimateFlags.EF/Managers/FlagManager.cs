@@ -144,6 +144,53 @@ internal class FlagManager : IFlagManager
         return _flagCommandStorage.ExecutePurge(idsToPurge);
     }
 
+    public IEnumerable<Flag> Restore(Guid id)
+    {
+        List<Flag> ret = [];
+
+        _restore(id);
+
+        return ret;
+
+        void _restore(Guid currentId)
+        {
+            Flag? currentFlag = _flagQueryStorage.Read(currentId, deleted: null);
+
+            if (currentFlag is null)
+            {
+                throw new FlagNotFound
+                {
+                    Area = $"{nameof(FlagManager)}.{nameof(Restore)}(id)",
+                };
+            }
+
+            if (!currentFlag.DeletedAt.HasValue)
+            {
+                throw new FlagNotDeleted
+                {
+                    Area = $"{nameof(FlagManager)}.{nameof(Restore)}(id)",
+                };
+            }
+
+            if (currentFlag.Parent != null)
+            {
+                _restore(currentFlag.Parent.Id);
+            }
+
+            if (_flagCommandStorage.Restore(currentId))
+            {
+                ret.Add(currentFlag); // todo - check DeletedAt value
+            }
+            else
+            {
+                throw new FlagRestorationFailed
+                {
+                    Area = $"{nameof(FlagManager)}.{nameof(Restore)}(id)",
+                };
+            }
+        }
+    }
+
     public bool Exists(Guid id, bool? deleted = false)
     {
         return _flagQueryStorage.Exists(id, deleted);

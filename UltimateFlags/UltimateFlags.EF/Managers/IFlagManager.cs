@@ -36,6 +36,8 @@ internal interface IFlagManager
 
     public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null);
 
+    public IEnumerable<Flag> Restore(Guid id);
+
     public bool Exists(Guid id, bool? deleted = false);
 
     public bool Exists(string name, Guid? parentId, bool? deleted = false);

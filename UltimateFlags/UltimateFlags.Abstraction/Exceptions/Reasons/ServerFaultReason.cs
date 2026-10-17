@@ -9,4 +9,6 @@ public enum ServerFaultReason
     FlagDeletionFailed,
 
     FlagPurgeFailed,
+
+    FlagRestorationFailed
 }

@@ -84,6 +84,14 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
+    public IEnumerable<FlagResponse> Restore(Guid id)
+    {
+        using IServiceScope scope = _scopeFactory.CreateScope();
+        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        throw new NotImplementedException();
+    }
+
     public void Enable(Guid id)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();

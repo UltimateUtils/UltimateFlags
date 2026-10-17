@@ -69,7 +69,20 @@ internal class FlagQueryService : IFlagQueryService
         throw new NotImplementedException();
     }
 
-    public IPagedList<FlagResponse> List(string? searchString = null, bool? isOn = null, int pageNumber = 1, int pageSize = 20)
+    public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)
+    {
+        using IServiceScope scope = _scopeFactory.CreateScope();
+        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        throw new NotImplementedException();
+    }
+
+    public IPagedList<FlagResponse> List(
+        Guid? rootId = null,
+        string? searchString = null,
+        bool? isOn = null,
+        int pageNumber = 1,
+        int pageSize = 20)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();
         IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();

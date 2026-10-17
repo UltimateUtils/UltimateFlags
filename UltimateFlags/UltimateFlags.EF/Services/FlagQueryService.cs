@@ -81,7 +81,13 @@ internal class FlagQueryService : IFlagQueryService
         return foundEntity.ToContract();
     }
 
+    public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)
+    {
+        throw new NotImplementedException();
+    }
+
     public IPagedList<FlagResponse> List(
+        Guid? rootId = null,
         string? searchString = null,
         bool? isOn = null,
         int pageNumber = 1,

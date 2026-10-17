@@ -95,6 +95,13 @@ public interface IFlagCommandService
     public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null);
 
     /// <summary>
+    ///     Restores deleted FLAG and its deleted ancestors
+    /// </summary>
+    /// <param name="id">ID</param>
+    /// <returns>Restored FLAGs</returns>
+    public IEnumerable<FlagResponse> Restore(Guid id);
+
+    /// <summary>
     ///     Enables a FLAG by ID.
     /// </summary>
     /// <param name="id">ID</param>

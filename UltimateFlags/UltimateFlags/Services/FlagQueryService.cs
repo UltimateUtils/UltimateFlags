@@ -50,7 +50,17 @@ internal class FlagQueryService : IFlagQueryService
         throw new NotImplementedException();
     }
 
-    public IPagedList<FlagResponse> List(string? searchString = null, bool? isOn = null, int pageNumber = 1, int pageSize = 20)
+    public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IPagedList<FlagResponse> List(
+        Guid? rootId = null,
+        string? searchString = null,
+        bool? isOn = null,
+        int pageNumber = 1,
+        int pageSize = 20)
     {
         throw new NotImplementedException();
     }

@@ -55,6 +55,7 @@ public class FlagsController : ControllerBase
     [HttpGet]
     [Route("list")]
     public IPagedList<FlagResponse> List(
+        [FromQuery] Guid? rootId = null,
         [FromQuery] string? searchString = null,
         [FromQuery] bool? isOn = null,
         [FromQuery] int pageNumber = 1,
@@ -69,6 +70,7 @@ public class FlagsController : ControllerBase
         return
             _flagQueryService
                 .List(
+                    rootId,
                     searchString,
                     isOn,
                     pageNumber,

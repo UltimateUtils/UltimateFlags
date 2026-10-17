@@ -60,6 +60,14 @@ public interface IFlagQueryService
     public FlagResponse GetRequired(string key);
 
     /// <summary>
+    ///     Retrieves deleted FLAGs
+    /// </summary>
+    /// <param name="pageNumber">PageNumber</param>
+    /// <param name="pageSize">PageSize</param>
+    /// <returns>PagedList of deleted FLAGs</returns>
+    public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20);
+
+    /// <summary>
     ///     Searches and retrieves FLAGs.
     /// </summary>
     /// <remarks>
@@ -68,12 +76,14 @@ public interface IFlagQueryService
     ///     When the ParentId is passed in,
     ///     the search will be only for the specified FLAG and children recursively.
     /// </remarks>
+    /// <param name="rootId">ID of the root flag</param>
     /// <param name="searchString">Search string</param>
     /// <param name="isOn">Is ON by key</param>
     /// <param name="pageNumber">Page Number</param>
     /// <param name="pageSize">Page Size</param>
     /// <returns>Response contracts</returns>
     public IPagedList<FlagResponse> List(
+        Guid? rootId = null,
         string? searchString = null,
         bool? isOn = null,
         int pageNumber = 1,

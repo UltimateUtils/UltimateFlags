@@ -100,7 +100,16 @@ internal class FlagQueryService : IFlagQueryService
         return foundEntity.ToContract();
     }
 
+    public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)
+    {
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        throw new NotImplementedException();
+    }
+
     public IPagedList<FlagResponse> List(
+        Guid? rootId = null,
         string? searchString = null,
         bool? isOn = null,
         int pageNumber = 1,

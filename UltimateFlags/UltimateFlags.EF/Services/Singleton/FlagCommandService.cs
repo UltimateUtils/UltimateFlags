@@ -171,6 +171,14 @@ internal class FlagCommandService : IFlagCommandService
         }
     }
 
+    public IEnumerable<FlagResponse> Restore(Guid id)
+    {
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        throw new NotImplementedException();
+    }
+
     public void Enable(Guid id)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();

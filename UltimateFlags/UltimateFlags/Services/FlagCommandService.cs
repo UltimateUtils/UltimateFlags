@@ -59,6 +59,11 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
+    public IEnumerable<FlagResponse> Restore(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Enable(Guid id)
     {
         throw new NotImplementedException();

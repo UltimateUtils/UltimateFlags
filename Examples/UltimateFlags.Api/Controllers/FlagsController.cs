@@ -53,6 +53,17 @@ public class FlagsController : ControllerBase
     }
 
     [HttpGet]
+    [Route("deleted")]
+    public IPagedList<FlagResponse> GetAllDeleted(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 20)
+    {
+        _logger.LogDebug("Getting deleted flags");
+
+        return _flagQueryService.GetAllDeleted(pageNumber, pageSize);
+    }
+
+    [HttpGet]
     [Route("list")]
     public IPagedList<FlagResponse> List(
         [FromQuery] Guid? rootId = null,

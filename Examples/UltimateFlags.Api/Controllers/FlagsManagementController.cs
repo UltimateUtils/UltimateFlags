@@ -92,6 +92,15 @@ public class FlagsManagementController : ControllerBase
         return _flagCommandService.ExecutePurge(from, to);
     }
 
+    [HttpPost]
+    [Route("restore/{id:guid}")]
+    public IEnumerable<FlagResponse> Restore(Guid id)
+    {
+        _logger.LogDebug("Restoring flag. (id: {id})", id);
+
+        return _flagCommandService.Restore(id);
+    }
+
     [HttpPut]
     [Route("{id:guid}/enable")]
     public void EnableById([FromRoute] Guid id)

@@ -83,7 +83,9 @@ internal class FlagQueryService : IFlagQueryService
 
     public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)
     {
-        throw new NotImplementedException();
+        IPagedList<Flag> deletedEntities = _flagManager.GetAllDeleted(pageNumber, pageSize);
+
+        return deletedEntities.Convert(entity => entity.ToContract());
     }
 
     public IPagedList<FlagResponse> List(

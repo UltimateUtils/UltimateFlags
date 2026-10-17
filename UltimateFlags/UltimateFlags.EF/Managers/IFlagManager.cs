@@ -14,6 +14,8 @@ internal interface IFlagManager
 
     public Flag? Read(string name, Guid? parentId);
 
+    public IPagedList<Flag> GetAllDeleted(int pageNumber, int pageSize);
+
     public IPagedList<Flag> List(
         string? searchString,
         bool? isOn,

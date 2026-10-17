@@ -7,6 +7,7 @@ using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Exceptions.ServerFaults;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Helpers;
+using UltimatePagination;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.Managers;
@@ -51,6 +52,14 @@ internal class FlagManager : IFlagManager
     public Flag? Read(string name, Guid? parentId)
     {
         return _flagQueryStorage.Read(name, parentId);
+    }
+
+    public IPagedList<Flag> GetAllDeleted(int pageNumber, int pageSize)
+    {
+        return
+            _flagQueryStorage
+                .ReadAllDeleted()
+                .Paginate(pageNumber, pageSize);
     }
 
     public IPagedList<Flag> List(

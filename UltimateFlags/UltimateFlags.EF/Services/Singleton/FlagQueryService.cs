@@ -105,7 +105,9 @@ internal class FlagQueryService : IFlagQueryService
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
 
-        throw new NotImplementedException();
+        IPagedList<Flag> deletedEntities = flagManager.GetAllDeleted(pageNumber, pageSize);
+
+        return deletedEntities.Convert(entity => entity.ToContract());
     }
 
     public IPagedList<FlagResponse> List(

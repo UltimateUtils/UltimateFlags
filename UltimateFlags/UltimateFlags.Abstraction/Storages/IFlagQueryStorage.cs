@@ -1,3 +1,4 @@
+using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimatePagination.Abstraction;
 
@@ -62,7 +63,7 @@ public interface IFlagQueryStorage
     /// <param name="fromInclusive">FROM deleted time (inclusive)</param>
     /// <param name="toInclusive">TO deleted time (inclusive)</param>
     /// <returns></returns>
-    public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive, DateTime? toInclusive);
+    public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive = null, DateTime? toInclusive = null);
 
     /// <summary>
     ///     Searches and retrieves FLAGs.

@@ -3,18 +3,16 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reqnroll;
 using UltimateFlags.Abstraction.Contracts;
-using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
+using UltimateFlags.EF.IntegrationTests.Utils;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;
 
 [Binding]
 public class BasicGetFlagsSteps
 {
-    private const string AllFlagsKey = "AllFlags";
-
     private readonly ILogger<BasicGetFlagsSteps> _logger;
 
     private readonly FeatureContext _featureContext;
@@ -55,29 +53,19 @@ public class BasicGetFlagsSteps
         _serviceConfiguration = options.Value;
     }
 
-    [Given("DB has the following flags")]
-    public async Task DbHasTheFollowingFlagsAsync(DataTable table)
-    {
-        IEnumerable<Flag> flags = table.CreateSet<Flag>();
-
-        await _flagDbContext.Flags.AddRangeAsync(flags);
-
-        _ = await _flagDbContext.SaveChangesAsync();
-    }
-
     [When("retrieve all flags")]
     public void RetrieveAllFlags()
     {
         FlagResponse[] actualFlags = [.. _flagQueryService.List(pageSize: int.MaxValue)];
 
-        _scenarioContext[AllFlagsKey] = actualFlags;
+        _scenarioContext[ContextKeys.AllFlagsKey] = actualFlags;
     }
 
     [Then("all the following flags are returned correctly")]
     public void AllFlagsAreReturnedCorrectly(DataTable table)
     {
         IEnumerable<FlagResponse> expectedFlags = table.CreateSet<FlagResponse>();
-        FlagResponse[]? actualFlags = _scenarioContext[AllFlagsKey] as FlagResponse[];
+        FlagResponse[]? actualFlags = _scenarioContext[ContextKeys.AllFlagsKey] as FlagResponse[];
 
         Assert.That(actualFlags, Is.Not.Null);
         Assert.That(actualFlags, Is.EquivalentTo(expectedFlags));

@@ -61,7 +61,7 @@ public class BasicCreateFlagsSteps
 
         FlagResponse x = _flagCommandService.Create(flagToInsert);
 
-        _scenarioContext[ContextKeys.NewlyAddedFlagIdKey] = x.Id;
+        _scenarioContext.Set(x.Id, ContextKeys.NewlyAddedFlagIdKey);
     }
 
     [Then("Newly added flag is as follows")]
@@ -69,10 +69,9 @@ public class BasicCreateFlagsSteps
     {
         Flag expected = table.CreateInstance<Flag>();
 
-        Guid? id = _scenarioContext[ContextKeys.NewlyAddedFlagIdKey] as Guid?;
-        Assert.That(id, Is.Not.Null);
+        Guid id = _scenarioContext.Get<Guid>(ContextKeys.NewlyAddedFlagIdKey);
 
-        FlagResponse? actual = _flagQueryService.Get(id.Value);
+        FlagResponse? actual = _flagQueryService.Get(id);
         Assert.That(actual, Is.Not.Null);
 
         Assert.That(actual, Is.EqualTo(expected).Using(_FlagResponseFlagComparison()));

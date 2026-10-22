@@ -376,4 +376,4 @@ FodyWeavers.xsd
 
 # SQLite
 /Examples/**/MyFlagsDb.*
-/Tests/**/MyFlagsDb_*.*
+/Tests/**/MyFlagsTestDb.*

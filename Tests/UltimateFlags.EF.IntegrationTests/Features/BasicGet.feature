@@ -1,7 +1,7 @@
-@AddBasicFlags
+@ResetBasicFlags
 Feature: Basic Get feature
 
-Scenario: Get Flags
+Scenario: 1. Get Flags
     When retrieve all flags
     Then all the following flags are returned correctly
         | Id                                   | Name       | Key                                    | IsOn  | Description   | ParentId                             | CreatedAt                   | UpdatedAt                   | DeletedAt |
@@ -31,7 +31,7 @@ Scenario: Get Flags
         | DBE0F6F1-9338-497A-998C-234AD831CFB6 | Table2602c | MyBuilding.Floor26.Room2602.Table2602c | FALSE | table #2602 c | CE0DEB00-7946-4BE0-AE93-7E1B42178841 | 2026-10-17 20:36:30.3876071 | 2026-10-17 20:36:30.3876071 | <null>    |
         | 58934C81-05C6-4E0B-A62D-24996957D486 | Table2602d | MyBuilding.Floor26.Room2602.Table2602d | TRUE  | table #2602 d | CE0DEB00-7946-4BE0-AE93-7E1B42178841 | 2026-10-17T20:36:30.3876072 | 2026-10-17T20:36:30.3876072 | <null>    |
 
-Scenario Outline: Get Flag
+Scenario Outline: 2. Get Flag
     When retrieve a flag by <Id>
     Then the following flag is returned correctly
         | Id   | Name   | Key   | IsOn   | Description   | ParentId   | CreatedAt   | UpdatedAt   | DeletedAt |

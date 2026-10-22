@@ -83,10 +83,4 @@ public class BasicHooks
     {
         _ = await flagDbContext.Database.EnsureDeletedAsync();
     }
-
-    [AfterFeature]
-    public static async Task CleanupTablesAsync(MyFlagDbContext flagDbContext)
-    {
-        _ = await flagDbContext.Flags.ExecuteDeleteAsync();
-    }
 }

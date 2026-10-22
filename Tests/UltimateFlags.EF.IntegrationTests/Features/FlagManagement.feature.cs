@@ -20,14 +20,12 @@ namespace UltimateFlags.EF.IntegrationTests.Features
     [global::NUnit.Framework.TestFixtureAttribute()]
     [global::NUnit.Framework.DescriptionAttribute("Flag Management")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    [global::NUnit.Framework.CategoryAttribute("AddBasicFlags")]
     public partial class FlagManagementFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = new string[] {
-                "AddBasicFlags"};
+        private static string[] featureTags = ((string[])(null));
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Flag Management", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
@@ -111,20 +109,27 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Update Flag")]
+        [global::NUnit.Framework.DescriptionAttribute("1. Update Flag")]
+        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("A63D23CC-3A85-4B59-A420-CBFD1E127FC5", "false", "any randome string %^!*$#~", "0", null)]
         [global::NUnit.Framework.TestCaseAttribute("A63D23CC-3A85-4B59-A420-CBFD1E127FC5", "true", "any randome string 123613", "1", null)]
         [global::NUnit.Framework.TestCaseAttribute("1AEE1C30-B4BA-4B5D-9BBE-0078C372579F", "false", "yet another random words ~~", "2", null)]
         [global::NUnit.Framework.TestCaseAttribute("1AEE1C30-B4BA-4B5D-9BBE-0078C372579F", "true", "~~ yet another random words", "3", null)]
-        public async global::System.Threading.Tasks.Task UpdateFlag(string id, string isOn, string description, string @__pickleIndex, string[] exampleTags)
+        public async global::System.Threading.Tasks.Task _1_UpdateFlag(string id, string isOn, string description, string @__pickleIndex, string[] exampleTags)
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] @__tags = new string[] {
+                    "ResetBasicFlags"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Id", id);
             argumentsOfScenario.Add("IsOn", isOn);
             argumentsOfScenario.Add("Description", description);
             string pickleIndex = @__pickleIndex;
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Update Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("1. Update Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 4

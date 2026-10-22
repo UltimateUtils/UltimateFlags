@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -6,8 +7,6 @@ using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
-using UltimateFlags.EF.IntegrationTests.Steps;
-using UltimateFlags.EF.IntegrationTests.Utils;
 
 namespace UltimateFlags.EF.IntegrationTests.Hooks;
 
@@ -54,14 +53,23 @@ public class DatabaseHooks
         _options = options;
     }
 
-    [BeforeFeature("AddBasicFlags")]
-    public static async Task AddBasicFlagsAsync(MyFlagDbContext flagDbContext)
+    [BeforeFeature("ResetBasicFlags")]
+    [BeforeScenario("ResetBasicFlags")]
+    public static async Task ResetBasicFlagsAsync(MyFlagDbContext flagDbContext)
     {
+        _ = await flagDbContext.Flags.ExecuteDeleteAsync();
+
         IEnumerable<Flag> flags = _GetBasicFlags();
 
         await flagDbContext.Flags.AddRangeAsync(flags);
-
         _ = await flagDbContext.SaveChangesAsync();
+    }
+
+
+    [AfterFeature]
+    public static async Task CleanupTablesAsync(MyFlagDbContext flagDbContext)
+    {
+        _ = await flagDbContext.Flags.ExecuteDeleteAsync();
     }
 
     //// This method will generate the BASIC FLAGS

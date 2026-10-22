@@ -1,7 +1,7 @@
-@AddBasicFlags
 Feature: Flag Management
 
-Scenario Outline: Update Flag
+@ResetBasicFlags
+Scenario Outline: 1. Update Flag
 
     When I update a flag with the Id, <Id>, as follows
         | IsOn   | Description   |

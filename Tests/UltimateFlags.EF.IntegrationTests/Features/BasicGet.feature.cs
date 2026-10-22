@@ -20,14 +20,14 @@ namespace UltimateFlags.EF.IntegrationTests.Features
     [global::NUnit.Framework.TestFixtureAttribute()]
     [global::NUnit.Framework.DescriptionAttribute("Basic Get feature")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    [global::NUnit.Framework.CategoryAttribute("AddBasicFlags")]
+    [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
     public partial class BasicGetFeatureFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = new string[] {
-                "AddBasicFlags"};
+                "ResetBasicFlags"};
         
         private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Basic Get feature", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
@@ -111,13 +111,13 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Get Flags")]
-        public async global::System.Threading.Tasks.Task GetFlags()
+        [global::NUnit.Framework.DescriptionAttribute("1. Get Flags")]
+        public async global::System.Threading.Tasks.Task _1_GetFlags()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Get Flags", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("1. Get Flags", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 4
@@ -401,7 +401,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Get Flag")]
+        [global::NUnit.Framework.DescriptionAttribute("2. Get Flag")]
         [global::NUnit.Framework.TestCaseAttribute("4F228BF5-BBB0-428C-92CE-B63754579712", "MyBuilding", "MyBuilding", "TRUE", "my building", "<null>", "2026-09-30 03:37:26.0661723", "2026-09-30 03:37:26.0661723", "<null>", "1", null)]
         [global::NUnit.Framework.TestCaseAttribute("CDFA551C-5504-4475-97BE-66A9084C81A7", "Floor23", "MyBuilding.Floor23", "TRUE", "floor #23", "4F228BF5-BBB0-428C-92CE-B63754579712", "2026-09-30 03:38:26.5139868", "2026-09-30 03:38:26.5139868", "<null>", "2", null)]
         [global::NUnit.Framework.TestCaseAttribute("12A46EC8-AFFB-4E6A-BABF-D1F92E661FE5", "Room2301", "MyBuilding.Floor23.Room2301", "FALSE", "room #2301", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:38:50.2655434", "2026-09-30 03:38:50.2655434", "<null>", "3", null)]
@@ -427,7 +427,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         [global::NUnit.Framework.TestCaseAttribute("1430860F-FEA7-4318-BE0D-5B78157FA328", "Table2602b", "MyBuilding.Floor26.Room2602.Table2602b", "TRUE", "table #2602 b", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-09-30 03:46:44.7748539", "2026-09-30 03:46:44.7748539", "<null>", "23", null)]
         [global::NUnit.Framework.TestCaseAttribute("DBE0F6F1-9338-497A-998C-234AD831CFB6", "Table2602c", "MyBuilding.Floor26.Room2602.Table2602c", "FALSE", "table #2602 c", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-10-17 20:36:30.3876071", "2026-10-17 20:36:30.3876071", "<null>", "24", null)]
         [global::NUnit.Framework.TestCaseAttribute("58934C81-05C6-4E0B-A62D-24996957D486", "Table2602d", "MyBuilding.Floor26.Room2602.Table2602d", "TRUE", "table #2602 d", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-10-17T20:36:30.3876072", "2026-10-17T20:36:30.3876072", "<null>", "25", null)]
-        public async global::System.Threading.Tasks.Task GetFlag(string id, string name, string key, string isOn, string description, string parentId, string createdAt, string updatedAt, string deletedAt, string @__pickleIndex, string[] exampleTags)
+        public async global::System.Threading.Tasks.Task _2_GetFlag(string id, string name, string key, string isOn, string description, string parentId, string createdAt, string updatedAt, string deletedAt, string @__pickleIndex, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
@@ -441,7 +441,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             argumentsOfScenario.Add("UpdatedAt", updatedAt);
             argumentsOfScenario.Add("DeletedAt", deletedAt);
             string pickleIndex = @__pickleIndex;
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Get Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("2. Get Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 34

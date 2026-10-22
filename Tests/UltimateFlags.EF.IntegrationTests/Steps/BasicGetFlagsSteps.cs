@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reqnroll;
 using UltimateFlags.Abstraction.Contracts;
-using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
@@ -59,7 +58,7 @@ public class BasicGetFlagsSteps
     {
         FlagResponse[] actualFlags = [.. _flagQueryService.List(pageSize: int.MaxValue)];
 
-        _scenarioContext[ContextKeys.AllFlagsKey] = actualFlags;
+        _scenarioContext.Set(actualFlags, ContextKeys.AllFlagsKey);
     }
 
     [When("retrieve a flag by {Guid}")]
@@ -67,16 +66,15 @@ public class BasicGetFlagsSteps
     {
         FlagResponse? actual = _flagQueryService.Get(id);
 
-        _scenarioContext[ContextKeys.RetrievedFlagKey] = actual;
+        _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
 
     [Then("all the following flags are returned correctly")]
     public void AllFlagsAreReturnedCorrectly(DataTable table)
     {
         IEnumerable<FlagResponse> expectedFlags = table.CreateSet<FlagResponse>();
-        FlagResponse[]? actualFlags = _scenarioContext[ContextKeys.AllFlagsKey] as FlagResponse[];
+        FlagResponse[] actualFlags = _scenarioContext.Get<FlagResponse[]>(ContextKeys.AllFlagsKey);
 
-        Assert.That(actualFlags, Is.Not.Null);
         Assert.That(actualFlags, Is.EquivalentTo(expectedFlags));
     }
 
@@ -84,9 +82,7 @@ public class BasicGetFlagsSteps
     public void TheFollowingFlagIsReturnedCorrectly(DataTable table)
     {
         FlagResponse expectedFlag = table.CreateInstance<FlagResponse>();
-
-        FlagResponse? actual = _scenarioContext[ContextKeys.RetrievedFlagKey] as FlagResponse;
-        Assert.That(actual, Is.Not.Null);
+        FlagResponse actual = _scenarioContext.Get<FlagResponse>(ContextKeys.RetrievedFlagKey);
 
         Assert.That(actual, Is.EqualTo(expectedFlag));
     }

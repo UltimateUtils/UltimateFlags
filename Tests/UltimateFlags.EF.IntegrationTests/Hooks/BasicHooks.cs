@@ -27,7 +27,15 @@ public class BasicHooks
                 .Build();
 
         services.AddSingleton<IConfiguration>(configuration);
-        services.Configure<ServiceConfiguration>(configuration.GetRequiredSection(ServiceConfiguration.SectionName));
+
+        IConfigurationSection configurationSection = configuration.GetRequiredSection(ServiceConfiguration.SectionName);
+
+        ServiceConfiguration jokeGeneratorConfiguration =
+            configurationSection.Get<ServiceConfiguration>()
+            ?? throw new InvalidOperationException($"Configuration value of type {nameof(ServiceConfiguration)} not valid");
+
+        services.Configure<ServiceConfiguration>(configurationSection);
+        services.AddSingleton(jokeGeneratorConfiguration);
 
         services
             .AddLogging(

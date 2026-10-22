@@ -20,14 +20,16 @@ namespace UltimateFlags.EF.IntegrationTests.Features
     [global::NUnit.Framework.TestFixtureAttribute()]
     [global::NUnit.Framework.DescriptionAttribute("Flag Management")]
     [global::NUnit.Framework.FixtureLifeCycleAttribute(global::NUnit.Framework.LifeCycle.InstancePerTestCase)]
+    [global::NUnit.Framework.CategoryAttribute("AddBasicFlags")]
     public partial class FlagManagementFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
-        private static string[] featureTags = ((string[])(null));
+        private static string[] featureTags = new string[] {
+                "AddBasicFlags"};
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Flag Management", "This feature is about flag management.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Flag Management", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
 #line 1 "FlagManagement.feature"
 #line hidden
@@ -105,20 +107,27 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FlagManagement.feature.ndjson", 3);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FlagManagement.feature.ndjson", 6);
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Add Flag")]
-        public async global::System.Threading.Tasks.Task AddFlag()
+        [global::NUnit.Framework.DescriptionAttribute("Update Flag")]
+        [global::NUnit.Framework.TestCaseAttribute("A63D23CC-3A85-4B59-A420-CBFD1E127FC5", "false", "any randome string %^!*$#~", "0", null)]
+        [global::NUnit.Framework.TestCaseAttribute("A63D23CC-3A85-4B59-A420-CBFD1E127FC5", "true", "any randome string 123613", "1", null)]
+        [global::NUnit.Framework.TestCaseAttribute("1AEE1C30-B4BA-4B5D-9BBE-0078C372579F", "false", "yet another random words ~~", "2", null)]
+        [global::NUnit.Framework.TestCaseAttribute("1AEE1C30-B4BA-4B5D-9BBE-0078C372579F", "true", "~~ yet another random words", "3", null)]
+        public async global::System.Threading.Tasks.Task UpdateFlag(string id, string isOn, string description, string @__pickleIndex, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Add Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            argumentsOfScenario.Add("Id", id);
+            argumentsOfScenario.Add("IsOn", isOn);
+            argumentsOfScenario.Add("Description", description);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Update Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 5
+#line 4
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -128,14 +137,23 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 7
-    await testRunner.GivenAsync("DB is ready", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                            "IsOn",
+                            "Description"});
+                table1.AddRow(new string[] {
+                            string.Format("{0}", isOn),
+                            string.Format("{0}", description)});
+#line 6
+    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table1, "When ");
 #line hidden
-#line 8
-    await testRunner.WhenAsync("flag is added", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                            "IsOn",
+                            "Description"});
+                table2.AddRow(new string[] {
+                            string.Format("{0}", isOn),
+                            string.Format("{0}", description)});
 #line 9
-    await testRunner.ThenAsync("flag data is populated properly", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table2, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

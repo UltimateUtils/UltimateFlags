@@ -64,11 +64,6 @@ public class DatabaseHooks
         _ = await flagDbContext.SaveChangesAsync();
     }
 
-    [AfterScenario]
-    public void DoSomethingAfterScenario()
-    {
-    }
-
     //// This method will generate the BASIC FLAGS
     //// | Id                                   | Name       | Key                                    | IsOn  | Description   | ParentId                             | CreatedAt                   | UpdatedAt                   | DeletedAt |
     //// | 4F228BF5-BBB0-428C-92CE-B63754579712 | MyBuilding | MyBuilding                             | TRUE  | my building   | <null>                               | 2026-09-30 03:37:26.0661723 | 2026-09-30 03:37:26.0661723 | <null>    |

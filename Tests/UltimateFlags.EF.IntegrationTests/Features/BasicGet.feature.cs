@@ -167,7 +167,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "12A46EC8-AFFB-4E6A-BABF-D1F92E661FE5",
                             "Room2301",
                             "MyBuilding.Floor23.Room2301",
-                            "FALSE",
+                            "TRUE",
                             "room #2301",
                             "CDFA551C-5504-4475-97BE-66A9084C81A7",
                             "2026-09-30 03:38:50.2655434",
@@ -187,7 +187,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "6CA466A8-11E3-4751-B69A-D06714CCEEA1",
                             "Room2303",
                             "MyBuilding.Floor23.Room2303",
-                            "FALSE",
+                            "TRUE",
                             "room #2303",
                             "CDFA551C-5504-4475-97BE-66A9084C81A7",
                             "2026-09-30 03:39:01.7470543",
@@ -207,7 +207,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "404FA049-CBB7-4C6E-A143-3340678CA90E",
                             "Floor24",
                             "MyBuilding.Floor24",
-                            "FALSE",
+                            "TRUE",
                             "floor #24",
                             "4F228BF5-BBB0-428C-92CE-B63754579712",
                             "2026-09-30 03:41:02.8863859",
@@ -247,7 +247,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "9978B252-97BE-429C-B7A8-63F6579373E6",
                             "Table2401c",
                             "MyBuilding.Floor24.Room2401.Table2401c",
-                            "FALSE",
+                            "TRUE",
                             "table #2401 c",
                             "58E492D1-5723-427A-883F-5F5F6B661210",
                             "2026-09-30 03:42:16.7083398",
@@ -337,7 +337,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "1AEE1C30-B4BA-4B5D-9BBE-0078C372579F",
                             "Room2601",
                             "MyBuilding.Floor26.Room2601",
-                            "FALSE",
+                            "TRUE",
                             "room #2601",
                             "10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6",
                             "2026-09-30 03:46:10.4785162",
@@ -377,7 +377,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "DBE0F6F1-9338-497A-998C-234AD831CFB6",
                             "Table2602c",
                             "MyBuilding.Floor26.Room2602.Table2602c",
-                            "FALSE",
+                            "TRUE",
                             "table #2602 c",
                             "CE0DEB00-7946-4BE0-AE93-7E1B42178841",
                             "2026-10-17 20:36:30.3876071",
@@ -404,15 +404,15 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         [global::NUnit.Framework.DescriptionAttribute("2. Get Flag")]
         [global::NUnit.Framework.TestCaseAttribute("4F228BF5-BBB0-428C-92CE-B63754579712", "MyBuilding", "MyBuilding", "TRUE", "my building", "<null>", "2026-09-30 03:37:26.0661723", "2026-09-30 03:37:26.0661723", "<null>", "1", null)]
         [global::NUnit.Framework.TestCaseAttribute("CDFA551C-5504-4475-97BE-66A9084C81A7", "Floor23", "MyBuilding.Floor23", "TRUE", "floor #23", "4F228BF5-BBB0-428C-92CE-B63754579712", "2026-09-30 03:38:26.5139868", "2026-09-30 03:38:26.5139868", "<null>", "2", null)]
-        [global::NUnit.Framework.TestCaseAttribute("12A46EC8-AFFB-4E6A-BABF-D1F92E661FE5", "Room2301", "MyBuilding.Floor23.Room2301", "FALSE", "room #2301", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:38:50.2655434", "2026-09-30 03:38:50.2655434", "<null>", "3", null)]
+        [global::NUnit.Framework.TestCaseAttribute("12A46EC8-AFFB-4E6A-BABF-D1F92E661FE5", "Room2301", "MyBuilding.Floor23.Room2301", "TRUE", "room #2301", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:38:50.2655434", "2026-09-30 03:38:50.2655434", "<null>", "3", null)]
         [global::NUnit.Framework.TestCaseAttribute("6F3BD2C8-F17C-4903-B3BE-C1CA88EABCCE", "Room2302", "MyBuilding.Floor23.Room2302", "TRUE", "room #2302", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:38:58.7826112", "2026-09-30 03:38:58.7826112", "<null>", "4", null)]
-        [global::NUnit.Framework.TestCaseAttribute("6CA466A8-11E3-4751-B69A-D06714CCEEA1", "Room2303", "MyBuilding.Floor23.Room2303", "FALSE", "room #2303", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:39:01.7470543", "2026-09-30 03:39:01.7470543", "<null>", "5", null)]
+        [global::NUnit.Framework.TestCaseAttribute("6CA466A8-11E3-4751-B69A-D06714CCEEA1", "Room2303", "MyBuilding.Floor23.Room2303", "TRUE", "room #2303", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:39:01.7470543", "2026-09-30 03:39:01.7470543", "<null>", "5", null)]
         [global::NUnit.Framework.TestCaseAttribute("705FA822-E54B-4505-87B5-5EDC1E69D780", "Room2304", "MyBuilding.Floor23.Room2304", "TRUE", "room #2304", "CDFA551C-5504-4475-97BE-66A9084C81A7", "2026-09-30 03:39:04.4400251", "2026-09-30 03:39:04.4400251", "<null>", "6", null)]
-        [global::NUnit.Framework.TestCaseAttribute("404FA049-CBB7-4C6E-A143-3340678CA90E", "Floor24", "MyBuilding.Floor24", "FALSE", "floor #24", "4F228BF5-BBB0-428C-92CE-B63754579712", "2026-09-30 03:41:02.8863859", "2026-09-30 03:41:02.8863859", "<null>", "7", null)]
+        [global::NUnit.Framework.TestCaseAttribute("404FA049-CBB7-4C6E-A143-3340678CA90E", "Floor24", "MyBuilding.Floor24", "TRUE", "floor #24", "4F228BF5-BBB0-428C-92CE-B63754579712", "2026-09-30 03:41:02.8863859", "2026-09-30 03:41:02.8863859", "<null>", "7", null)]
         [global::NUnit.Framework.TestCaseAttribute("58E492D1-5723-427A-883F-5F5F6B661210", "Room2401", "MyBuilding.Floor24.Room2401", "TRUE", "Room #2401", "404FA049-CBB7-4C6E-A143-3340678CA90E", "2026-09-30 03:41:32.8614085", "2026-09-30 03:41:32.8614085", "<null>", "8", null)]
         [global::NUnit.Framework.TestCaseAttribute("65BDBC19-9125-426C-B792-6EB8E272D5A2", "Table2401a", "MyBuilding.Floor24.Room2401.Table2401a", "TRUE", "table #2401 a", "58E492D1-5723-427A-883F-5F5F6B661210", "2026-09-30 03:42:10.6716511", "2026-09-30 03:42:10.6716511", "<null>", "9", null)]
         [global::NUnit.Framework.TestCaseAttribute("04485343-B041-4603-82FF-D08B13292127", "Table2401b", "MyBuilding.Floor24.Room2401.Table2401b", "TRUE", "table #2401 b", "58E492D1-5723-427A-883F-5F5F6B661210", "2026-09-30 03:42:13.7318341", "2026-09-30 03:42:13.7318341", "<null>", "10", null)]
-        [global::NUnit.Framework.TestCaseAttribute("9978B252-97BE-429C-B7A8-63F6579373E6", "Table2401c", "MyBuilding.Floor24.Room2401.Table2401c", "FALSE", "table #2401 c", "58E492D1-5723-427A-883F-5F5F6B661210", "2026-09-30 03:42:16.7083398", "2026-09-30 03:42:16.7083398", "<null>", "11", null)]
+        [global::NUnit.Framework.TestCaseAttribute("9978B252-97BE-429C-B7A8-63F6579373E6", "Table2401c", "MyBuilding.Floor24.Room2401.Table2401c", "TRUE", "table #2401 c", "58E492D1-5723-427A-883F-5F5F6B661210", "2026-09-30 03:42:16.7083398", "2026-09-30 03:42:16.7083398", "<null>", "11", null)]
         [global::NUnit.Framework.TestCaseAttribute("DCCA661B-98A2-4FDF-8219-8B7A340A3688", "Room2402", "MyBuilding.Floor24.Room2402", "TRUE", "room #2402", "404FA049-CBB7-4C6E-A143-3340678CA90E", "2026-09-30 03:43:00.2007052", "2026-09-30 03:43:00.2007052", "<null>", "12", null)]
         [global::NUnit.Framework.TestCaseAttribute("F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD", "Room2403", "MyBuilding.Floor24.Room2403", "TRUE", "room #2403", "404FA049-CBB7-4C6E-A143-3340678CA90E", "2026-09-30 03:43:19.7272716", "2026-09-30 03:43:19.7272716", "<null>", "13", null)]
         [global::NUnit.Framework.TestCaseAttribute("A63D23CC-3A85-4B59-A420-CBFD1E127FC5", "Table2403a", "MyBuilding.Floor24.Room2403.Table2403a", "TRUE", "table #2403 a", "F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD", "2026-09-30 03:43:49.1854194", "2026-09-30 03:43:49.1854194", "<null>", "14", null)]
@@ -421,11 +421,11 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         [global::NUnit.Framework.TestCaseAttribute("06DD9F21-626B-4B88-93F7-BE8B2E4FC3F0", "Room2405", "MyBuilding.Floor24.Room2405", "TRUE", "room #2405", "404FA049-CBB7-4C6E-A143-3340678CA90E", "2026-09-30 03:44:33.9484467", "2026-09-30 03:44:33.9484467", "<null>", "17", null)]
         [global::NUnit.Framework.TestCaseAttribute("52B40BAA-183B-4C6E-A8E9-71AF2F5F797F", "Floor25", "MyBuilding.Floor25", "TRUE", "floor #25", "4F228BF5-BBB0-428C-92CE-B63754579712", "2026-09-30 03:45:23.2836617", "2026-09-30 03:45:23.2836617", "<null>", "18", null)]
         [global::NUnit.Framework.TestCaseAttribute("10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6", "Floor26", "MyBuilding.Floor26", "TRUE", "floor #26", "4F228BF5-BBB0-428C-92CE-B63754579712", "2026-09-30 03:45:45.9977765", "2026-09-30 03:45:45.9977765", "<null>", "19", null)]
-        [global::NUnit.Framework.TestCaseAttribute("1AEE1C30-B4BA-4B5D-9BBE-0078C372579F", "Room2601", "MyBuilding.Floor26.Room2601", "FALSE", "room #2601", "10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6", "2026-09-30 03:46:10.4785162", "2026-09-30 03:46:10.4785162", "<null>", "20", null)]
+        [global::NUnit.Framework.TestCaseAttribute("1AEE1C30-B4BA-4B5D-9BBE-0078C372579F", "Room2601", "MyBuilding.Floor26.Room2601", "TRUE", "room #2601", "10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6", "2026-09-30 03:46:10.4785162", "2026-09-30 03:46:10.4785162", "<null>", "20", null)]
         [global::NUnit.Framework.TestCaseAttribute("CE0DEB00-7946-4BE0-AE93-7E1B42178841", "Room2602", "MyBuilding.Floor26.Room2602", "TRUE", "room #2602", "10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6", "2026-09-30 03:46:17.4000942", "2026-09-30 03:46:17.4000942", "<null>", "21", null)]
         [global::NUnit.Framework.TestCaseAttribute("9B503318-BDB1-4EA7-8D2D-306C1E974E70", "Table2602a", "MyBuilding.Floor26.Room2602.Table2602a", "TRUE", "table #2602 a", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-09-30 03:46:38.2760252", "2026-09-30 03:46:38.2760252", "<null>", "22", null)]
         [global::NUnit.Framework.TestCaseAttribute("1430860F-FEA7-4318-BE0D-5B78157FA328", "Table2602b", "MyBuilding.Floor26.Room2602.Table2602b", "TRUE", "table #2602 b", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-09-30 03:46:44.7748539", "2026-09-30 03:46:44.7748539", "<null>", "23", null)]
-        [global::NUnit.Framework.TestCaseAttribute("DBE0F6F1-9338-497A-998C-234AD831CFB6", "Table2602c", "MyBuilding.Floor26.Room2602.Table2602c", "FALSE", "table #2602 c", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-10-17 20:36:30.3876071", "2026-10-17 20:36:30.3876071", "<null>", "24", null)]
+        [global::NUnit.Framework.TestCaseAttribute("DBE0F6F1-9338-497A-998C-234AD831CFB6", "Table2602c", "MyBuilding.Floor26.Room2602.Table2602c", "TRUE", "table #2602 c", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-10-17 20:36:30.3876071", "2026-10-17 20:36:30.3876071", "<null>", "24", null)]
         [global::NUnit.Framework.TestCaseAttribute("58934C81-05C6-4E0B-A62D-24996957D486", "Table2602d", "MyBuilding.Floor26.Room2602.Table2602d", "TRUE", "table #2602 d", "CE0DEB00-7946-4BE0-AE93-7E1B42178841", "2026-10-17T20:36:30.3876072", "2026-10-17T20:36:30.3876072", "<null>", "25", null)]
         public async global::System.Threading.Tasks.Task _2_GetFlag(string id, string name, string key, string isOn, string description, string parentId, string createdAt, string updatedAt, string deletedAt, string @__pickleIndex, string[] exampleTags)
         {

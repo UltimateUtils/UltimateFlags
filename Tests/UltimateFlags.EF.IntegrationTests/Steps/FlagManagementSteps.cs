@@ -5,6 +5,8 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
+using UltimateFlags.EF.IntegrationTests.Utils;
+using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;
 
@@ -79,5 +81,23 @@ public class FlagManagementSteps
 
         Assert.That(updateResponse.Description, Is.EqualTo(expectedDescription));
         Assert.That(updatedFlag.Description, Is.EqualTo(expectedDescription));
+    }
+
+    [When("I delete a flag with the Id, {Guid}")]
+    public void DeleteAFlagWithTheId(Guid id)
+    {
+        IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id);
+        _scenarioContext.Set(deletedFlags);
+    }
+
+    [Then("The flags with the following Ids have been deleted, {string}")]
+    public void FlagsWithTheFollowingIdsHaveBeenDeleted(string deletedIds)
+    {
+        Guid[] expectedDeletedIds = [.. deletedIds.Split(',').Select(Guid.Parse)];
+        IEnumerable<FlagResponse> actualDeletedFlags = _scenarioContext.Get<IEnumerable<FlagResponse>>();
+        IPagedList<FlagResponse> allDeletedFlags = _flagQueryService.GetAllDeleted(1, int.MaxValue);
+
+        Assert.That(actualDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
+        Assert.That(allDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
     }
 }

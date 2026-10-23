@@ -66,7 +66,7 @@ public class FlagsManagementController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("/purge/{id:guid}")]
+    [Route("purge/{id:guid}")]
     public IEnumerable<FlagResponse> Purge([FromRoute] Guid id)
     {
         _logger.LogDebug("Purging flag. (id: {id})", id);

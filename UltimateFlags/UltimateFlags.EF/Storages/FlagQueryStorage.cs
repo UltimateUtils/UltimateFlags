@@ -102,6 +102,7 @@ public class FlagQueryStorage : IFlagQueryStorage
         return
             _flagDbContext
                 .Flags
+                .IgnoreQueryFilters()
                 .AsNoTracking()
                 .Where(
                     flag =>

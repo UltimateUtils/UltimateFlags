@@ -105,7 +105,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FlagManagement.feature.ndjson", 14);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FlagManagement.feature.ndjson", 15);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -179,6 +179,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             "F-FEA7-4318-BE0D-5B78157FA328,DBE0F6F1-9338-497A-998C-234AD831CFB6,58934C81-05C6" +
             "-4E0B-A62D-24996957D486", "9", null)]
         [global::NUnit.Framework.TestCaseAttribute("10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6", @"10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6,1AEE1C30-B4BA-4B5D-9BBE-0078C372579F,CE0DEB00-7946-4BE0-AE93-7E1B42178841,9B503318-BDB1-4EA7-8D2D-306C1E974E70,1430860F-FEA7-4318-BE0D-5B78157FA328,DBE0F6F1-9338-497A-998C-234AD831CFB6,58934C81-05C6-4E0B-A62D-24996957D486", "10", null)]
+        [global::NUnit.Framework.TestCaseAttribute("404FA049-CBB7-4C6E-A143-3340678CA90E", @"404FA049-CBB7-4C6E-A143-3340678CA90E,58E492D1-5723-427A-883F-5F5F6B661210,65BDBC19-9125-426C-B792-6EB8E272D5A2,04485343-B041-4603-82FF-D08B13292127,9978B252-97BE-429C-B7A8-63F6579373E6,DCCA661B-98A2-4FDF-8219-8B7A340A3688,F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20D-B63F-4120-BC95-9A0A6532ADD1,56CF92D4-0FFF-40D5-B7B4-E78E03961650,06DD9F21-626B-4B88-93F7-BE8B2E4FC3F0", "11", null)]
         public async global::System.Threading.Tasks.Task _2_DeleteFlag(string id, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -219,7 +220,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         [global::NUnit.Framework.DescriptionAttribute("3. Purge Flag")]
         [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD", "F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20" +
-            "D-B63F-4120-BC95-9A0A6532ADD1", "11", null)]
+            "D-B63F-4120-BC95-9A0A6532ADD1", "12", null)]
         public async global::System.Threading.Tasks.Task _3_PurgeFlag(string id, string purgedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -236,7 +237,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("3. Purge Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 37
+#line 38
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -246,13 +247,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 39
+#line 40
     await testRunner.GivenAsync(string.Format("The flag, {0}, has been deleted", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 40
+#line 41
     await testRunner.WhenAsync(string.Format("I purge the flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 42
     await testRunner.ThenAsync(string.Format("The flags, \'{0}\', are purged", purgedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

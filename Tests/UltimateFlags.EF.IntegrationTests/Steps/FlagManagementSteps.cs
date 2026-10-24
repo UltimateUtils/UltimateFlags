@@ -5,7 +5,6 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
-using UltimateFlags.EF.IntegrationTests.Utils;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;
@@ -53,6 +52,8 @@ public class FlagManagementSteps
         _serviceConfiguration = serviceConfiguration;
     }
 
+    #region When
+
     [When("I update a flag with the Id, {Guid}, as follows")]
     public void UpdateAFlagWithTheIdAsFollows(Guid id, DataTable table)
     {
@@ -62,6 +63,17 @@ public class FlagManagementSteps
 
         _scenarioContext.Set(updateResponse);
     }
+
+    [When("I delete a flag with the Id, {Guid}")]
+    public void DeleteAFlagWithTheId(Guid id)
+    {
+        IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id);
+        _scenarioContext.Set(deletedFlags);
+    }
+
+    #endregion When
+
+    #region Then
 
     [Then("flag data with the Id, {Guid}, is updated properly")]
     public void FlagDataWithTheIdIsUpdatedProperly(Guid id, DataTable table)
@@ -83,13 +95,6 @@ public class FlagManagementSteps
         Assert.That(updatedFlag.Description, Is.EqualTo(expectedDescription));
     }
 
-    [When("I delete a flag with the Id, {Guid}")]
-    public void DeleteAFlagWithTheId(Guid id)
-    {
-        IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id);
-        _scenarioContext.Set(deletedFlags);
-    }
-
     [Then("The flags with the following Ids have been deleted, {string}")]
     public void FlagsWithTheFollowingIdsHaveBeenDeleted(string deletedIds)
     {
@@ -100,4 +105,6 @@ public class FlagManagementSteps
         Assert.That(actualDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
         Assert.That(allDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
     }
+
+    #endregion Then
 }

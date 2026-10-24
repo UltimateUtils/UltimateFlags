@@ -54,6 +54,8 @@ public class BasicCreateFlagsSteps
         _options = options;
     }
 
+    #region When
+
     [When("I create the following flag")]
     public void CreateTheFollowingFlag(DataTable table)
     {
@@ -63,6 +65,10 @@ public class BasicCreateFlagsSteps
 
         _scenarioContext.Set(x.Id, ContextKeys.NewlyAddedFlagIdKey);
     }
+
+    #endregion When
+
+    #region Then
 
     [Then("Newly added flag is as follows")]
     public void TheNewlyAddedFlagIsReturnedCorrectly(DataTable table)
@@ -76,6 +82,8 @@ public class BasicCreateFlagsSteps
 
         Assert.That(actual, Is.EqualTo(expected).Using(_FlagResponseFlagComparison()));
     }
+
+    #endregion Then
 
     private static Func<FlagResponse, Flag, bool> _FlagResponseFlagComparison()
     {

@@ -39,6 +39,7 @@ Scenario Outline: 3. Purge Flag
     Given The flag, <Id>, has been deleted
     When I purge the flag, <Id>
     Then The flags, '<PurgedIdsString>', are purged
+    And No flags left soft-deleted
 
 Examples:
     | Id                                   | PurgedIdsString                                                                                                                                                                                                                                                    |

@@ -265,6 +265,9 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 41
     await testRunner.ThenAsync(string.Format("The flags, \'{0}\', are purged", purgedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
+#line 42
+    await testRunner.AndAsync("No flags left soft-deleted", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
             }
             await this.ScenarioCleanupAsync();
         }

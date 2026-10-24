@@ -112,11 +112,11 @@ internal class FlagCommandService : IFlagCommandService
 
     public IEnumerable<FlagResponse> Purge(Guid id)
     {
-        IEnumerable<Flag> purgedEntity = _flagManager.Purge(id);
+        IEnumerable<Flag> purgedEntities = _flagManager.Purge(id);
 
         return
             _flagManager.SaveChanges() > 0
-                ? purgedEntity.ToContracts()
+                ? purgedEntities.ToContracts()
                 : throw new FlagPurgeFailed { Area = $"{nameof(FlagService)}.{nameof(Purge)}(id)", };
     }
 

@@ -50,3 +50,17 @@ Examples:
     | 52B40BAA-183B-4C6E-A8E9-71AF2F5F797F | 52B40BAA-183B-4C6E-A8E9-71AF2F5F797F                                                                                                                                                                                                                               |
     | CE0DEB00-7946-4BE0-AE93-7E1B42178841 | CE0DEB00-7946-4BE0-AE93-7E1B42178841,9B503318-BDB1-4EA7-8D2D-306C1E974E70,1430860F-FEA7-4318-BE0D-5B78157FA328,DBE0F6F1-9338-497A-998C-234AD831CFB6,58934C81-05C6-4E0B-A62D-24996957D486                                                                           |
     | 10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6 | 10EC94AD-9D9E-49A5-AAE8-D0C5FA93A2E6,1AEE1C30-B4BA-4B5D-9BBE-0078C372579F,CE0DEB00-7946-4BE0-AE93-7E1B42178841,9B503318-BDB1-4EA7-8D2D-306C1E974E70,1430860F-FEA7-4318-BE0D-5B78157FA328,DBE0F6F1-9338-497A-998C-234AD831CFB6,58934C81-05C6-4E0B-A62D-24996957D486 |
+
+@ResetBasicFlags
+Scenario Outline: 4. Purge Flag 2
+
+    Given The flag, <Id>, has been deleted
+    When I purge the flag, <IdToPurge>
+    Then The flags, '<PurgedIdsString>', are purged
+    And The flags, '<DeletedIdsString>', left soft-deleted
+
+Examples:
+    | Id                                   | IdToPurge                            | PurgedIdsString                                                                                                                                     | DeletedIdsString                                                                                                                                                                                                                                                                                        |
+    | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | A63D23CC-3A85-4B59-A420-CBFD1E127FC5 | A63D23CC-3A85-4B59-A420-CBFD1E127FC5                                                                                                                | 09A4D20D-B63F-4120-BC95-9A0A6532ADD1                                                                                                                                                                                                                                                                    |
+    | 404FA049-CBB7-4C6E-A143-3340678CA90E | 58E492D1-5723-427A-883F-5F5F6B661210 | 58E492D1-5723-427A-883F-5F5F6B661210,65BDBC19-9125-426C-B792-6EB8E272D5A2,04485343-B041-4603-82FF-D08B13292127,9978B252-97BE-429C-B7A8-63F6579373E6 | 404FA049-CBB7-4C6E-A143-3340678CA90E,DCCA661B-98A2-4FDF-8219-8B7A340A3688,F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20D-B63F-4120-BC95-9A0A6532ADD1,56CF92D4-0FFF-40D5-B7B4-E78E03961650,06DD9F21-626B-4B88-93F7-BE8B2E4FC3F0                                      |
+    | 404FA049-CBB7-4C6E-A143-3340678CA90E | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20D-B63F-4120-BC95-9A0A6532ADD1                                      | 404FA049-CBB7-4C6E-A143-3340678CA90E,58E492D1-5723-427A-883F-5F5F6B661210,65BDBC19-9125-426C-B792-6EB8E272D5A2,04485343-B041-4603-82FF-D08B13292127,9978B252-97BE-429C-B7A8-63F6579373E6,DCCA661B-98A2-4FDF-8219-8B7A340A3688,56CF92D4-0FFF-40D5-B7B4-E78E03961650,06DD9F21-626B-4B88-93F7-BE8B2E4FC3F0 |

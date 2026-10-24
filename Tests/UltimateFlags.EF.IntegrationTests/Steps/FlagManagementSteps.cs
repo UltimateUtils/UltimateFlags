@@ -140,7 +140,7 @@ public class FlagManagementSteps
 
         foreach (Guid expectedPurgedId in expectedPurgedIds)
         {
-            var foundFlag = _flagQueryService.Get(expectedPurgedId);
+            FlagResponse? foundFlag = _flagQueryService.Get(expectedPurgedId);
             Assert.That(foundFlag, Is.Null);
         }
     }
@@ -151,6 +151,16 @@ public class FlagManagementSteps
         IPagedList<FlagResponse> deletedFlags = _flagQueryService.GetAllDeleted();
 
         Assert.That(deletedFlags, Is.Empty);
+    }
+
+    [Then("The flags, {string}, left soft-deleted")]
+    public void FlagsLeftSoftDeleted(string deletedIdsString)
+    {
+        Guid[] expectedDeletedIds = [.. deletedIdsString.Split(',').Select(Guid.Parse)];
+
+        IPagedList<FlagResponse> deletedFlags = _flagQueryService.GetAllDeleted(1, int.MaxValue);
+
+        Assert.That(expectedDeletedIds, Is.SubsetOf(deletedFlags.Select(f => f.Id)));
     }
 
     #endregion Then

@@ -145,5 +145,13 @@ public class FlagManagementSteps
         }
     }
 
+    [Then("No flags left soft-deleted")]
+    public void NoFlagsLeftSoftDeleted()
+    {
+        IPagedList<FlagResponse> deletedFlags = _flagQueryService.GetAllDeleted();
+
+        Assert.That(deletedFlags, Is.Empty);
+    }
+
     #endregion Then
 }

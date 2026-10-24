@@ -53,6 +53,8 @@ public class BasicGetFlagsSteps
         _serviceConfiguration = options.Value;
     }
 
+    #region When
+
     [When("retrieve all flags")]
     public void RetrieveAllFlags()
     {
@@ -68,6 +70,10 @@ public class BasicGetFlagsSteps
 
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
+
+    #endregion When
+
+    #region Then
 
     [Then("all the following flags are returned correctly")]
     public void AllFlagsAreReturnedCorrectly(DataTable table)
@@ -86,4 +92,6 @@ public class BasicGetFlagsSteps
 
         Assert.That(actual, Is.EqualTo(expectedFlag));
     }
+
+    #endregion Then
 }

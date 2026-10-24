@@ -52,6 +52,8 @@ public class BasicFlagsSteps
         _serviceConfiguration = options.Value;
     }
 
+    #region Given
+
     [Given("DB has the following flags")]
     public async Task DbHasTheFollowingFlagsAsync(DataTable table)
     {
@@ -61,4 +63,6 @@ public class BasicFlagsSteps
 
         _ = await _flagDbContext.SaveChangesAsync();
     }
+
+    #endregion Given
 }

@@ -5,6 +5,7 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
+using UltimateFlags.EF.IntegrationTests.Utils;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;
@@ -52,6 +53,16 @@ public class FlagManagementSteps
         _serviceConfiguration = serviceConfiguration;
     }
 
+    #region Given
+
+    [Given("The flag, {Guid}, has been deleted")]
+    public void FlagHasBeenDeleted(Guid id)
+    {
+        _ = _flagCommandService.Delete(id);
+    }
+
+    #endregion Given
+
     #region When
 
     [When("I update a flag with the Id, {Guid}, as follows")]
@@ -69,6 +80,13 @@ public class FlagManagementSteps
     {
         IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id);
         _scenarioContext.Set(deletedFlags);
+    }
+
+    [When("I purge the flag, {Guid}")]
+    public void PurgeTheFlag(Guid id)
+    {
+        IEnumerable<FlagResponse> purgedFlags = _flagCommandService.Purge(id);
+        _scenarioContext.Set(purgedFlags);
     }
 
     #endregion When
@@ -104,6 +122,12 @@ public class FlagManagementSteps
 
         Assert.That(actualDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
         Assert.That(allDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
+    }
+
+    [Then("The flags, {string}, are purged")]
+    public void FlagsArePurged(string purgedIds)
+    {
+        Guid[] expectedPurgedIds = [.. purgedIds.Split(',').Select(Guid.Parse)];
     }
 
     #endregion Then

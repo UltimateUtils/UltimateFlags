@@ -105,7 +105,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FlagManagement.feature.ndjson", 13);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FlagManagement.feature.ndjson", 14);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -210,6 +210,50 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
 #line 24
     await testRunner.ThenAsync(string.Format("The flags with the following Ids have been deleted, \'{0}\'", deletedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("3. Purge Flag")]
+        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.TestCaseAttribute("F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD", "F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20" +
+            "D-B63F-4120-BC95-9A0A6532ADD1", "11", null)]
+        public async global::System.Threading.Tasks.Task _3_PurgeFlag(string id, string purgedIdsString, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "ResetBasicFlags"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Id", id);
+            argumentsOfScenario.Add("PurgedIdsString", purgedIdsString);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("3. Purge Flag", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 37
+this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 39
+    await testRunner.GivenAsync(string.Format("The flag, {0}, has been deleted", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 40
+    await testRunner.WhenAsync(string.Format("I purge the flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 41
+    await testRunner.ThenAsync(string.Format("The flags, \'{0}\', are purged", purgedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

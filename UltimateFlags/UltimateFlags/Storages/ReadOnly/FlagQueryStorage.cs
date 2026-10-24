@@ -20,7 +20,7 @@ public class FlagQueryStorage : IFlagQueryStorage
         _flagsComplex = flagsComplex;
     }
 
-    public Flag? Read(Guid id, bool? deleted)
+    public Flag? Read(Guid id, bool? deleted = false)
     {
         throw new NotImplementedException();
     }

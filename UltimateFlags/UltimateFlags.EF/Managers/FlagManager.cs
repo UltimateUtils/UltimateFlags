@@ -112,7 +112,7 @@ internal class FlagManager : IFlagManager
     public List<Flag> Delete(Guid id)
     {
         // need to enumerate here
-        return [.. _Delete(id, purge: false)];
+        return [.. _Delete(id)];
     }
 
     public int ExecuteDelete(Guid id)
@@ -124,7 +124,7 @@ internal class FlagManager : IFlagManager
     public List<Flag> Purge(Guid id)
     {
         // need to enumerate here
-        return [.. _Delete(id, purge: true)];
+        return [.. _Purge(id)];
     }
 
     public int ExecutePurge(Guid id)
@@ -317,14 +317,13 @@ internal class FlagManager : IFlagManager
         return _flagCommandStorage.SaveChanges();
     }
 
-    private IEnumerable<Flag> _Delete(Guid id, bool purge)
+    private IEnumerable<Flag> _Delete(Guid id)
     {
-        // todo - improve
         Flag rootToDelete =
-            _flagQueryStorage.Read(id, deleted: purge)
+            _flagQueryStorage.Read(id, deleted: false)
             ?? throw new FlagNotFound
             {
-                Area = $"{nameof(FlagManager)}.{nameof(Delete)}(id)",
+                Area = $"{nameof(FlagManager)}.{nameof(_Delete)}(id)",
             };
 
         Queue<Flag> flagsToDelete = [];
@@ -334,19 +333,46 @@ internal class FlagManager : IFlagManager
         while (flagsToDelete.Count > 0)
         {
             Flag curr = flagsToDelete.Dequeue();
-            Flag deleted =
-                purge
-                    ? _flagCommandStorage.Purge(curr)
-                    : _flagCommandStorage.Delete(curr);
+            Flag deleted = _flagCommandStorage.Delete(curr);
 
             yield return deleted;
 
-            IEnumerable<Flag> nextGeneration = _flagQueryStorage.ReadAll(parentId: deleted.Id, deleted: purge);
+            IEnumerable<Flag> nextGeneration = _flagQueryStorage.ReadAll(parentId: deleted.Id, deleted: false);
 
             // todo - improve with PushRange()
             foreach (Flag nextFlag in nextGeneration)
             {
                 flagsToDelete.Enqueue(nextFlag);
+            }
+        }
+    }
+
+    private IEnumerable<Flag> _Purge(Guid id)
+    {
+        Flag rootToDelete =
+            _flagQueryStorage.Read(id, deleted: true)
+            ?? throw new FlagNotDeleted
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(Delete)}(id)",
+            };
+
+        Queue<Flag> flagsToPurge = [];
+
+        flagsToPurge.Enqueue(rootToDelete);
+
+        while (flagsToPurge.Count > 0)
+        {
+            Flag curr = flagsToPurge.Dequeue();
+            Flag deleted = _flagCommandStorage.Purge(curr);
+
+            yield return deleted;
+
+            IEnumerable<Flag> nextGeneration = _flagQueryStorage.ReadAll(parentId: deleted.Id, deleted: true);
+
+            // todo - improve with PushRange()
+            foreach (Flag nextFlag in nextGeneration)
+            {
+                flagsToPurge.Enqueue(nextFlag);
             }
         }
     }

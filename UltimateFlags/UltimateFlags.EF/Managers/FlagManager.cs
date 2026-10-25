@@ -154,7 +154,7 @@ internal class FlagManager : IFlagManager
 
         void _restore(Guid currentId)
         {
-            Flag? currentFlag = _flagQueryStorage.Read(currentId, deleted: null);
+            Flag? currentFlag = _flagQueryStorage.Read(currentId, deleted: null, includeParent: true);
 
             if (currentFlag is null)
             {
@@ -166,10 +166,7 @@ internal class FlagManager : IFlagManager
 
             if (!currentFlag.DeletedAt.HasValue)
             {
-                throw new FlagNotDeleted
-                {
-                    Area = $"{nameof(FlagManager)}.{nameof(Restore)}(id)",
-                };
+                return;
             }
 
             if (currentFlag.Parent != null)

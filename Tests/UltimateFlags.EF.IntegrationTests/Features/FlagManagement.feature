@@ -21,7 +21,7 @@ Examples:
 Scenario Outline: 2. Delete Flag
 
     When I delete a flag with the Id, <Id>
-    Then The flags with the following Ids have been deleted, '<DeletedIdsString>'
+    Then the flags with the following Ids have been deleted, '<DeletedIdsString>'
 
 Examples:
     | Id                                   | DeletedIdsString                                                                                                                                                                                                                                                   |
@@ -36,10 +36,10 @@ Examples:
 @ResetBasicFlags
 Scenario Outline: 3. Purge Flag
 
-    Given The flag, <Id>, has been deleted
+    Given the flag, <Id>, has been deleted
     When I purge the flag, <Id>
-    Then The flags, '<PurgedIdsString>', are purged
-    And No flags left soft-deleted
+    Then the flags, '<PurgedIdsString>', are purged
+    And no flags left soft-deleted
 
 Examples:
     | Id                                   | PurgedIdsString                                                                                                                                                                                                                                                    |
@@ -54,13 +54,28 @@ Examples:
 @ResetBasicFlags
 Scenario Outline: 4. Purge Flag 2
 
-    Given The flag, <Id>, has been deleted
+    Given the flag, <Id>, has been deleted
     When I purge the flag, <IdToPurge>
-    Then The flags, '<PurgedIdsString>', are purged
-    And The flags, '<DeletedIdsString>', left soft-deleted
+    Then the flags, '<PurgedIdsString>', are purged
+    And the flags, '<DeletedIdsString>', left soft-deleted
 
 Examples:
     | Id                                   | IdToPurge                            | PurgedIdsString                                                                                                                                     | DeletedIdsString                                                                                                                                                                                                                                                                                        |
     | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | A63D23CC-3A85-4B59-A420-CBFD1E127FC5 | A63D23CC-3A85-4B59-A420-CBFD1E127FC5                                                                                                                | 09A4D20D-B63F-4120-BC95-9A0A6532ADD1                                                                                                                                                                                                                                                                    |
     | 404FA049-CBB7-4C6E-A143-3340678CA90E | 58E492D1-5723-427A-883F-5F5F6B661210 | 58E492D1-5723-427A-883F-5F5F6B661210,65BDBC19-9125-426C-B792-6EB8E272D5A2,04485343-B041-4603-82FF-D08B13292127,9978B252-97BE-429C-B7A8-63F6579373E6 | 404FA049-CBB7-4C6E-A143-3340678CA90E,DCCA661B-98A2-4FDF-8219-8B7A340A3688,F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20D-B63F-4120-BC95-9A0A6532ADD1,56CF92D4-0FFF-40D5-B7B4-E78E03961650,06DD9F21-626B-4B88-93F7-BE8B2E4FC3F0                                      |
     | 404FA049-CBB7-4C6E-A143-3340678CA90E | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20D-B63F-4120-BC95-9A0A6532ADD1                                      | 404FA049-CBB7-4C6E-A143-3340678CA90E,58E492D1-5723-427A-883F-5F5F6B661210,65BDBC19-9125-426C-B792-6EB8E272D5A2,04485343-B041-4603-82FF-D08B13292127,9978B252-97BE-429C-B7A8-63F6579373E6,DCCA661B-98A2-4FDF-8219-8B7A340A3688,56CF92D4-0FFF-40D5-B7B4-E78E03961650,06DD9F21-626B-4B88-93F7-BE8B2E4FC3F0 |
+
+@ResetBasicFlags
+Scenario Outline: 5. Restore Flag
+
+    Given the flag, <Id>, has been deleted
+    When I restore the flag, <IdToRestore>
+    Then the response has the flags, '<RestoredIds>'
+    And the flags, '<RestoredIds>', are restored
+    And the flags, '<DeletedIdsString>', left soft-deleted
+
+Examples:
+    | Id                                   | IdToRestore                          | RestoredIds                                                               | DeletedIdsString                                                          |
+    | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD                                      | A63D23CC-3A85-4B59-A420-CBFD1E127FC5,09A4D20D-B63F-4120-BC95-9A0A6532ADD1 |
+    | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | A63D23CC-3A85-4B59-A420-CBFD1E127FC5 | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,A63D23CC-3A85-4B59-A420-CBFD1E127FC5 | 09A4D20D-B63F-4120-BC95-9A0A6532ADD1                                      |
+    | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD | 09A4D20D-B63F-4120-BC95-9A0A6532ADD1 | F9DB6BEE-5B40-4051-930A-2ACBEBAD36CD,09A4D20D-B63F-4120-BC95-9A0A6532ADD1 | A63D23CC-3A85-4B59-A420-CBFD1E127FC5                                      |

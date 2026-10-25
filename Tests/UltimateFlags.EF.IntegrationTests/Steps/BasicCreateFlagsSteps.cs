@@ -70,7 +70,7 @@ public class BasicCreateFlagsSteps
 
     #region Then
 
-    [Then("Newly added flag is as follows")]
+    [Then("newly added flag is as follows")]
     public void TheNewlyAddedFlagIsReturnedCorrectly(DataTable table)
     {
         Flag expected = table.CreateInstance<Flag>();

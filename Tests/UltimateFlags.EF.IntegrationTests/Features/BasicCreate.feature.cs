@@ -187,7 +187,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "room #2301",
                             "CDFA551C-5504-4475-97BE-66A9084C81A7"});
 #line 11
-    await testRunner.ThenAsync("Newly added flag is as follows", ((string)(null)), table3, "Then ");
+    await testRunner.ThenAsync("newly added flag is as follows", ((string)(null)), table3, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

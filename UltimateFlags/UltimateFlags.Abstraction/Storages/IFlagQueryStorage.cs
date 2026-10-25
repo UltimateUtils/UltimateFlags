@@ -1,4 +1,3 @@
-using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimatePagination.Abstraction;
 
@@ -15,8 +14,9 @@ public interface IFlagQueryStorage
     /// </remarks>
     /// <param name="id">ID</param>
     /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
+    /// <param name="includeParent">Include Parent</param>
     /// <returns>FLAG entity if found / null if not found</returns>
-    public Flag? Read(Guid id, bool? deleted = false);
+    public Flag? Read(Guid id, bool? deleted = false, bool includeParent = false);
 
     /// <summary>
     ///     Retrieves a readonly FLAG with NO TRACKING by the KEY.

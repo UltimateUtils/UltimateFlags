@@ -27,12 +27,12 @@ public class FlagQueryStorage : IFlagQueryStorage
         _flags = flagDbContext.Flags.AsNoTracking();
     }
 
-    public Flag? Read(Guid id, bool? deleted = false)
+    public Flag? Read(Guid id, bool? deleted = false, bool includeParent = false)
     {
         IQueryable<Flag> flagsQuery =
-            _flagDbContext
-                .Flags
-                .AsNoTracking();
+            includeParent
+                ? _flagDbContext.Flags.AsNoTracking().Include(flag => flag.Parent)
+                : _flagDbContext.Flags.AsNoTracking();
 
         return
             deleted is null
@@ -76,8 +76,7 @@ public class FlagQueryStorage : IFlagQueryStorage
             _flagDbContext
                 .Flags
                 .AsNoTracking()
-                .Where(
-                    flag =>keys.Contains(flag.Key));
+                .Where(flag => keys.Contains(flag.Key));
     }
 
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted = false)

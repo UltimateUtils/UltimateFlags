@@ -8,6 +8,6 @@ Scenario: 1. Create Flags
     When I create the following flag
         | Name     | IsOn  | Description | ParentId                             |
         | Room2301 | FALSE | room #2301  | CDFA551C-5504-4475-97BE-66A9084C81A7 |
-    Then Newly added flag is as follows
+    Then newly added flag is as follows
         | Name     | Key                         | IsOn  | Description | ParentId                             |
         | Room2301 | MyBuilding.Floor23.Room2301 | FALSE | room #2301  | CDFA551C-5504-4475-97BE-66A9084C81A7 |

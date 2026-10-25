@@ -28,7 +28,7 @@ public class FlagQueryStorage : IFlagQueryStorage
         _flagsComplex = optionsSnapshot.Value.Flags.GetFlagsComplex();
     }
 
-    public Flag? Read(Guid id, bool? deleted = false)
+    public Flag? Read(Guid id, bool? deleted = false, bool includeParent = false)
     {
         throw new NotImplementedException();
     }

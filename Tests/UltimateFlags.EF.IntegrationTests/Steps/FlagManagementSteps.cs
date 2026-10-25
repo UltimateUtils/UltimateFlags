@@ -61,7 +61,7 @@ public class FlagManagementSteps
 
     #region Given
 
-    [Given("The flag, {Guid}, has been deleted")]
+    [Given("the flag, {Guid}, has been deleted")]
     public void FlagHasBeenDeleted(Guid id)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
@@ -98,6 +98,13 @@ public class FlagManagementSteps
         _scenarioContext.Set(purgedFlags);
     }
 
+    [When("I restore the flag, {Guid}")]
+    public void RestoreFlag(Guid idToRestore)
+    {
+        IEnumerable<FlagResponse> restoredFlags = _flagCommandService.Restore(idToRestore);
+        _scenarioContext.Set(restoredFlags);
+    }
+
     #endregion When
 
     #region Then
@@ -122,7 +129,7 @@ public class FlagManagementSteps
         Assert.That(updatedFlag.Description, Is.EqualTo(expectedDescription));
     }
 
-    [Then("The flags with the following Ids have been deleted, {string}")]
+    [Then("the flags with the following Ids have been deleted, {string}")]
     public void FlagsWithTheFollowingIdsHaveBeenDeleted(string deletedIds)
     {
         Guid[] expectedDeletedIds = [.. deletedIds.Split(',').Select(Guid.Parse)];
@@ -133,7 +140,7 @@ public class FlagManagementSteps
         Assert.That(allDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
     }
 
-    [Then("The flags, {string}, are purged")]
+    [Then("the flags, {string}, are purged")]
     public void FlagsArePurged(string purgedIds)
     {
         Guid[] expectedPurgedIds = [.. purgedIds.Split(',').Select(Guid.Parse)];
@@ -145,7 +152,7 @@ public class FlagManagementSteps
         }
     }
 
-    [Then("No flags left soft-deleted")]
+    [Then("no flags left soft-deleted")]
     public void NoFlagsLeftSoftDeleted()
     {
         IPagedList<FlagResponse> deletedFlags = _flagQueryService.GetAllDeleted();
@@ -153,7 +160,7 @@ public class FlagManagementSteps
         Assert.That(deletedFlags, Is.Empty);
     }
 
-    [Then("The flags, {string}, left soft-deleted")]
+    [Then("the flags, {string}, left soft-deleted")]
     public void FlagsLeftSoftDeleted(string deletedIdsString)
     {
         Guid[] expectedDeletedIds = [.. deletedIdsString.Split(',').Select(Guid.Parse)];
@@ -161,6 +168,28 @@ public class FlagManagementSteps
         IPagedList<FlagResponse> deletedFlags = _flagQueryService.GetAllDeleted(1, int.MaxValue);
 
         Assert.That(expectedDeletedIds, Is.SubsetOf(deletedFlags.Select(f => f.Id)));
+    }
+
+    [Then("the response has the flags, {string}")]
+    public void ResponseHasFlags(string restoredIds)
+    {
+        IEnumerable<FlagResponse> restoredFlags = _scenarioContext.Get<IEnumerable<FlagResponse>>();
+
+        Guid[] expectedRestoredIds = [.. restoredIds.Split(',').Select(Guid.Parse)];
+
+        Assert.That(restoredFlags.Select(f => f.Id), Is.EquivalentTo(expectedRestoredIds));
+    }
+
+    [Then("the flags, {string}, are restored")]
+    public void FlagsAreRestored(string restoredIds)
+    {
+        Guid[] expectedRestoredIds = [.. restoredIds.Split(',').Select(Guid.Parse)];
+
+        IPagedList<FlagResponse> deletedFlags = _flagQueryService.GetAllDeleted(1, int.MaxValue);
+
+        IEnumerable<Guid> deletedFlagIds = deletedFlags.Select(f => f.Id);
+
+        Assert.That(expectedRestoredIds.Intersect(deletedFlagIds), Is.Empty);
     }
 
     #endregion Then

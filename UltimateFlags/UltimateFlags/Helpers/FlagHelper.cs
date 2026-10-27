@@ -30,7 +30,10 @@ public static class FlagHelper
         }
 
         if (updated)
+        {
             entity.UpdatedAt = DateTime.UtcNow;
+            entity.ConcurrencyToken = Guid.NewGuid();
+        }
 
         return entity;
     }

@@ -11,19 +11,23 @@ using UltimateFlags.EF.Api.Db;
 namespace UltimateFlags.EF.Api.Db.Migrations
 {
     [DbContext(typeof(MyFlagDbContext))]
-    [Migration("20261004234247_Init")]
+    [Migration("20261028002801_Init")]
     partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.13");
 
             modelBuilder.Entity("UltimateFlags.Abstraction.Entities.Flag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ConcurrencyToken")
+                        .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")

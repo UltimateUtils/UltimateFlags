@@ -84,8 +84,10 @@ internal class FlagCommandService : IFlagCommandService
     {
         Flag updatedEntity = _flagManager.Update(id, updateRequest);
 
+        int saveChanges = _flagManager.SaveChanges();
+
         return
-            _flagManager.SaveChanges() > 0
+            saveChanges > 0
                 ? updatedEntity.ToContract()
                 : throw new FlagUpdateFailed { Area = $"{nameof(FlagService)}.{nameof(Update)}(id, contract)", };
     }

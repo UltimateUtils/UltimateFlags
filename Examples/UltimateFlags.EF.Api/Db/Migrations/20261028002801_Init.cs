@@ -16,11 +16,12 @@ namespace UltimateFlags.EF.Api.Db.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    IsOn = table.Column<bool>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Key = table.Column<string>(type: "TEXT", nullable: false),
-                    IsOn = table.Column<bool>(type: "INTEGER", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ConcurrencyToken = table.Column<Guid>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "TEXT", nullable: true)

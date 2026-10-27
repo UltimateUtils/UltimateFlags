@@ -14,6 +14,8 @@ public record FlagResponse
 
     public required Guid? ParentId { get; init; }
 
+    public required Guid ConcurrencyToken { get; init; }
+
     public required DateTime CreatedAt { get; init; }
 
     public required DateTime UpdatedAt { get; init; }

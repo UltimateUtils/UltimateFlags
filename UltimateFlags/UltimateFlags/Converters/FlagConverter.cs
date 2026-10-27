@@ -45,6 +45,7 @@ public static class FlagConverter
                 IsOn = entity.IsOn,
                 Description = entity.Description,
                 ParentId = entity.ParentId,
+                ConcurrencyToken = entity.ConcurrencyToken,
                 CreatedAt = entity.CreatedAt,
                 UpdatedAt = entity.UpdatedAt,
                 DeletedAt = entity.DeletedAt,

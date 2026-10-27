@@ -218,8 +218,23 @@ public class FlagCommandStorage : IFlagCommandStorage
         {
             return _flagDbContext.SaveChanges();
         }
+        catch (DbUpdateConcurrencyException e)
+        {
+            // todo
+            _logger.LogWarning(e, "{ErrorMessage}", e.Message);
+
+            return 0;
+        }
         catch (DbUpdateException e)
         {
+            // todo
+            _logger.LogError(e, "{ErrorMessage}", e.Message);
+
+            return 0;
+        }
+        catch (Exception e)
+        {
+            // todo
             _logger.LogError(e, "{ErrorMessage}", e.Message);
 
             return 0;

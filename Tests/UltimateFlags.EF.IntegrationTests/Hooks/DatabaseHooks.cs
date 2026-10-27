@@ -463,8 +463,8 @@ public class DatabaseHooks
                 IsOn = true,
                 Description = "table #2602 d",
                 ParentId = Guid.Parse("CE0DEB00-7946-4BE0-AE93-7E1B42178841"),
-                CreatedAt = DateTime.Parse("2026-10-17T20:36:30.3876072"),
-                UpdatedAt = DateTime.Parse("2026-10-17T20:36:30.3876072"),
+                CreatedAt = DateTime.Parse("2026-10-17 20:36:30.3876072"),
+                UpdatedAt = DateTime.Parse("2026-10-17 20:36:30.3876072"),
                 DeletedAt = null,
             };
     }

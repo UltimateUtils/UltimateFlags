@@ -11,7 +11,7 @@ using UltimateFlags.EF.IntegrationTests.Db;
 namespace UltimateFlags.EF.IntegrationTests.Db.Migrations
 {
     [DbContext(typeof(MyFlagDbContext))]
-    [Migration("20261019022119_Init")]
+    [Migration("20261028010614_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -24,6 +24,10 @@ namespace UltimateFlags.EF.IntegrationTests.Db.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ConcurrencyToken")
+                        .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")

@@ -317,7 +317,7 @@ internal class FlagManager : IFlagManager
     private IEnumerable<Flag> _Delete(Guid id)
     {
         Flag rootToDelete =
-            _flagQueryStorage.Read(id, deleted: false)
+            _flagCommandStorage.Get(id, deleted: false)
             ?? throw new FlagNotFound
             {
                 Area = $"{nameof(FlagManager)}.{nameof(_Delete)}(id)",
@@ -334,7 +334,7 @@ internal class FlagManager : IFlagManager
 
             yield return deleted;
 
-            IEnumerable<Flag> nextGeneration = _flagQueryStorage.ReadAll(parentId: deleted.Id, deleted: false);
+            IEnumerable<Flag> nextGeneration = _flagCommandStorage.GetAll(parentId: deleted.Id, deleted: false);
 
             // todo - improve with PushRange()
             foreach (Flag nextFlag in nextGeneration)

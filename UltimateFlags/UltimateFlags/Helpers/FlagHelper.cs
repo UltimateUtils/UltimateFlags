@@ -29,34 +29,40 @@ public static class FlagHelper
             entity.IsOn = updateRequest.IsOn.Value;
         }
 
-        if (updated)
-        {
-            entity.UpdatedAt = DateTime.UtcNow;
-            entity.ConcurrencyToken = Guid.NewGuid();
-        }
-
-        return entity;
+        return
+            updated
+                ? entity._Modified()
+                : entity;
     }
 
     public static Flag Enabled(this Flag entity)
     {
+        if (entity.IsOn)
+            return entity;
+
         entity.IsOn = true;
 
-        return entity;
+        return entity._Modified();
     }
 
     public static Flag Disabled(this Flag entity)
     {
+        if (!entity.IsOn)
+            return entity;
+
         entity.IsOn = false;
 
-        return entity;
+        return entity._Modified();
     }
 
     public static Flag Deleted(this Flag entity)
     {
+        if (entity.DeletedAt.HasValue)
+            return entity;
+
         entity.DeletedAt = DateTime.UtcNow;
 
-        return entity;
+        return entity._Modified();
     }
 
     public static IEnumerable<string> GetAncestorKeys(this string key, bool inclusive)
@@ -69,5 +75,13 @@ public static class FlagHelper
                 : names.Take(names.Length - 1);
 
         return x.Select((_, index) => string.Join(Utils.Constants.KeyDelimiter, names[..(index + 1)]));
+    }
+
+    private static Flag _Modified(this Flag entity)
+    {
+        entity.UpdatedAt = DateTime.UtcNow;
+        entity.ConcurrencyToken = Guid.NewGuid();
+
+        return entity;
     }
 }

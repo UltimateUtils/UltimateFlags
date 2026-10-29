@@ -77,8 +77,13 @@ public class FlagCommandStorage : IFlagCommandStorage
         return created.Entity;
     }
 
-    public Flag Update(Flag flag)
+    public Flag Update(Flag flag, Guid? concurrencyToken = null)
     {
+        if (concurrencyToken.HasValue)
+        {
+            _flagDbContext.Entry(flag).Property(p => p.ConcurrencyToken).OriginalValue = concurrencyToken.Value;
+        }
+
         EntityEntry<Flag> updated = _flagDbContext.Flags.Update(flag);
 
         return updated.Entity;

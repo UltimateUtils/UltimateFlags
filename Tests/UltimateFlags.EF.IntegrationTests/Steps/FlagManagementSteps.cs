@@ -77,11 +77,11 @@ public class FlagManagementSteps
     [When("I update a flag with the Id, {Guid}, as follows")]
     public void UpdateAFlagWithTheIdAsFollows(Guid id, DataTable table)
     {
-        (bool isOn, string description) = table.CreateInstance<(bool isOn, string description)>();
+        FlagUpdateRequest flagUpdateRequest = table.CreateInstance<FlagUpdateRequest>();
 
-        FlagResponse updateResponse = _flagCommandService.Update(id, new FlagUpdateRequest { IsOn = isOn, Description = description });
+        FlagResponse updateResponse = _flagCommandService.Update(id, flagUpdateRequest);
 
-        _scenarioContext.Set(updateResponse);
+        _scenarioContext.Set(updateResponse, ContextKeys.UpdateResponseKey);
     }
 
     [When("I delete a flag with the Id, {Guid}")]
@@ -112,9 +112,9 @@ public class FlagManagementSteps
     [Then("flag data with the Id, {Guid}, is updated properly")]
     public void FlagDataWithTheIdIsUpdatedProperly(Guid id, DataTable table)
     {
-        (bool expectedIsOn, string expectedDescription) = table.CreateInstance<(bool isOn, string description)>();
+        Flag expectedFlag = table.CreateInstance<Flag>();
 
-        FlagResponse updateResponse = _scenarioContext.Get<FlagResponse>();
+        FlagResponse updateResponse = _scenarioContext.Get<FlagResponse>(ContextKeys.UpdateResponseKey);
 
         FlagResponse? updatedFlag = _flagQueryService.Get(id);
         Assert.That(updatedFlag, Is.Not.Null);
@@ -122,11 +122,11 @@ public class FlagManagementSteps
         Assert.That(updateResponse.Id, Is.EqualTo(id));
         Assert.That(updatedFlag.Id, Is.EqualTo(id));
 
-        Assert.That(updateResponse.IsOn, Is.EqualTo(expectedIsOn));
-        Assert.That(updatedFlag.IsOn, Is.EqualTo(expectedIsOn));
+        Assert.That(updateResponse.IsOn, Is.EqualTo(expectedFlag.IsOn));
+        Assert.That(updatedFlag.IsOn, Is.EqualTo(expectedFlag.IsOn));
 
-        Assert.That(updateResponse.Description, Is.EqualTo(expectedDescription));
-        Assert.That(updatedFlag.Description, Is.EqualTo(expectedDescription));
+        Assert.That(updateResponse.Description, Is.EqualTo(expectedFlag.Description));
+        Assert.That(updatedFlag.Description, Is.EqualTo(expectedFlag.Description));
     }
 
     [Then("the flags with the following Ids have been deleted, {string}")]

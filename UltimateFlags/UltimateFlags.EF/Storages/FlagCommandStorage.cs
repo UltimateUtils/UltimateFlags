@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
+using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.EF.Db;
 using UltimateFlags.Helpers;
@@ -214,30 +215,6 @@ public class FlagCommandStorage : IFlagCommandStorage
 
     public int SaveChanges()
     {
-        try
-        {
-            return _flagDbContext.SaveChanges();
-        }
-        catch (DbUpdateConcurrencyException e)
-        {
-            // todo
-            _logger.LogWarning(e, "{ErrorMessage}", e.Message);
-
-            return 0;
-        }
-        catch (DbUpdateException e)
-        {
-            // todo
-            _logger.LogError(e, "{ErrorMessage}", e.Message);
-
-            return 0;
-        }
-        catch (Exception e)
-        {
-            // todo
-            _logger.LogError(e, "{ErrorMessage}", e.Message);
-
-            return 0;
-        }
+        return _flagDbContext.SaveChanges();
     }
 }

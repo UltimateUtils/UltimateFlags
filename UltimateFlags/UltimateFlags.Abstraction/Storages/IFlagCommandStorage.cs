@@ -48,8 +48,9 @@ public interface IFlagCommandStorage
     ///     Updates a FLAG.
     /// </summary>
     /// <param name="flag">An entity of the FLAG</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>An entity of the updated FLAG</returns>
-    public Flag Update(Flag flag);
+    public Flag Update(Flag flag, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Updates a FLAG.

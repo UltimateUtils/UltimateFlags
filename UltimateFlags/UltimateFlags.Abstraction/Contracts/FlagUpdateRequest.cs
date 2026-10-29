@@ -5,4 +5,6 @@ public record FlagUpdateRequest
     public bool? IsOn { get; init; }
 
     public string? Description { get; init; }
+
+    public Guid? ConcurrencyToken { get; set; }
 }

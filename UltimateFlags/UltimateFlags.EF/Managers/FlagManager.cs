@@ -87,7 +87,7 @@ internal class FlagManager : IFlagManager
                 Area = $"{nameof(FlagManager)}.{nameof(Update)}(id, contract)",
             };
 
-        return _flagCommandStorage.Update(entity.UpdatedFrom(contract));
+        return _flagCommandStorage.Update(entity.UpdatedFrom(contract), contract.ConcurrencyToken);
     }
 
     public int ExecuteUpdate(Guid id, FlagUpdateRequest contract)

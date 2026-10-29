@@ -1,4 +1,4 @@
-Feature: Flag Management
+Feature: Flag Management Feature
 
 @ResetBasicFlags
 Scenario Outline: 1. Update Flag

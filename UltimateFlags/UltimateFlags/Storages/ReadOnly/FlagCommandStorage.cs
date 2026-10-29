@@ -40,7 +40,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
-    public Flag Update(Flag flag)
+    public Flag Update(Flag flag, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

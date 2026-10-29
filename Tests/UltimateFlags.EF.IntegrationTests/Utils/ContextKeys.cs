@@ -7,4 +7,8 @@ internal static class ContextKeys
     internal const string NewlyAddedFlagIdKey = "NewlyAddedFlagId";
 
     internal const string RetrievedFlagKey = "RetrievedFlag";
+
+    internal const string UpdateResponseKey = "UpdateResponse";
+
+    internal const string ThrownExceptionKey = "ThrownException";
 }

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UltimateFlags.Abstraction.Config;
@@ -311,7 +312,24 @@ internal class FlagManager : IFlagManager
 
     public int SaveChanges()
     {
-        return _flagCommandStorage.SaveChanges();
+        try
+        {
+            return _flagCommandStorage.SaveChanges();
+        }
+        catch (DbUpdateConcurrencyException e)
+        {
+            _logger.LogWarning(e, "{ErrorMessage}", e.Message);
+
+            throw new ConcurrencyConflict
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(SaveChanges)}()",
+            };
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "{ErrorMessage}", e.Message);
+            return 0;
+        }
     }
 
     private IEnumerable<Flag> _Delete(Guid id)

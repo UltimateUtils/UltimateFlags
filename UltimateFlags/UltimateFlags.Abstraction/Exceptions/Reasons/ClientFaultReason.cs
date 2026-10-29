@@ -16,5 +16,7 @@ public enum ClientFaultReason
 
     InvalidTimeRange,
 
-    InvalidFlagName
+    InvalidFlagName,
+
+    ConcurrencyConflict
 }

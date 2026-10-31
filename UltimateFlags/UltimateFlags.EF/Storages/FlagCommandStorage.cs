@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
-using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.EF.Db;
 using UltimateFlags.Helpers;
@@ -14,13 +13,13 @@ public class FlagCommandStorage : IFlagCommandStorage
 {
     private readonly ILogger<FlagCommandStorage> _logger;
 
-    private readonly IFlagDbContext _flagDbContext;
+    private readonly FlagDbContext _flagDbContext;
 
     private readonly IQueryable<Flag> _flags;
 
     public FlagCommandStorage(
         ILogger<FlagCommandStorage> logger,
-        IFlagDbContext flagDbContext)
+        FlagDbContext flagDbContext)
     {
         _logger = logger;
         _flagDbContext = flagDbContext;

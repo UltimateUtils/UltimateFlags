@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.EF.Db;
@@ -14,13 +13,13 @@ public class FlagQueryStorage : IFlagQueryStorage
 {
     private readonly ILogger<FlagQueryStorage> _logger;
 
-    private readonly IFlagDbContext _flagDbContext;
+    private readonly FlagDbContext _flagDbContext;
 
     private readonly IQueryable<Flag> _flags;
 
     public FlagQueryStorage(
         ILogger<FlagQueryStorage> logger,
-        IFlagDbContext flagDbContext)
+        FlagDbContext flagDbContext)
     {
         _logger = logger;
         _flagDbContext = flagDbContext;

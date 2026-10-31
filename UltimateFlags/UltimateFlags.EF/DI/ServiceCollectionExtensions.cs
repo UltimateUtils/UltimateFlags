@@ -17,14 +17,14 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         Action<DbContextOptionsBuilder>? optionsAction)
-        where TContext : FlagDbContext, IFlagDbContext
+        where TContext : FlagDbContext
     {
         IConfigurationSection configurationSection = configuration.GetSection(UltimateFlagConfiguration.SectionName);
 
         if (configurationSection.Exists())
             services.Configure<UltimateFlagConfiguration>(configurationSection);
 
-        services.AddScoped<IFlagDbContext, TContext>();
+        services.AddScoped<FlagDbContext, TContext>();
         services.AddDbContext<TContext>(optionsAction);
 
         services.AddScoped<IFlagQueryStorage, FlagQueryStorage>();
@@ -41,14 +41,14 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration,
         Action<DbContextOptionsBuilder>? optionsAction)
-        where TContext : FlagDbContext, IFlagDbContext
+        where TContext : FlagDbContext
     {
         IConfigurationSection configurationSection = configuration.GetSection(UltimateFlagConfiguration.SectionName);
 
         if (configurationSection.Exists())
             services.Configure<UltimateFlagConfiguration>(configurationSection);
 
-        services.AddScoped<IFlagDbContext, TContext>();
+        services.AddScoped<FlagDbContext, TContext>();
         services.AddDbContext<TContext>(optionsAction);
 
         services.AddScoped<IFlagQueryStorage, FlagQueryStorage>();

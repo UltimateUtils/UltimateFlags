@@ -13,8 +13,8 @@ public class FlagDbContext : FlagDbContext<FlagDbContext>
     }
 }
 
-public class FlagDbContext<TContext> : DbContext, IFlagDbContext
-    where TContext : DbContext, IFlagDbContext
+public class FlagDbContext<TContext> : DbContext
+    where TContext : DbContext
 {
     // protected const string DeletedAt = "DeletedAt";
 

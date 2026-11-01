@@ -26,7 +26,7 @@ internal interface IFlagManager
 
     public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest);
 
-    public List<Flag> Delete(Guid id);
+    public List<Flag> Delete(Guid id, Guid? concurrencyToken = null);
 
     public int ExecuteDelete(Guid id);
 

@@ -105,7 +105,7 @@ internal class FlagCommandService : IFlagCommandService
         return flagManager.ExecuteUpdate(id, updateRequest);
     }
 
-    public IEnumerable<FlagResponse> Delete(Guid id)
+    public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();

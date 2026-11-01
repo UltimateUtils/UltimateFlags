@@ -21,7 +21,7 @@ Examples:
 Scenario Outline: 2. Delete Flag
 
     When I delete a flag with the Id, <Id>
-    Then the flags with the following Ids have been deleted, '<DeletedIdsString>'
+    Then exactly the flags with the following Ids are deleted, '<DeletedIdsString>'
 
 Examples:
     | Id                                   | DeletedIdsString                                                                                                                                                                                                                                                   |

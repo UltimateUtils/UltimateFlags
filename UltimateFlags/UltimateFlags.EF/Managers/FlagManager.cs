@@ -111,10 +111,10 @@ internal class FlagManager : IFlagManager
         };
     }
 
-    public List<Flag> Delete(Guid id)
+    public List<Flag> Delete(Guid id, Guid? concurrencyToken = null)
     {
         // need to enumerate here
-        return [.. _Delete(id)];
+        return [.. _Delete(id, concurrencyToken)];
     }
 
     public int ExecuteDelete(Guid id)
@@ -333,7 +333,7 @@ internal class FlagManager : IFlagManager
         }
     }
 
-    private IEnumerable<Flag> _Delete(Guid id)
+    private IEnumerable<Flag> _Delete(Guid id, Guid? concurrencyToken)
     {
         Flag rootToDelete =
             _flagCommandStorage.Get(id, deleted: false)
@@ -342,9 +342,12 @@ internal class FlagManager : IFlagManager
                 Area = $"{nameof(FlagManager)}.{nameof(_Delete)}(id)",
             };
 
-        Queue<Flag> flagsToDelete = [];
+        Flag deletedRoot = _flagCommandStorage.Delete(rootToDelete, concurrencyToken);
 
-        flagsToDelete.Enqueue(rootToDelete);
+        yield return deletedRoot;
+
+        IEnumerable<Flag> secondGeneration = _flagCommandStorage.GetAll(parentId: deletedRoot.Id, deleted: false);
+        Queue<Flag> flagsToDelete = new(secondGeneration);
 
         while (flagsToDelete.Count > 0)
         {

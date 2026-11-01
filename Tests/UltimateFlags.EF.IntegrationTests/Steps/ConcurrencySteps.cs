@@ -82,6 +82,22 @@ public class ConcurrencySteps
         {
             FlagResponse updateResponse = _flagCommandService.Update(retrievedFlag.Id, flagUpdateRequest);
             _scenarioContext.Set(updateResponse, ContextKeys.UpdateResponseKey);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I delete a flag, {Guid}, with a ConcurrencyToken, {Guid}")]
+    public void DeleteFlagWithConcurrencyToken(Guid id, Guid? concurrencyToken)
+    {
+        try
+        {
+            IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id, concurrencyToken);
+            _scenarioContext.Set(deletedFlags);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
         }
         catch (Exception e)
         {

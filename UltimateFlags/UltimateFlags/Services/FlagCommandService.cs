@@ -34,7 +34,7 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public IEnumerable<FlagResponse> Delete(Guid id)
+    public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

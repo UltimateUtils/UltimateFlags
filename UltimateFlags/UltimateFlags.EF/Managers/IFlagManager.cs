@@ -22,9 +22,9 @@ internal interface IFlagManager
         int pageNumber,
         int pageSize);
 
-    public Flag Update(Guid id, FlagUpdateRequest contract);
+    public Flag Update(Guid id, FlagUpdateRequest updateRequest);
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest contract);
+    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest);
 
     public List<Flag> Delete(Guid id);
 

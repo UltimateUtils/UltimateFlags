@@ -78,7 +78,7 @@ internal class FlagManager : IFlagManager
                     pageSize);
     }
 
-    public Flag Update(Guid id, FlagUpdateRequest contract)
+    public Flag Update(Guid id, FlagUpdateRequest updateRequest)
     {
         Flag entity =
             _flagCommandStorage.Get(id)
@@ -87,10 +87,10 @@ internal class FlagManager : IFlagManager
                 Area = $"{nameof(FlagManager)}.{nameof(Update)}(id, contract)",
             };
 
-        return _flagCommandStorage.Update(entity.UpdatedFrom(contract), contract.ConcurrencyToken);
+        return _flagCommandStorage.Update(entity.UpdatedFrom(updateRequest), updateRequest.ConcurrencyToken);
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest contract)
+    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
     {
         if (!_flagQueryStorage.Exists(id))
         {
@@ -100,7 +100,7 @@ internal class FlagManager : IFlagManager
             };
         }
 
-        int updatedCount = _flagCommandStorage.ExecuteUpdate(id, contract);
+        int updatedCount = _flagCommandStorage.ExecuteUpdate(id, updateRequest);
         if (updatedCount == 1)
             return updatedCount;
 

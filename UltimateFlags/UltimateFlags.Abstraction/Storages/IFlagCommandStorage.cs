@@ -56,9 +56,9 @@ public interface IFlagCommandStorage
     ///     Updates a FLAG.
     /// </summary>
     /// <param name="id">ID</param>
-    /// <param name="contract">Update request contract</param>
+    /// <param name="updateRequest">Update request contract</param>
     /// <returns>An entity of the updated FLAG</returns>
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest contract);
+    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest);
 
     /// <summary>
     ///     Soft-deletes a FLAG.

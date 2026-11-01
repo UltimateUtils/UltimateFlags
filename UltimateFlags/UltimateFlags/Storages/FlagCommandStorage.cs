@@ -58,7 +58,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
-    public Flag Delete(Flag flag)
+    public Flag Delete(Flag flag, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

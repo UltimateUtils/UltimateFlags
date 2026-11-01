@@ -64,8 +64,9 @@ public interface IFlagCommandStorage
     ///     Soft-deletes a FLAG.
     /// </summary>
     /// <param name="flag">ID</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>An entity of the deleted FLAG</returns>
-    public Flag Delete(Flag flag);
+    public Flag Delete(Flag flag, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Soft-deletes a FLAG by ID.

@@ -44,11 +44,12 @@ public interface IFlagCommandService
     ///     Soft-Deletes a FLAG by ID and its descendants recursively.
     /// </summary>
     /// <param name="id">ID</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>Response contracts of deleted FLAGs</returns>
     /// <exception cref="FlagNotFound">
     ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
     /// </exception>
-    public IEnumerable<FlagResponse> Delete(Guid id);
+    public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Soft-Deletes a FLAG and its descendants recursively.

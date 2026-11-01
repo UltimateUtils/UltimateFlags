@@ -107,8 +107,13 @@ public class FlagCommandStorage : IFlagCommandStorage
                             .SetProperty(f => f.IsOn, f => updateRequest.IsOn ?? f.IsOn));
     }
 
-    public Flag Delete(Flag flag)
+    public Flag Delete(Flag flag, Guid? concurrencyToken = null)
     {
+        if (concurrencyToken.HasValue)
+        {
+            _flagDbContext.Entry(flag).Property(p => p.ConcurrencyToken).OriginalValue = concurrencyToken.Value;
+        }
+
         EntityEntry<Flag> softDeleted = _flagDbContext.Flags.Update(flag.Deleted());
 
         return softDeleted.Entity;

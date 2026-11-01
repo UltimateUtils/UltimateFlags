@@ -85,7 +85,7 @@ public class FlagManagementSteps
     }
 
     [When("I delete a flag with the Id, {Guid}")]
-    public void DeleteAFlagWithTheId(Guid id)
+    public void DeleteFlagWithTheId(Guid id)
     {
         IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id);
         _scenarioContext.Set(deletedFlags);
@@ -129,8 +129,8 @@ public class FlagManagementSteps
         Assert.That(updatedFlag.Description, Is.EqualTo(expectedFlag.Description));
     }
 
-    [Then("the flags with the following Ids have been deleted, {string}")]
-    public void FlagsWithTheFollowingIdsHaveBeenDeleted(string deletedIds)
+    [Then("exactly the flags with the following Ids are deleted, {string}")]
+    public void ExactlyFlagsWithTheFollowingIdsAreDeleted(string deletedIds)
     {
         Guid[] expectedDeletedIds = [.. deletedIds.Split(',').Select(Guid.Parse)];
         IEnumerable<FlagResponse> actualDeletedFlags = _scenarioContext.Get<IEnumerable<FlagResponse>>();
@@ -138,6 +138,16 @@ public class FlagManagementSteps
 
         Assert.That(actualDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
         Assert.That(allDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
+    }
+
+    [Then("the flags with the following Ids are not deleted, {string}")]
+    public void FlagsWithFollowingIdsAreNotDeleted(string notDeletedIds)
+    {
+        Guid[] expectedNotDeletedIds = [.. notDeletedIds.Split(',').Select(Guid.Parse)];
+
+        IPagedList<FlagResponse> allDeletedFlags = _flagQueryService.GetAllDeleted(1, int.MaxValue);
+
+        Assert.That(allDeletedFlags.Select(f => f.Id).Intersect(expectedNotDeletedIds), Is.Empty);
     }
 
     [Then("the flags, {string}, are purged")]

@@ -142,23 +142,23 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table1.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 6
-    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table1, "When ");
+    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table6, "When ");
 #line hidden
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table2.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 9
-    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table2, "Then ");
+    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table7, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -209,7 +209,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
     await testRunner.WhenAsync(string.Format("I delete a flag with the Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 24
-    await testRunner.ThenAsync(string.Format("the flags with the following Ids have been deleted, \'{0}\'", deletedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync(string.Format("exactly the flags with the following Ids are deleted, \'{0}\'", deletedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

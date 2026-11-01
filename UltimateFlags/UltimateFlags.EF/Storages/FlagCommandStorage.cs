@@ -95,7 +95,11 @@ public class FlagCommandStorage : IFlagCommandStorage
             _flagDbContext
                 .Flags
                 .AsNoTracking()
-                .Where(f => f.Id == id)
+                .Where(
+                    f =>
+                        f.Id == id
+                        && (updateRequest.ConcurrencyToken == null
+                            || f.ConcurrencyToken == updateRequest.ConcurrencyToken))
                 .ExecuteUpdate(
                     setters =>
                         setters

@@ -104,6 +104,7 @@ internal class FlagManager : IFlagManager
         if (updatedCount == 1)
             return updatedCount;
 
+        // todo - ConcurrencyConflict ??
         throw new FlagUpdateFailed
         {
             Area = $"{nameof(FlagManager)}.{nameof(ExecuteUpdate)}(id, contract)",
@@ -419,7 +420,7 @@ internal class FlagManager : IFlagManager
         {
             throw new FlagNotFound
             {
-                Area = $"{nameof(FlagManager)}.{nameof(Delete)}(id)",
+                Area = $"{nameof(FlagManager)}.{nameof(_GetAllDescendantIds)}(id)",
             };
         }
 

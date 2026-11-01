@@ -45,7 +45,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest contract)
+    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
     {
         throw new NotImplementedException();
     }

@@ -89,7 +89,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         return updated.Entity;
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest contract)
+    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
     {
         return
             _flagDbContext
@@ -99,8 +99,8 @@ public class FlagCommandStorage : IFlagCommandStorage
                 .ExecuteUpdate(
                     setters =>
                         setters
-                            .SetProperty(f => f.Description, f => contract.Description ?? f.Description)
-                            .SetProperty(f => f.IsOn, f => contract.IsOn ?? f.IsOn));
+                            .SetProperty(f => f.Description, f => updateRequest.Description ?? f.Description)
+                            .SetProperty(f => f.IsOn, f => updateRequest.IsOn ?? f.IsOn));
     }
 
     public Flag Delete(Flag flag)

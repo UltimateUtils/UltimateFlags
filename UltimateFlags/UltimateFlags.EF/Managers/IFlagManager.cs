@@ -24,17 +24,9 @@ internal interface IFlagManager
 
     public Flag Update(Guid id, FlagUpdateRequest updateRequest);
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest);
-
     public List<Flag> Delete(Guid id, Guid? concurrencyToken = null);
 
-    public int ExecuteDelete(Guid id);
-
     public List<Flag> Purge(Guid id, Guid? concurrencyToken = null);
-
-    public int ExecutePurge(Guid id);
-
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null);
 
     public IEnumerable<Flag> Restore(Guid id);
 

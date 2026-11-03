@@ -30,17 +30,6 @@ public interface IFlagCommandService
     public FlagResponse Update(Guid id, FlagUpdateRequest updateRequest);
 
     /// <summary>
-    ///     Updates a FLAG.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <param name="updateRequest">Request contract of FLAG to update</param>
-    /// <returns>Number of updated FLAGs. 1 if successful. 0 otherwise.</returns>
-    /// <exception cref="FlagNotFound">
-    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
-    /// </exception>
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest);
-
-    /// <summary>
     ///     Soft-Deletes a FLAG by ID and its descendants recursively.
     /// </summary>
     /// <param name="id">ID</param>
@@ -50,16 +39,6 @@ public interface IFlagCommandService
     ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
     /// </exception>
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null);
-
-    /// <summary>
-    ///     Soft-Deletes a FLAG and its descendants recursively.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <returns>Number of deleted FLAGs</returns>
-    /// <exception cref="FlagNotFound">
-    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
-    /// </exception>
-    public int ExecuteDelete(Guid id);
 
     /// <summary>
     ///     Purge/Hard-Deletes a FLAG and its descendants recursively.
@@ -74,27 +53,6 @@ public interface IFlagCommandService
     ///     FlagNotDeleted will be thrown when the FLAG is not soft-deleted.
     /// </exception>
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null);
-
-    /// <summary>
-    ///     Purge/Hard-Deletes a FLAG and its descendants recursively.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <returns>Number of purged/hard-deleted flags.</returns>
-    /// <exception cref="FlagNotFound">
-    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
-    /// </exception>
-    /// <exception cref="FlagNotDeleted">
-    ///     FlagNotDeleted will be thrown when the FLAG is not soft-deleted.
-    /// </exception>
-    public int ExecutePurge(Guid id);
-
-    /// <summary>
-    ///     Purge/Hard-Deletes FLAGs and their descendants recursively.
-    /// </summary>
-    /// <param name="fromInclusive">Deleted after (inclusive) the specified time. No limit if NULL.</param>
-    /// <param name="toInclusive">Deleted before (inclusive) the specified time. No limit if NULL.</param>
-    /// <returns>Number of purged/hard-deleted flags.</returns>
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null);
 
     /// <summary>
     ///     Restores deleted FLAG and its deleted ancestors

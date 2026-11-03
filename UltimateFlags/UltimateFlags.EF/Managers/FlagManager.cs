@@ -90,60 +90,16 @@ internal class FlagManager : IFlagManager
         return _flagCommandStorage.Update(entity.UpdatedFrom(updateRequest), updateRequest.ConcurrencyToken);
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        if (!_flagQueryStorage.Exists(id))
-        {
-            throw new FlagNotFound
-            {
-                Area = $"{nameof(FlagManager)}.{nameof(ExecuteUpdate)}(id, contract)",
-            };
-        }
-
-        int updatedCount = _flagCommandStorage.ExecuteUpdate(id, updateRequest);
-        if (updatedCount == 1)
-            return updatedCount;
-
-        // todo - ConcurrencyConflict ??
-        throw new FlagUpdateFailed
-        {
-            Area = $"{nameof(FlagManager)}.{nameof(ExecuteUpdate)}(id, contract)",
-        };
-    }
-
     public List<Flag> Delete(Guid id, Guid? concurrencyToken = null)
     {
         // need to enumerate here
         return [.. _Delete(id, concurrencyToken)];
     }
 
-    public int ExecuteDelete(Guid id)
-    {
-        IEnumerable<Guid> idsToDelete = _GetAllDescendantIds(id, deleted: false);
-        return _flagCommandStorage.ExecuteDelete(idsToDelete);
-    }
-
     public List<Flag> Purge(Guid id, Guid? concurrencyToken = null)
     {
         // need to enumerate here
         return [.. _Purge(id, concurrencyToken)];
-    }
-
-    public int ExecutePurge(Guid id)
-    {
-        IEnumerable<Guid> idsToPurge = _GetAllDescendantIds(id, deleted: true);
-        return _flagCommandStorage.ExecutePurge(idsToPurge);
-    }
-
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null)
-    {
-        IEnumerable<Guid> rootIds =
-            _flagQueryStorage
-                .ReadAllDeleted(fromInclusive, toInclusive)
-                .Select(flag => flag.Id);
-
-        IEnumerable<Guid> idsToPurge = _GetAllDescendantIds(rootIds, deleted: true);
-        return _flagCommandStorage.ExecutePurge(idsToPurge);
     }
 
     public IEnumerable<Flag> Restore(Guid id)
@@ -396,59 +352,6 @@ internal class FlagManager : IFlagManager
             {
                 flagsToPurge.Enqueue(nextFlag);
             }
-        }
-    }
-
-    private IEnumerable<Guid> _GetAllDescendantIds(IEnumerable<Guid> rootIds, bool? deleted)
-    {
-        // todo - test algorithm
-
-        HashSet<Guid> visited = [];
-
-        foreach (Guid rootId in rootIds)
-        {
-            if (!visited.Add(rootId))
-                continue;
-
-            IEnumerable<Guid> descendentIds = _GetAllDescendantIds(rootId, deleted);
-
-            foreach (Guid descendentId in descendentIds)
-            {
-                if (visited.Add(descendentId))
-                    yield return descendentId;
-            }
-        }
-    }
-
-    private IEnumerable<Guid> _GetAllDescendantIds(Guid rootId, bool? deleted)
-    {
-        if (!_flagQueryStorage.Exists(rootId, deleted))
-        {
-            throw new FlagNotFound
-            {
-                Area = $"{nameof(FlagManager)}.{nameof(_GetAllDescendantIds)}(id)",
-            };
-        }
-
-        yield return rootId;
-
-        List<Guid> frontier = [rootId];
-        while (frontier.Count > 0)
-        {
-            List<Guid> nextBag = [];
-
-            foreach (Guid parentId in frontier)
-            {
-                Guid[] nextGenerationIds = [.. _flagQueryStorage.ReadAll(parentId, deleted).Select(f => f.Id)];
-                nextBag.AddRange(nextGenerationIds);
-
-                foreach (Guid nextGenerationId in nextGenerationIds)
-                {
-                    yield return nextGenerationId;
-                }
-            }
-
-            frontier = nextBag;
         }
     }
 }

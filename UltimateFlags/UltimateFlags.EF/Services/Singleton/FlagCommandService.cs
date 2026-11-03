@@ -97,14 +97,6 @@ internal class FlagCommandService : IFlagCommandService
                 : throw new FlagUpdateFailed { Area = $"{nameof(FlagService)}.{nameof(Update)}(id, contract)", };
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        return flagManager.ExecuteUpdate(id, updateRequest);
-    }
-
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
@@ -118,14 +110,6 @@ internal class FlagCommandService : IFlagCommandService
                 : throw new FlagDeletionFailed { Area = $"{nameof(FlagService)}.{nameof(Delete)}(id)", };
     }
 
-    public int ExecuteDelete(Guid id)
-    {
-        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        return flagManager.ExecuteDelete(id);
-    }
-
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
@@ -137,38 +121,6 @@ internal class FlagCommandService : IFlagCommandService
             flagManager.SaveChanges() > 0
                 ? purgedEntity.ToContracts()
                 : throw new FlagPurgeFailed { Area = $"{nameof(FlagService)}.{nameof(Purge)}(id)", };
-    }
-
-    public int ExecutePurge(Guid id)
-    {
-        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        return flagManager.ExecutePurge(id);
-    }
-
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null)
-    {
-        _validateTimeRange();
-
-        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
-        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        return flagManager.ExecutePurge(fromInclusive, toInclusive);
-
-        void _validateTimeRange()
-        {
-            if (fromInclusive is null || toInclusive is null)
-                return;
-
-            if (fromInclusive.Value > toInclusive.Value)
-            {
-                throw new InvalidTimeRange
-                {
-                    Area = $"{nameof(FlagService)}.{nameof(ExecutePurge)}(from, to)",
-                };
-            }
-        }
     }
 
     public IEnumerable<FlagResponse> Restore(Guid id)

@@ -36,14 +36,6 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
-    }
-
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();
@@ -52,31 +44,7 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public int ExecuteDelete(Guid id)
-    {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
-    }
-
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
-    {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
-    }
-
-    public int ExecutePurge(Guid id)
-    {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
-    }
-
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();
         IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();

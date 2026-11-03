@@ -65,6 +65,7 @@ public interface IFlagCommandService
     ///     Purge/Hard-Deletes a FLAG and its descendants recursively.
     /// </summary>
     /// <param name="id">ID</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>Contracts of purged/hard-deleted flags.</returns>
     /// <exception cref="FlagNotFound">
     ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
@@ -72,7 +73,7 @@ public interface IFlagCommandService
     /// <exception cref="FlagNotDeleted">
     ///     FlagNotDeleted will be thrown when the FLAG is not soft-deleted.
     /// </exception>
-    public IEnumerable<FlagResponse> Purge(Guid id);
+    public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Purge/Hard-Deletes a FLAG and its descendants recursively.

@@ -44,7 +44,7 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public IEnumerable<FlagResponse> Purge(Guid id)
+    public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

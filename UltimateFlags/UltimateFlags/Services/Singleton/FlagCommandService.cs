@@ -60,7 +60,7 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public IEnumerable<FlagResponse> Purge(Guid id)
+    public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();
         IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();

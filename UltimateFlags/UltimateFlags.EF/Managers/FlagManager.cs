@@ -123,10 +123,10 @@ internal class FlagManager : IFlagManager
         return _flagCommandStorage.ExecuteDelete(idsToDelete);
     }
 
-    public List<Flag> Purge(Guid id)
+    public List<Flag> Purge(Guid id, Guid? concurrencyToken = null)
     {
         // need to enumerate here
-        return [.. _Purge(id)];
+        return [.. _Purge(id, concurrencyToken)];
     }
 
     public int ExecutePurge(Guid id)
@@ -366,7 +366,7 @@ internal class FlagManager : IFlagManager
         }
     }
 
-    private IEnumerable<Flag> _Purge(Guid id)
+    private IEnumerable<Flag> _Purge(Guid id, Guid? concurrencyToken)
     {
         Flag rootToDelete =
             _flagQueryStorage.Read(id, deleted: true)
@@ -375,18 +375,21 @@ internal class FlagManager : IFlagManager
                 Area = $"{nameof(FlagManager)}.{nameof(Delete)}(id)",
             };
 
-        Queue<Flag> flagsToPurge = [];
+        Flag purgedRoot = _flagCommandStorage.Purge(rootToDelete, concurrencyToken);
 
-        flagsToPurge.Enqueue(rootToDelete);
+        yield return purgedRoot;
+
+        IEnumerable<Flag> secondGeneration = _flagCommandStorage.GetAll(parentId: purgedRoot.Id, deleted: true);
+        Queue<Flag> flagsToPurge = new(secondGeneration);
 
         while (flagsToPurge.Count > 0)
         {
             Flag curr = flagsToPurge.Dequeue();
-            Flag deleted = _flagCommandStorage.Purge(curr);
+            Flag purged = _flagCommandStorage.Purge(curr);
 
-            yield return deleted;
+            yield return purged;
 
-            IEnumerable<Flag> nextGeneration = _flagQueryStorage.ReadAll(parentId: deleted.Id, deleted: true);
+            IEnumerable<Flag> nextGeneration = _flagCommandStorage.GetAll(parentId: purged.Id, deleted: true);
 
             // todo - improve with PushRange()
             foreach (Flag nextFlag in nextGeneration)

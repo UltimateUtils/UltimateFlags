@@ -260,7 +260,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
     await testRunner.GivenAsync(string.Format("the flag, {0}, has been deleted", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 40
-    await testRunner.WhenAsync(string.Format("I purge the flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync(string.Format("I purge the flag with the Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 41
     await testRunner.ThenAsync(string.Format("the flags, \'{0}\', are purged", purgedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -312,7 +312,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
     await testRunner.GivenAsync(string.Format("the flag, {0}, has been deleted", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 58
-    await testRunner.WhenAsync(string.Format("I purge the flag, {0}", idToPurge), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync(string.Format("I purge the flag with the Id, {0}", idToPurge), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 59
     await testRunner.ThenAsync(string.Format("the flags, \'{0}\', are purged", purgedIdsString), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

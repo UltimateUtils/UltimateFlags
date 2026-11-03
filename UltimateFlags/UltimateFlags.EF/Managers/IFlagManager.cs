@@ -30,7 +30,7 @@ internal interface IFlagManager
 
     public int ExecuteDelete(Guid id);
 
-    public List<Flag> Purge(Guid id);
+    public List<Flag> Purge(Guid id, Guid? concurrencyToken = null);
 
     public int ExecutePurge(Guid id);
 

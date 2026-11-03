@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
-using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.EF.Db;
@@ -89,24 +88,6 @@ public class FlagCommandStorage : IFlagCommandStorage
         return updated.Entity;
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .Where(
-                    f =>
-                        f.Id == id
-                        && (updateRequest.ConcurrencyToken == null
-                            || f.ConcurrencyToken == updateRequest.ConcurrencyToken))
-                .ExecuteUpdate(
-                    setters =>
-                        setters
-                            .SetProperty(f => f.Description, f => updateRequest.Description ?? f.Description)
-                            .SetProperty(f => f.IsOn, f => updateRequest.IsOn ?? f.IsOn));
-    }
-
     public Flag Delete(Flag flag, Guid? concurrencyToken = null)
     {
         if (concurrencyToken.HasValue)
@@ -119,21 +100,6 @@ public class FlagCommandStorage : IFlagCommandStorage
         return softDeleted.Entity;
     }
 
-    public int ExecuteDelete(IEnumerable<Guid> ids)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .Where(f => ids.Contains(f.Id))
-                .ExecuteUpdate(
-                    setters =>
-                        setters
-                            .SetProperty(
-                                f => f.DeletedAt,
-                                DateTime.UtcNow));
-    }
-
     public Flag Purge(Flag flag, Guid? concurrencyToken = null)
     {
         if (concurrencyToken.HasValue)
@@ -144,17 +110,6 @@ public class FlagCommandStorage : IFlagCommandStorage
         EntityEntry<Flag> hardDeleted = _flagDbContext.Flags.Remove(flag);
 
         return hardDeleted.Entity;
-    }
-
-    public int ExecutePurge(IEnumerable<Guid> ids)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .IgnoreQueryFilters()
-                .Where(f => ids.Contains(f.Id) && f.DeletedAt.HasValue)
-                .ExecuteDelete();
     }
 
     public bool Restore(Guid id)

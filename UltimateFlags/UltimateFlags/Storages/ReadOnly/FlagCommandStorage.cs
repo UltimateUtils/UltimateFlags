@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Logging;
-using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Config;
@@ -45,27 +44,12 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        throw new NotImplementedException();
-    }
-
     public Flag Delete(Flag flag, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }
 
-    public int ExecuteDelete(IEnumerable<Guid> ids)
-    {
-        throw new NotImplementedException();
-    }
-
     public Flag Purge(Flag flag, Guid? concurrencyToken = null)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int ExecutePurge(IEnumerable<Guid> ids)
     {
         throw new NotImplementedException();
     }

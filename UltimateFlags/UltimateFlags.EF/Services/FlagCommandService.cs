@@ -92,11 +92,6 @@ internal class FlagCommandService : IFlagCommandService
                 : throw new FlagUpdateFailed { Area = $"{nameof(FlagService)}.{nameof(Update)}(id, contract)", };
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        return _flagManager.ExecuteUpdate(id, updateRequest);
-    }
-
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
         IEnumerable<Flag> deletedEntities = _flagManager.Delete(id, concurrencyToken);
@@ -107,11 +102,6 @@ internal class FlagCommandService : IFlagCommandService
                 : throw new FlagDeletionFailed { Area = $"{nameof(FlagService)}.{nameof(Delete)}(id)", };
     }
 
-    public int ExecuteDelete(Guid id)
-    {
-        return _flagManager.ExecuteDelete(id);
-    }
-
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
     {
         IEnumerable<Flag> purgedEntities = _flagManager.Purge(id, concurrencyToken);
@@ -120,32 +110,6 @@ internal class FlagCommandService : IFlagCommandService
             _flagManager.SaveChanges() > 0
                 ? purgedEntities.ToContracts()
                 : throw new FlagPurgeFailed { Area = $"{nameof(FlagService)}.{nameof(Purge)}(id)", };
-    }
-
-    public int ExecutePurge(Guid id)
-    {
-        return _flagManager.ExecutePurge(id);
-    }
-
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null)
-    {
-        _validateTimeRange();
-
-        return _flagManager.ExecutePurge(fromInclusive, toInclusive);
-
-        void _validateTimeRange()
-        {
-            if (fromInclusive is null || toInclusive is null)
-                return;
-
-            if (fromInclusive.Value > toInclusive.Value)
-            {
-                throw new InvalidTimeRange
-                {
-                    Area = $"{nameof(FlagService)}.{nameof(ExecutePurge)}(from, to)",
-                };
-            }
-        }
     }
 
     public IEnumerable<FlagResponse> Restore(Guid id)

@@ -1,4 +1,3 @@
-using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 
 namespace UltimateFlags.Abstraction.Storages;
@@ -53,14 +52,6 @@ public interface IFlagCommandStorage
     public Flag Update(Flag flag, Guid? concurrencyToken = null);
 
     /// <summary>
-    ///     Updates a FLAG.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <param name="updateRequest">Update request contract</param>
-    /// <returns>An entity of the updated FLAG</returns>
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest);
-
-    /// <summary>
     ///     Soft-deletes a FLAG.
     /// </summary>
     /// <param name="flag">ID</param>
@@ -69,26 +60,12 @@ public interface IFlagCommandStorage
     public Flag Delete(Flag flag, Guid? concurrencyToken = null);
 
     /// <summary>
-    ///     Soft-deletes a FLAG by ID.
-    /// </summary>
-    /// <param name="ids">IDs</param>
-    /// <returns>Number of deleted FLAGs.</returns>
-    public int ExecuteDelete(IEnumerable<Guid> ids);
-
-    /// <summary>
     ///     Purges/Hard-deletes a FLAG.
     /// </summary>
     /// <param name="flag">FLAG</param>
     /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>Entity of purged/hard-deleted flag.</returns>
     public Flag Purge(Flag flag, Guid? concurrencyToken = null);
-
-    /// <summary>
-    ///     Purges/Hard-deletes a FLAG by ID.
-    /// </summary>
-    /// <param name="ids">ID</param>
-    /// <returns>Number of purged/hard-deleted flags. 1 if successful. 0 otherwise.</returns>
-    public int ExecutePurge(IEnumerable<Guid> ids);
 
     /// <summary>
     ///     Restores single deleted FLAG

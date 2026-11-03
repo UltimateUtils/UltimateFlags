@@ -29,32 +29,12 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public int ExecuteUpdate(Guid id, FlagUpdateRequest updateRequest)
-    {
-        throw new NotImplementedException();
-    }
-
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }
 
-    public int ExecuteDelete(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int ExecutePurge(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int ExecutePurge(DateTime? fromInclusive = null, DateTime? toInclusive = null)
     {
         throw new NotImplementedException();
     }

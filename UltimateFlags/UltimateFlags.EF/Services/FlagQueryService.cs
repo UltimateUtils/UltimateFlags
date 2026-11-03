@@ -41,7 +41,7 @@ internal class FlagQueryService : IFlagQueryService
             _flagManager.Read(id)
             ?? throw new FlagNotFound
             {
-                Area = $"{nameof(FlagService)}.{nameof(GetRequired)}(id)",
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequired)}(id)",
             };
 
         return foundEntity.ToContract();
@@ -58,7 +58,7 @@ internal class FlagQueryService : IFlagQueryService
             _flagManager.Read(name, parentId)
             ?? throw new FlagNotFound
             {
-                Area = $"{nameof(FlagService)}.{nameof(GetRequired)}(name, parentId)",
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequired)}(name, parentId)",
             };
 
         return foundEntity.ToContract();
@@ -75,7 +75,7 @@ internal class FlagQueryService : IFlagQueryService
             _flagManager.Read(key)
             ?? throw new FlagNotFound
             {
-                Area = $"{nameof(FlagService)}.{nameof(GetRequired)}(key)",
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequired)}(key)",
             };
 
         return foundEntity.ToContract();
@@ -99,7 +99,7 @@ internal class FlagQueryService : IFlagQueryService
         {
             throw new InvalidPaginationInfo
             {
-                Area = $"{nameof(FlagService)}.{nameof(List)}(searchString, isOn, pageNumber, pageSize)",
+                Area = $"{nameof(FlagQueryService)}.{nameof(List)}(rootId, searchString, isOn, pageNumber, pageSize)",
             };
         }
 

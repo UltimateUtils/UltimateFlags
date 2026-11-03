@@ -67,7 +67,8 @@ public class FlagManagementSteps
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         IFlagCommandService flagCommandService = serviceScope.ServiceProvider.GetRequiredService<IFlagCommandService>();
 
-        _ = flagCommandService.Delete(id);
+        IEnumerable<FlagResponse> deletedFlags = flagCommandService.Delete(id);
+        _scenarioContext.Set(deletedFlags);
     }
 
     #endregion Given
@@ -91,8 +92,8 @@ public class FlagManagementSteps
         _scenarioContext.Set(deletedFlags);
     }
 
-    [When("I purge the flag, {Guid}")]
-    public void PurgeTheFlag(Guid id)
+    [When("I purge the flag with the Id, {Guid}")]
+    public void PurgeTheFlagWithId(Guid id)
     {
         IEnumerable<FlagResponse> purgedFlags = _flagCommandService.Purge(id);
         _scenarioContext.Set(purgedFlags);
@@ -160,6 +161,9 @@ public class FlagManagementSteps
             FlagResponse? foundFlag = _flagQueryService.Get(expectedPurgedId);
             Assert.That(foundFlag, Is.Null);
         }
+
+        FlagResponse[] allDeleted = [.. _flagQueryService.GetAllDeleted(1, int.MaxValue)];
+        Assert.That(allDeleted.Select(f => f.Id).Intersect(expectedPurgedIds), Is.Empty);
     }
 
     [Then("no flags left soft-deleted")]
@@ -200,6 +204,14 @@ public class FlagManagementSteps
         IEnumerable<Guid> deletedFlagIds = deletedFlags.Select(f => f.Id);
 
         Assert.That(expectedRestoredIds.Intersect(deletedFlagIds), Is.Empty);
+    }
+
+    [Then("no exception is thrown")]
+    public void NoExceptionIsThrown()
+    {
+        Exception x = _scenarioContext.Get<Exception>(ContextKeys.ThrownExceptionKey);
+
+        Assert.That(x, Is.TypeOf<NoException>());
     }
 
     #endregion Then

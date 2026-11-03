@@ -60,7 +60,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
-    public Flag Purge(Flag flag)
+    public Flag Purge(Flag flag, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

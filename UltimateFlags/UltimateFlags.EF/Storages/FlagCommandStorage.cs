@@ -134,8 +134,13 @@ public class FlagCommandStorage : IFlagCommandStorage
                                 DateTime.UtcNow));
     }
 
-    public Flag Purge(Flag flag)
+    public Flag Purge(Flag flag, Guid? concurrencyToken = null)
     {
+        if (concurrencyToken.HasValue)
+        {
+            _flagDbContext.Entry(flag).Property(p => p.ConcurrencyToken).OriginalValue = concurrencyToken.Value;
+        }
+
         EntityEntry<Flag> hardDeleted = _flagDbContext.Flags.Remove(flag);
 
         return hardDeleted.Entity;

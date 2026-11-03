@@ -37,7 +37,7 @@ Examples:
 Scenario Outline: 3. Purge Flag
 
     Given the flag, <Id>, has been deleted
-    When I purge the flag, <Id>
+    When I purge the flag with the Id, <Id>
     Then the flags, '<PurgedIdsString>', are purged
     And no flags left soft-deleted
 
@@ -55,7 +55,7 @@ Examples:
 Scenario Outline: 4. Purge Flag 2
 
     Given the flag, <Id>, has been deleted
-    When I purge the flag, <IdToPurge>
+    When I purge the flag with the Id, <IdToPurge>
     Then the flags, '<PurgedIdsString>', are purged
     And the flags, '<DeletedIdsString>', left soft-deleted
 

@@ -126,12 +126,12 @@ internal class FlagCommandService : IFlagCommandService
         return flagManager.ExecuteDelete(id);
     }
 
-    public IEnumerable<FlagResponse> Purge(Guid id)
+    public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
 
-        IEnumerable<Flag> purgedEntity = flagManager.Purge(id);
+        IEnumerable<Flag> purgedEntity = flagManager.Purge(id, concurrencyToken);
 
         return
             flagManager.SaveChanges() > 0

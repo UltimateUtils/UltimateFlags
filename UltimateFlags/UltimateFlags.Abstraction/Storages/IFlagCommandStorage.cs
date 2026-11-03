@@ -79,8 +79,9 @@ public interface IFlagCommandStorage
     ///     Purges/Hard-deletes a FLAG.
     /// </summary>
     /// <param name="flag">FLAG</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>Entity of purged/hard-deleted flag.</returns>
-    public Flag Purge(Flag flag);
+    public Flag Purge(Flag flag, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Purges/Hard-deletes a FLAG by ID.

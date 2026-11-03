@@ -105,6 +105,39 @@ public class ConcurrencySteps
         }
     }
 
+    [When("I purge the flag, {Guid}, with the correct concurrency token")]
+    public void PurgeFlagWithCorrectConcurrencyToken(Guid id)
+    {
+        try
+        {
+            IEnumerable<FlagResponse> deletedFlags = _scenarioContext.Get<IEnumerable<FlagResponse>>();
+            Guid concurrencyToken = deletedFlags.First(f => f.Id == id).ConcurrencyToken;
+
+            IEnumerable<FlagResponse> purgedFlags = _flagCommandService.Purge(id, concurrencyToken);
+            _scenarioContext.Set(purgedFlags);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I purge the flag, {Guid}, with a concurrency token, {Guid}")]
+    public void PurgeFlagWithCorrectConcurrencyToken(Guid id, Guid concurrencyToken)
+    {
+        try
+        {
+            IEnumerable<FlagResponse> purgedFlags = _flagCommandService.Purge(id, concurrencyToken);
+            _scenarioContext.Set(purgedFlags);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
     #endregion when
 
     #region Then

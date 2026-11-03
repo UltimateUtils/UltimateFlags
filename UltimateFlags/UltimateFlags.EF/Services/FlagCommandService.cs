@@ -38,14 +38,14 @@ internal class FlagCommandService : IFlagCommandService
 
         if (_flagManager.Exists(creationRequest.Name, creationRequest.ParentId, deleted: null))
         {
-            throw new FlagDuplicateFound { Area = $"{nameof(FlagService)}.{nameof(Create)}(contract)", };
+            throw new FlagDuplicateFound { Area = $"{nameof(FlagCommandService)}.{nameof(Create)}(creationRequest)", };
         }
 
         Flag createdEntity = _flagManager.Create(creationRequest.ToEntity(parentKey));
 
         return _flagManager.SaveChanges() > 0
             ? createdEntity.ToContract()
-            : throw new FlagCreationFailed { Area = $"{nameof(FlagService)}.{nameof(Create)}(contract)", };
+            : throw new FlagCreationFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Create)}(creationRequest)", };
 
         void _validateFlagName()
         {
@@ -72,7 +72,7 @@ internal class FlagCommandService : IFlagCommandService
             {
                 throw new FlagParentNotFound
                 {
-                    Area = $"{nameof(FlagService)}.{nameof(Create)}(contract)",
+                    Area = $"{nameof(FlagCommandService)}.{nameof(Create)}(creationRequest)",
                 };
             }
 
@@ -89,7 +89,7 @@ internal class FlagCommandService : IFlagCommandService
         return
             saveChanges > 0
                 ? updatedEntity.ToContract()
-                : throw new FlagUpdateFailed { Area = $"{nameof(FlagService)}.{nameof(Update)}(id, contract)", };
+                : throw new FlagUpdateFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Update)}(id, updateRequest)", };
     }
 
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
@@ -99,7 +99,7 @@ internal class FlagCommandService : IFlagCommandService
         return
             _flagManager.SaveChanges() > 0
                 ? deletedEntities.ToContracts()
-                : throw new FlagDeletionFailed { Area = $"{nameof(FlagService)}.{nameof(Delete)}(id)", };
+                : throw new FlagDeletionFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Delete)}(id, concurrencyToken)", };
     }
 
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
@@ -109,7 +109,7 @@ internal class FlagCommandService : IFlagCommandService
         return
             _flagManager.SaveChanges() > 0
                 ? purgedEntities.ToContracts()
-                : throw new FlagPurgeFailed { Area = $"{nameof(FlagService)}.{nameof(Purge)}(id)", };
+                : throw new FlagPurgeFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Purge)}(id, concurrencyToken)", };
     }
 
     public IEnumerable<FlagResponse> Restore(Guid id)

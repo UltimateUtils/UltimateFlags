@@ -139,7 +139,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "UpdatedAt",
                             "DeletedAt"});
                 table1.AddRow(new string[] {
-                            "4F228BF5-BBB0-428C-92CE-B63754579712",
+                            "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "MyBuilding",
                             "MyBuilding",
                             "TRUE",
@@ -149,12 +149,12 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:37:26.0661723",
                             "<null>"});
                 table1.AddRow(new string[] {
-                            "CDFA551C-5504-4475-97BE-66A9084C81A7",
+                            "01A1A968-66A6-7189-A0DD-95C844F16129",
                             "Floor23",
                             "MyBuilding.Floor23",
                             "TRUE",
                             "floor #23",
-                            "4F228BF5-BBB0-428C-92CE-B63754579712",
+                            "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "2026-09-30 03:38:26.5139868",
                             "2026-09-30 03:38:26.5139868",
                             "<null>"});
@@ -170,7 +170,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "Room2301",
                             "FALSE",
                             "room #2301",
-                            "CDFA551C-5504-4475-97BE-66A9084C81A7"});
+                            "01A1A968-66A6-7189-A0DD-95C844F16129"});
 #line 8
     await testRunner.WhenAsync("I create the following flag", ((string)(null)), table2, "When ");
 #line hidden
@@ -185,7 +185,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "MyBuilding.Floor23.Room2301",
                             "FALSE",
                             "room #2301",
-                            "CDFA551C-5504-4475-97BE-66A9084C81A7"});
+                            "01A1A968-66A6-7189-A0DD-95C844F16129"});
 #line 11
     await testRunner.ThenAsync("newly added flag is as follows", ((string)(null)), table3, "Then ");
 #line hidden

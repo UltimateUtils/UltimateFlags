@@ -76,14 +76,12 @@ public interface IFlagQueryService
     ///     When the ParentId is passed in,
     ///     the search will be only for the specified FLAG and children recursively.
     /// </remarks>
-    /// <param name="rootId">ID of the root flag</param>
     /// <param name="searchString">Search string</param>
     /// <param name="isOn">Is ON by key</param>
     /// <param name="pageNumber">Page Number</param>
     /// <param name="pageSize">Page Size</param>
     /// <returns>Response contracts</returns>
     public IPagedList<FlagResponse> List(
-        Guid? rootId = null,
         string? searchString = null,
         bool? isOn = null,
         int pageNumber = 1,

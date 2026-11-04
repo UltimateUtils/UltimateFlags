@@ -111,7 +111,6 @@ internal class FlagQueryService : IFlagQueryService
     }
 
     public IPagedList<FlagResponse> List(
-        Guid? rootId = null,
         string? searchString = null,
         bool? isOn = null,
         int pageNumber = 1,

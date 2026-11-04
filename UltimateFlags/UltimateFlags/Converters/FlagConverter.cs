@@ -19,7 +19,7 @@ public static class FlagConverter
         return
             new Flag
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.CreateVersion7(),
                 Name = creationRequest.Name,
                 Key = $"{parentKey}{delimiter}{creationRequest.Name}",
                 IsOn = creationRequest.IsOn,

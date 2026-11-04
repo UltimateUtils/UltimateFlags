@@ -40,29 +40,29 @@ public class FlagsManagementController : ControllerBase
 
     [HttpDelete]
     [Route("{id:guid}")]
-    public IEnumerable<FlagResponse> Delete([FromRoute] Guid id)
+    public IEnumerable<FlagResponse> Delete([FromRoute] Guid id, [FromQuery] Guid? concurrencyToken)
     {
         _logger.LogDebug("Deleting flag. (id: {id})", id);
 
-        return _flagCommandService.Delete(id);
+        return _flagCommandService.Delete(id, concurrencyToken);
     }
 
     [HttpDelete]
     [Route("purge/{id:guid}")]
-    public IEnumerable<FlagResponse> Purge([FromRoute] Guid id)
+    public IEnumerable<FlagResponse> Purge([FromRoute] Guid id, [FromQuery] Guid? concurrencyToken)
     {
         _logger.LogDebug("Purging flag. (id: {id})", id);
 
-        return _flagCommandService.Purge(id);
+        return _flagCommandService.Purge(id, concurrencyToken);
     }
 
     [HttpPost]
     [Route("restore/{id:guid}")]
-    public IEnumerable<FlagResponse> Restore(Guid id)
+    public IEnumerable<FlagResponse> Restore(Guid id, [FromQuery] Guid? concurrencyToken = null)
     {
         _logger.LogDebug("Restoring flag. (id: {id})", id);
 
-        return _flagCommandService.Restore(id);
+        return _flagCommandService.Restore(id, concurrencyToken);
     }
 
     [HttpPut]

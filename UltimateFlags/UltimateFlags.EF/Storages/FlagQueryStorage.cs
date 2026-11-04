@@ -120,7 +120,7 @@ public class FlagQueryStorage : IFlagQueryStorage
                         (isOn == null || flag.IsOn == isOn)
                         && (searchString.IsNullOrEmpty()
                             || flag.Name.Contains(searchString)))
-                .OrderBy(flag => flag.Name) // todo - order by key
+                .OrderBy(flag => flag.Key)
                 .Paginate(pageNumber, pageSize);
     }
 

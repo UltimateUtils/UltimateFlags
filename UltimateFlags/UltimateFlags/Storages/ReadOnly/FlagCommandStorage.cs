@@ -19,7 +19,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         _flagsComplex = flagsComplex;
     }
 
-    public Flag? Get(Guid id, bool? deleted)
+    public Flag? Get(Guid id, bool? deleted, bool includeParent = false)
     {
         throw new NotImplementedException();
     }
@@ -54,7 +54,7 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
-    public bool Restore(Guid id)
+    public Flag Restore(Flag flag, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

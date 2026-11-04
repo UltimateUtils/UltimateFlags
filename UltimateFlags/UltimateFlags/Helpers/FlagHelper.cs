@@ -65,6 +65,16 @@ public static class FlagHelper
         return entity._Modified();
     }
 
+    public static Flag Restored(this Flag entity)
+    {
+        if (!entity.DeletedAt.HasValue)
+            return entity;
+
+        entity.DeletedAt = null;
+
+        return entity._Modified();
+    }
+
     public static IEnumerable<string> GetAncestorKeys(this string key, bool inclusive)
     {
         string[] names = key.Split(Utils.Constants.KeyDelimiter);

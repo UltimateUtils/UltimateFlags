@@ -123,7 +123,7 @@ internal class FlagCommandService : IFlagCommandService
                 : throw new FlagPurgeFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Purge)}(id, concurrencyToken)", };
     }
 
-    public IEnumerable<FlagResponse> Restore(Guid id)
+    public IEnumerable<FlagResponse> Restore(Guid id, Guid? concurrencyToken = null)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();

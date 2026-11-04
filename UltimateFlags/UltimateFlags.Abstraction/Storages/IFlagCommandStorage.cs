@@ -13,8 +13,9 @@ public interface IFlagCommandStorage
     /// </remarks>
     /// <param name="id">ID</param>
     /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
+    /// <param name="includeParent">Include Parent</param>
     /// <returns>FLAG entity if found / null if not found</returns>
-    public Flag? Get(Guid id, bool? deleted = false);
+    public Flag? Get(Guid id, bool? deleted = false, bool includeParent = false);
 
     /// <summary>
     ///     Retrieves a FLAG with TRACKING by the NAME and the ParentId.
@@ -70,9 +71,10 @@ public interface IFlagCommandStorage
     /// <summary>
     ///     Restores single deleted FLAG
     /// </summary>
-    /// <param name="id">ID</param>
-    /// <returns>TRUE if successful. FALSE otherwise</returns>
-    public bool Restore(Guid id);
+    /// <param name="flag">FLAG</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
+    /// <returns>Entity of restored flag.</returns>
+    public Flag Restore(Flag flag, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Enables a FLAG by ID.

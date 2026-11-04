@@ -112,9 +112,14 @@ internal class FlagCommandService : IFlagCommandService
                 : throw new FlagPurgeFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Purge)}(id, concurrencyToken)", };
     }
 
-    public IEnumerable<FlagResponse> Restore(Guid id)
+    public IEnumerable<FlagResponse> Restore(Guid id, Guid? concurrencyToken = null)
     {
-        return _flagManager.Restore(id).ToContracts();
+        IEnumerable<Flag> restoredEntities = _flagManager.Restore(id, concurrencyToken);
+
+        return
+            _flagManager.SaveChanges() > 0
+                ? restoredEntities.ToContracts()
+                : throw new FlagRestorationFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Restore)}(id)", };
     }
 
     public void Enable(Guid id)

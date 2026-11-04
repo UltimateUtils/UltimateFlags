@@ -28,7 +28,7 @@ internal interface IFlagManager
 
     public List<Flag> Purge(Guid id, Guid? concurrencyToken = null);
 
-    public IEnumerable<Flag> Restore(Guid id);
+    public List<Flag> Restore(Guid id, Guid? concurrencyToken = null);
 
     public bool Exists(Guid id, bool? deleted = false);
 

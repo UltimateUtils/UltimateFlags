@@ -58,8 +58,9 @@ public interface IFlagCommandService
     ///     Restores deleted FLAG and its deleted ancestors
     /// </summary>
     /// <param name="id">ID</param>
+    /// <param name="concurrencyToken">ConcurrencyToken</param>
     /// <returns>Restored FLAGs</returns>
-    public IEnumerable<FlagResponse> Restore(Guid id);
+    public IEnumerable<FlagResponse> Restore(Guid id, Guid? concurrencyToken = null);
 
     /// <summary>
     ///     Enables a FLAG by ID.

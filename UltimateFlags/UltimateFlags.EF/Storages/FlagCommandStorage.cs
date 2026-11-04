@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
@@ -25,20 +26,24 @@ public class FlagCommandStorage : IFlagCommandStorage
         _flags = flagDbContext.Flags;
     }
 
-    public Flag? Get(Guid id, bool? deleted = false)
+    public Flag? Get(Guid id, bool? deleted = false, bool includeParent = false)
     {
+        IQueryable<Flag> flagsQuery =
+            includeParent
+                ? _flagDbContext.Flags.Include(f => f.Parent)
+                : _flagDbContext.Flags;
+
         return
             deleted is null
-                ? _flagDbContext.Flags.IgnoreQueryFilters().FirstOrDefault(f => f.Id == id)
+                ? flagsQuery.IgnoreQueryFilters().FirstOrDefault(f => f.Id == id)
                 : deleted.Value
-                    ? _flagDbContext
-                        .Flags
+                    ? flagsQuery
                         .IgnoreQueryFilters()
                         .FirstOrDefault(
                             flag =>
                                 flag.Id == id
                                 && flag.DeletedAt.HasValue)
-                    : _flagDbContext.Flags.Find(id);
+                    : flagsQuery.FirstOrDefault(flag => flag.Id == id);
     }
 
     public Flag? Get(string name, Guid? parentId)
@@ -112,22 +117,16 @@ public class FlagCommandStorage : IFlagCommandStorage
         return hardDeleted.Entity;
     }
 
-    public bool Restore(Guid id)
+    public Flag Restore(Flag flag, Guid? concurrencyToken = null)
     {
-        int updatedCount =
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .IgnoreQueryFilters()
-                .Where(f => f.Id == id && f.DeletedAt.HasValue)
-                .ExecuteUpdate(
-                    setters =>
-                        setters
-                            .SetProperty(
-                                f => f.DeletedAt,
-                                (DateTime?)null));
+        if (concurrencyToken.HasValue)
+        {
+            _flagDbContext.Entry(flag).Property(p => p.ConcurrencyToken).OriginalValue = concurrencyToken.Value;
+        }
 
-        return updatedCount == 1;
+        EntityEntry<Flag> restored = _flagDbContext.Flags.Update(flag.Restored());
+
+        return restored.Entity;
     }
 
     public int Enable(Guid id)

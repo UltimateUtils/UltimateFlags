@@ -102,48 +102,10 @@ internal class FlagManager : IFlagManager
         return [.. _Purge(id, concurrencyToken)];
     }
 
-    public IEnumerable<Flag> Restore(Guid id)
+    public List<Flag> Restore(Guid id, Guid? concurrencyToken = null)
     {
-        List<Flag> ret = [];
-
-        _restore(id);
-
-        return ret;
-
-        void _restore(Guid currentId)
-        {
-            Flag? currentFlag = _flagQueryStorage.Read(currentId, deleted: null, includeParent: true);
-
-            if (currentFlag is null)
-            {
-                throw new FlagNotFound
-                {
-                    Area = $"{nameof(FlagManager)}.{nameof(Restore)}(id)",
-                };
-            }
-
-            if (!currentFlag.DeletedAt.HasValue)
-            {
-                return;
-            }
-
-            if (currentFlag.Parent != null)
-            {
-                _restore(currentFlag.Parent.Id);
-            }
-
-            if (_flagCommandStorage.Restore(currentId))
-            {
-                ret.Add(currentFlag); // todo - check DeletedAt value
-            }
-            else
-            {
-                throw new FlagRestorationFailed
-                {
-                    Area = $"{nameof(FlagManager)}.{nameof(Restore)}(id)",
-                };
-            }
-        }
+        // need to enumerate here
+        return [.. _Restore(id, concurrencyToken)];
     }
 
     public bool Exists(Guid id, bool? deleted = false)
@@ -351,6 +313,58 @@ internal class FlagManager : IFlagManager
             foreach (Flag nextFlag in nextGeneration)
             {
                 flagsToPurge.Enqueue(nextFlag);
+            }
+        }
+    }
+
+    private IEnumerable<Flag> _Restore(Guid id, Guid? concurrencyToken = null)
+    {
+        Flag leafToRestore =
+            _flagCommandStorage.Get(id, deleted: null)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(_Delete)}(id)",
+            };
+
+        if (!leafToRestore.DeletedAt.HasValue)
+        {
+            throw new FlagNotDeleted
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(_Restore)}(id, concurrencyToken)",
+            };
+        }
+
+        Flag restoreResponse = _flagCommandStorage.Restore(leafToRestore, concurrencyToken);
+
+        yield return restoreResponse;
+
+        Flag restoredLeaf =
+            _flagCommandStorage.Get(restoreResponse.Id, deleted: null, includeParent: true)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(_Restore)}(id, concurrencyToken)",
+            };
+
+        foreach (Flag ancestor in _restoreAncestors(restoredLeaf))
+        {
+            yield return ancestor;
+        }
+
+        yield break;
+
+        IEnumerable<Flag> _restoreAncestors(Flag curr)
+        {
+            while (curr.Parent is { DeletedAt: not null })
+            {
+                Flag restored = _flagCommandStorage.Restore(curr.Parent);
+                yield return restored;
+
+                curr =
+                    _flagCommandStorage.Get(restored.Id, deleted: null, includeParent: true)
+                    ?? throw new FlagNotFound
+                    {
+                        Area = $"{nameof(FlagManager)}.{nameof(_Restore)}(id, concurrencyToken)",
+                    };
             }
         }
     }

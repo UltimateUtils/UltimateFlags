@@ -39,7 +39,7 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
-    public IEnumerable<FlagResponse> Restore(Guid id)
+    public IEnumerable<FlagResponse> Restore(Guid id, Guid? concurrencyToken = null)
     {
         throw new NotImplementedException();
     }

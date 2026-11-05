@@ -110,7 +110,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("1. Update Flag - null Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "false", "any randome string %^!*$#~", "<null>", "0", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "true", "any randome string 123613", "<null>", "1", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "false", "yet another random words ~~", "<null>", "2", null)]
@@ -118,7 +118,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         public async global::System.Threading.Tasks.Task _1_UpdateFlag_NullConcurrencyToken(string id, string isOn, string description, string concurrencyToken, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -143,25 +143,25 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description",
                             "ConcurrencyToken"});
-                table6.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description),
                             string.Format("{0}", concurrencyToken)});
 #line 6
-    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table6, "When ");
+    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table1, "When ");
 #line hidden
-                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table7.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 9
-    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table7, "Then ");
+    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table2, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -169,7 +169,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("2. Update Flag - Correct Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "false", "any randome string %^!*$#~", "7A8C9CDA-E5C3-4B89-B708-FFACBD29A3BD", "4", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "true", "any randome string 123613", "7A8C9CDA-E5C3-4B89-B708-FFACBD29A3BD", "5", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "false", "yet another random words ~~", "77E5F5EC-43AB-4EA8-8808-449FA24B57B1", "6", null)]
@@ -177,7 +177,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         public async global::System.Threading.Tasks.Task _2_UpdateFlag_CorrectConcurrencyToken(string id, string isOn, string description, string concurrencyToken, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -205,28 +205,28 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 23
     await testRunner.GivenAsync(string.Format("I have retrieved a flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description",
                             "ConcurrencyToken"});
-                table8.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description),
                             string.Format("{0}", concurrencyToken)});
 #line 24
-    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table8, "When ");
+    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table3, "When ");
 #line hidden
 #line 27
     await testRunner.ThenAsync("no exception is thrown", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table9.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 28
-    await testRunner.AndAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table9, "And ");
+    await testRunner.AndAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table4, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -234,7 +234,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("3. Update Flag - Incorrect Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "false", "any randome string %^!*$#~", "03FEA905-C322-4FE6-AC5A-F725F8AB92A5", "8", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "true", "any randome string 123613", "92412056-19D5-41D4-8837-EA05CD402A10", "9", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "false", "yet another random words ~~", "1ECA6C71-1A84-4C79-9113-DF65998EAEA7", "10", null)]
@@ -242,7 +242,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         public async global::System.Threading.Tasks.Task _3_UpdateFlag_IncorrectConcurrencyToken(string id, string isOn, string description, string concurrencyToken, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -270,16 +270,16 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 42
     await testRunner.GivenAsync(string.Format("I have retrieved a flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description",
                             "ConcurrencyToken"});
-                table10.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description),
                             string.Format("{0}", concurrencyToken)});
 #line 43
-    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table10, "When ");
+    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table5, "When ");
 #line hidden
 #line 46
     await testRunner.ThenAsync("ConcurrencyConflict exception is thrown", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -290,13 +290,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("4. Delete Flag - Correct Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "77E5F5EC-43AB-4EA8-8808-449FA24B57B1", "01A1A96C-2145-7840-88C7-A03F45928635", "12", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-0709-7A4E-831F-FB154377E39D", "06C2F42C-6BC6-4DD8-A81F-279F4F194F92", @"01A1A96C-0709-7A4E-831F-FB154377E39D,01A1A96C-2145-7840-88C7-A03F45928635,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850", "13", null)]
         public async global::System.Threading.Tasks.Task _4_DeleteFlag_CorrectConcurrencyToken(string id, string concurrencyToken, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -338,13 +338,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("5. Delete Flag - Incorrect Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "ABCDEF12-3456-7890-ABCD-EF1234567890", "01A1A96C-2145-7840-88C7-A03F45928635", "14", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-0709-7A4E-831F-FB154377E39D", "ABCDEF12-3456-7890-ABCD-EF1234567890", @"01A1A96C-0709-7A4E-831F-FB154377E39D,01A1A96C-2145-7840-88C7-A03F45928635,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850", "15", null)]
         public async global::System.Threading.Tasks.Task _5_DeleteFlag_IncorrectConcurrencyToken(string id, string concurrencyToken, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -386,7 +386,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("6. Purge Flag - Correct Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96" +
             "B-351F-7D60-BABF-8EE3F9D6AEE2", "16", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A968-66A6-7189-A0DD-95C844F16129", "01A1A968-66A6-7189-A0DD-95C844F16129,01A1A968-9C22-77AF-9C71-14455B6B3F66,01A1A96" +
@@ -402,7 +402,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         public async global::System.Threading.Tasks.Task _6_PurgeFlag_CorrectConcurrencyToken(string id, string purgedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -446,13 +446,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("7. Purge Flag - Incorrect Concurrency Token")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "ABCDEF12-3456-7890-ABCD-EF1234567890", "01A1A96C-2145-7840-88C7-A03F45928635", "23", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-0709-7A4E-831F-FB154377E39D", "ABCDEF12-3456-7890-ABCD-EF1234567890", @"01A1A96C-0709-7A4E-831F-FB154377E39D,01A1A96C-2145-7840-88C7-A03F45928635,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850", "24", null)]
         public async global::System.Threading.Tasks.Task _7_PurgeFlag_IncorrectConcurrencyToken(string id, string concurrencyToken, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

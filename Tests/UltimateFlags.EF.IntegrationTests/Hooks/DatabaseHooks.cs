@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reqnroll;
@@ -53,10 +54,13 @@ public class DatabaseHooks
         _options = options;
     }
 
-    [BeforeFeature("ResetBasicFlags")]
-    [BeforeScenario("ResetBasicFlags")]
-    public static async Task ResetBasicFlagsAsync(MyFlagDbContext flagDbContext)
+    [BeforeFeature("BeforeFeatureResetBasicFlags")]
+    [BeforeScenario("BeforeScenarioResetBasicFlags")]
+    public static async Task ResetBasicFlagsAsync(IServiceScopeFactory serviceScopeFactory)
     {
+        using IServiceScope serviceScope = serviceScopeFactory.CreateScope();
+        MyFlagDbContext flagDbContext = serviceScope.ServiceProvider.GetRequiredService<MyFlagDbContext>();
+
         await _CleanupFlagTableAsync(flagDbContext);
 
         IEnumerable<Flag> flags = _GetBasicFlags();

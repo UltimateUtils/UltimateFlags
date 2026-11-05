@@ -107,7 +107,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/GetFlag.feature.ndjson", 86);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/GetFlag.feature.ndjson", 90);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -168,7 +168,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
     await testRunner.WhenAsync(string.Format("retrieve a flag by {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -179,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table4.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -191,7 +191,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 6
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table4, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table1, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -289,7 +289,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 49
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\' and {1}", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -300,7 +300,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table5.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -312,7 +312,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 50
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table5, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table2, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -411,7 +411,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 93
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -422,7 +422,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table6.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -434,7 +434,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 94
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table6, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table3, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -469,6 +469,56 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
 #line 128
     await testRunner.ThenAsync("null is returned", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("7. Get all deleted flags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
+        [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96" +
+            "B-351F-7D60-BABF-8EE3F9D6AEE2", "84", null)]
+        [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96C-2145-7840-88C7-A03F45928635", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96" +
+            "B-351F-7D60-BABF-8EE3F9D6AEE2,01A1A96C-2145-7840-88C7-A03F45928635", "85", null)]
+        [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96C-86DD-74B3-BF66-7641B575DA9B", @"01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850", "86", null)]
+        [global::NUnit.Framework.TestCaseAttribute("01A1A96B-9FAF-76FB-9661-4360CEB07A73,01A1A96C-86DD-74B3-BF66-7641B575DA9B", "01A1A96B-9FAF-76FB-9661-4360CEB07A73,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96" +
+            "C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F" +
+            "-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850", "87", null)]
+        public async global::System.Threading.Tasks.Task _7_GetAllDeletedFlags(string deletedFlagIds, string expectedDeletedIdsResponse, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "BeforeScenarioResetBasicFlags"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("DeletedFlagIds", deletedFlagIds);
+            argumentsOfScenario.Add("ExpectedDeletedIdsResponse", expectedDeletedIdsResponse);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("7. Get all deleted flags", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 137
+this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 139
+    await testRunner.GivenAsync(string.Format("the flags, \'{0}\', have been deleted", deletedFlagIds), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 140
+    await testRunner.WhenAsync("I retrieve all deleted flags", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 141
+    await testRunner.ThenAsync(string.Format("the flags, \'{0}\', are returned", expectedDeletedIdsResponse), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

@@ -132,3 +132,17 @@ Examples:
     | iNValID nAMe |
     | MyBuilding.2 |
     | Table2602d   |
+
+@BeforeScenarioResetBasicFlags
+Scenario Outline: 7. Get all deleted flags
+
+    Given the flags, '<DeletedFlagIds>', have been deleted
+    When I retrieve all deleted flags
+    Then the flags, '<ExpectedDeletedIdsResponse>', are returned
+
+Examples:
+    | DeletedFlagIds                                                            | ExpectedDeletedIdsResponse                                                                                                                                                                                                                                                                              |
+    | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA                                      | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2                                                                                                                                                                                          |
+    | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96C-2145-7840-88C7-A03F45928635 | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2,01A1A96C-2145-7840-88C7-A03F45928635                                                                                                                                                     |
+    | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96C-86DD-74B3-BF66-7641B575DA9B | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850 |
+    | 01A1A96B-9FAF-76FB-9661-4360CEB07A73,01A1A96C-86DD-74B3-BF66-7641B575DA9B | 01A1A96B-9FAF-76FB-9661-4360CEB07A73,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850                                                                           |

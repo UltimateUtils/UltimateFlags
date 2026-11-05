@@ -71,6 +71,20 @@ public class FlagManagementSteps
         _scenarioContext.Set(deletedFlags);
     }
 
+    [Given("the flags, {string}, have been deleted")]
+    public void FlagsHaveBeenDeleted(string deletedFlagIds)
+    {
+        Guid[] deletedIds = [.. deletedFlagIds.Split(',').Select(Guid.Parse)];
+
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagCommandService flagCommandService = serviceScope.ServiceProvider.GetRequiredService<IFlagCommandService>();
+
+        foreach (Guid id in deletedIds)
+        {
+            _ = flagCommandService.Delete(id);
+        }
+    }
+
     #endregion Given
 
     #region When

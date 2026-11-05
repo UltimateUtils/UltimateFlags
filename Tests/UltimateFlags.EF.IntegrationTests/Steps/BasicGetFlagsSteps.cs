@@ -72,6 +72,14 @@ public class BasicGetFlagsSteps
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
 
+    [When("I retrieve a flag by {string} and {Guid}")]
+    public void RetrieveFlagBy(string name, Guid? parentId)
+    {
+        FlagResponse? actual = _flagQueryService.Get(name, parentId);
+
+        _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+    }
+
     [When("get a required flag by {Guid}")]
     public void GetRequiredFlagById(Guid id)
     {

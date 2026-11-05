@@ -8,6 +8,7 @@ using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
 using UltimateFlags.EF.IntegrationTests.Utils;
+using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;
 
@@ -88,6 +89,14 @@ public class GetFlagsSteps
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
 
+    [When("I retrieve all deleted flags")]
+    public void RetrieveAllDeletedFlags()
+    {
+        FlagResponse[] deletedFlags = [.. _flagQueryService.GetAllDeleted()];
+
+        _scenarioContext.Set(deletedFlags);
+    }
+
     #endregion When
 
     #region Then
@@ -125,6 +134,16 @@ public class GetFlagsSteps
         Exception x = _scenarioContext.Get<Exception>(ContextKeys.ThrownExceptionKey);
 
         Assert.That(x, Is.TypeOf<FlagNotFound>());
+    }
+
+    [Then("the flags, {string}, are returned")]
+    public void FlagsAreReturned(string expectedDeletedIdsResponse)
+    {
+        Guid[] expectedDeletedIds = [.. expectedDeletedIdsResponse.Split(',').Select(Guid.Parse)];
+
+        FlagResponse[] actualDeletedFlags = _scenarioContext.Get<FlagResponse[]>();
+
+        Assert.That(actualDeletedFlags.Select(f => f.Id), Is.EquivalentTo(expectedDeletedIds));
     }
 
     #endregion Then

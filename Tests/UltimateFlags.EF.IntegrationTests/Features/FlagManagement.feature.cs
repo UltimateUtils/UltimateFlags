@@ -110,7 +110,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("1. Update Flag")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "false", "any randome string %^!*$#~", "0", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "true", "any randome string 123613", "1", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96C-2145-7840-88C7-A03F45928635", "false", "yet another random words ~~", "2", null)]
@@ -118,7 +118,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         public async global::System.Threading.Tasks.Task _1_UpdateFlag(string id, string isOn, string description, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -142,23 +142,23 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table11.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 6
-    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table11, "When ");
+    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table1, "When ");
 #line hidden
-                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table12.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 9
-    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table12, "Then ");
+    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table2, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -166,7 +166,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("2. Delete Flag")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96" +
             "B-351F-7D60-BABF-8EE3F9D6AEE2", "4", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A968-66A6-7189-A0DD-95C844F16129", "01A1A968-66A6-7189-A0DD-95C844F16129,01A1A968-9C22-77AF-9C71-14455B6B3F66,01A1A96" +
@@ -182,7 +182,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         public async global::System.Threading.Tasks.Task _2_DeleteFlag(string id, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -217,7 +217,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("3. Purge Flag")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96" +
             "B-351F-7D60-BABF-8EE3F9D6AEE2", "11", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A968-66A6-7189-A0DD-95C844F16129", "01A1A968-66A6-7189-A0DD-95C844F16129,01A1A968-9C22-77AF-9C71-14455B6B3F66,01A1A96" +
@@ -233,7 +233,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         public async global::System.Threading.Tasks.Task _3_PurgeFlag(string id, string purgedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -274,7 +274,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("4. Purge Flag 2")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2", "18", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A969-721E-713C-B658-1782772551C2", "01A1A969-B33C-791C-8E3B-F770A0227ADA", "01A1A969-B33C-791C-8E3B-F770A0227ADA,01A1A96A-109B-7B54-976C-324E4484F7A1,01A1A96" +
             "A-27E0-7F76-B371-57E854A1675A,01A1A96A-4DD2-73E7-8851-A9D5079B1E45", @"01A1A969-721E-713C-B658-1782772551C2,01A1A96A-82B1-75B4-BD87-9894CE2E36B8,01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2,01A1A96B-68FE-77FE-9BD8-C4C03814C7EF,01A1A96B-7D1E-7EFB-88F2-06ADE45F5888", "19", null)]
@@ -283,7 +283,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         public async global::System.Threading.Tasks.Task _4_PurgeFlag2(string id, string idToPurge, string purgedIdsString, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -326,14 +326,14 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("5. Restore Flag")]
-        [global::NUnit.Framework.CategoryAttribute("ResetBasicFlags")]
+        [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2", "21", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2", "22", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA,01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2", "01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90", "23", null)]
         public async global::System.Threading.Tasks.Task _5_RestoreFlag(string id, string idToRestore, string restoredIds, string deletedIdsString, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "ResetBasicFlags"};
+                    "BeforeScenarioResetBasicFlags"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

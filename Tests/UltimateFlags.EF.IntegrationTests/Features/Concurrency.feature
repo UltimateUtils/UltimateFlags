@@ -1,6 +1,6 @@
 Feature: Concurrency feature
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 1. Update Flag - null Concurrency Token
 
     When I update a flag with the Id, <Id>, as follows
@@ -17,7 +17,7 @@ Examples:
     | 01A1A96C-2145-7840-88C7-A03F45928635 | false | yet another random words ~~ | <null>           |
     | 01A1A96C-2145-7840-88C7-A03F45928635 | true  | ~~ yet another random words | <null>           |
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 2. Update Flag - Correct Concurrency Token
 
     Given I have retrieved a flag, <Id>
@@ -36,7 +36,7 @@ Examples:
     | 01A1A96C-2145-7840-88C7-A03F45928635 | false | yet another random words ~~ | 77E5F5EC-43AB-4EA8-8808-449FA24B57B1 |
     | 01A1A96C-2145-7840-88C7-A03F45928635 | true  | ~~ yet another random words | 77E5F5EC-43AB-4EA8-8808-449FA24B57B1 |
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 3. Update Flag - Incorrect Concurrency Token
 
     Given I have retrieved a flag, <Id>
@@ -52,7 +52,7 @@ Examples:
     | 01A1A96C-2145-7840-88C7-A03F45928635 | false | yet another random words ~~ | 1ECA6C71-1A84-4C79-9113-DF65998EAEA7 |
     | 01A1A96C-2145-7840-88C7-A03F45928635 | true  | ~~ yet another random words | A229739E-909C-43AD-8545-4D55BA9092A2 |
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 4. Delete Flag - Correct Concurrency Token
 
     Given I have retrieved a flag, <Id>
@@ -65,7 +65,7 @@ Examples:
     | 01A1A96C-2145-7840-88C7-A03F45928635 | 77E5F5EC-43AB-4EA8-8808-449FA24B57B1 | 01A1A96C-2145-7840-88C7-A03F45928635                                                                                                                                                                                                                               |
     | 01A1A96C-0709-7A4E-831F-FB154377E39D | 06C2F42C-6BC6-4DD8-A81F-279F4F194F92 | 01A1A96C-0709-7A4E-831F-FB154377E39D,01A1A96C-2145-7840-88C7-A03F45928635,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850 |
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 5. Delete Flag - Incorrect Concurrency Token
 
     Given I have retrieved a flag, <Id>
@@ -78,7 +78,7 @@ Examples:
     | 01A1A96C-2145-7840-88C7-A03F45928635 | ABCDEF12-3456-7890-ABCD-EF1234567890 | 01A1A96C-2145-7840-88C7-A03F45928635                                                                                                                                                                                                                               |
     | 01A1A96C-0709-7A4E-831F-FB154377E39D | ABCDEF12-3456-7890-ABCD-EF1234567890 | 01A1A96C-0709-7A4E-831F-FB154377E39D,01A1A96C-2145-7840-88C7-A03F45928635,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850 |
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 6. Purge Flag - Correct Concurrency Token
 
     Given the flag, <Id>, has been deleted
@@ -97,7 +97,7 @@ Examples:
     | 01A1A96C-86DD-74B3-BF66-7641B575DA9B | 01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850                                                                           |
     | 01A1A96C-0709-7A4E-831F-FB154377E39D | 01A1A96C-0709-7A4E-831F-FB154377E39D,01A1A96C-2145-7840-88C7-A03F45928635,01A1A96C-86DD-74B3-BF66-7641B575DA9B,01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9,01A1A96C-F21A-7D7F-B77B-79BB617C30ED,01A1A96D-000F-7AAA-9517-0E9A9C6528E7,01A1A96D-3A5D-7188-B085-19561F94D850 |
 
-@ResetBasicFlags
+@BeforeScenarioResetBasicFlags
 Scenario Outline: 7. Purge Flag - Incorrect Concurrency Token
 
     Given the flag, <Id>, has been deleted

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reqnroll;
 using UltimateFlags.Abstraction.Contracts;
+using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Configs;
 using UltimateFlags.EF.IntegrationTests.Db;
@@ -71,6 +72,20 @@ public class BasicGetFlagsSteps
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
 
+    [When("get a required flag by {Guid}")]
+    public void GetRequiredFlag(Guid id)
+    {
+        try
+        {
+            FlagResponse actual = _flagQueryService.GetRequired(id);
+            _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
     #endregion When
 
     #region Then
@@ -88,9 +103,26 @@ public class BasicGetFlagsSteps
     public void TheFollowingFlagIsReturnedCorrectly(DataTable table)
     {
         FlagResponse expectedFlag = table.CreateInstance<FlagResponse>();
-        FlagResponse actual = _scenarioContext.Get<FlagResponse>(ContextKeys.RetrievedFlagKey);
+        FlagResponse? actual = _scenarioContext.Get<FlagResponse?>(ContextKeys.RetrievedFlagKey);
 
+        Assert.That(actual, Is.Not.Null);
         Assert.That(actual, Is.EqualTo(expectedFlag));
+    }
+
+    [Then("null is returned")]
+    public void ThenNullIsReturned()
+    {
+        FlagResponse? actual = _scenarioContext.Get<FlagResponse?>(ContextKeys.RetrievedFlagKey);
+
+        Assert.That(actual, Is.Null);
+    }
+
+    [Then("FlagNotFound exception is thrown")]
+    public void ThenFlagNotFoundExceptionIsThrown()
+    {
+        Exception x = _scenarioContext.Get<Exception>(ContextKeys.ThrownExceptionKey);
+
+        Assert.That(x, Is.TypeOf<FlagNotFound>());
     }
 
     #endregion Then

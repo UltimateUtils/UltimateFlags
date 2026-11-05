@@ -83,5 +83,19 @@ public class GetRequiredFlagsSteps
         }
     }
 
+    [When("I get a required flag by {string}")]
+    public void GetRequiredFlagBy(string key)
+    {
+        try
+        {
+            FlagResponse actual = _flagQueryService.GetRequired(key);
+            _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
     #endregion When
 }

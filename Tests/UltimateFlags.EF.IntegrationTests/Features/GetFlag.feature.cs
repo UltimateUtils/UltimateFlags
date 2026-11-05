@@ -168,7 +168,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
     await testRunner.WhenAsync(string.Format("retrieve a flag by {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -179,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table1.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -191,7 +191,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 6
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table1, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table4, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -289,7 +289,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 49
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\' and {1}", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -300,7 +300,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table2.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -312,7 +312,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 50
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table2, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table5, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -354,7 +354,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("5. Get Flag by key")]
+        [global::NUnit.Framework.DescriptionAttribute("5. Get Flag by Key")]
         [global::NUnit.Framework.TestCaseAttribute("01A1A968-05EA-7445-9702-95FFA353EA91", "<null>", "TRUE", "MyBuilding", "MyBuilding", "my building", "C04D5590-AC01-48D2-957E-2F3D37E3F70F", "2026-09-30 03:37:26.0661723", "2026-09-30 03:37:26.0661723", "<null>", "56", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A968-66A6-7189-A0DD-95C844F16129", "01A1A968-05EA-7445-9702-95FFA353EA91", "TRUE", "Floor23", "MyBuilding.Floor23", "floor #23", "1EE72A0B-16AF-428D-908F-2ADB5214E1D4", "2026-09-30 03:38:26.5139868", "2026-09-30 03:38:26.5139868", "<null>", "57", null)]
         [global::NUnit.Framework.TestCaseAttribute("01A1A968-9C22-77AF-9C71-14455B6B3F66", "01A1A968-66A6-7189-A0DD-95C844F16129", "TRUE", "Room2301", "MyBuilding.Floor23.Room2301", "room #2301", "D7601C7A-EE41-4ED6-B48A-E3DDB7682796", "2026-09-30 03:38:50.2655434", "2026-09-30 03:38:50.2655434", "<null>", "58", null)]
@@ -395,7 +395,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             argumentsOfScenario.Add("UpdatedAt", updatedAt);
             argumentsOfScenario.Add("DeletedAt", deletedAt);
             string pickleIndex = @__pickleIndex;
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("5. Get Flag by key", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("5. Get Flag by Key", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 92
@@ -411,7 +411,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 93
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -422,7 +422,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table3.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -434,14 +434,14 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 94
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table3, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table6, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
         [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("6. Get Flag by incorrect key")]
+        [global::NUnit.Framework.DescriptionAttribute("6. Get Flag by incorrect Key")]
         [global::NUnit.Framework.TestCaseAttribute("iNValID nAMe", "81", null)]
         [global::NUnit.Framework.TestCaseAttribute("MyBuilding.2", "82", null)]
         [global::NUnit.Framework.TestCaseAttribute("Table2602d", "83", null)]
@@ -451,7 +451,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Key", key);
             string pickleIndex = @__pickleIndex;
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("6. Get Flag by incorrect key", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("6. Get Flag by incorrect Key", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 126

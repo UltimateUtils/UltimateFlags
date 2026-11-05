@@ -73,11 +73,25 @@ public class BasicGetFlagsSteps
     }
 
     [When("get a required flag by {Guid}")]
-    public void GetRequiredFlag(Guid id)
+    public void GetRequiredFlagById(Guid id)
     {
         try
         {
             FlagResponse actual = _flagQueryService.GetRequired(id);
+            _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I get a required flag by {string} and {Guid}")]
+    public void GetRequiredFlagByName(string name, Guid? parentId)
+    {
+        try
+        {
+            FlagResponse actual = _flagQueryService.GetRequired(name, parentId);
             _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
         }
         catch (Exception e)

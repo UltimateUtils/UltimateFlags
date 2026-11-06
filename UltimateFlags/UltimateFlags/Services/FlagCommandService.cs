@@ -49,12 +49,22 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
+    public void Enable(string key)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Enable(string name, Guid? parentId)
     {
         throw new NotImplementedException();
     }
 
     public void Disable(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Disable(string key)
     {
         throw new NotImplementedException();
     }

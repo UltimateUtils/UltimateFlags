@@ -72,12 +72,21 @@ public interface IFlagCommandService
     public void Enable(Guid id);
 
     /// <summary>
+    ///     Enables a FLAG by KEY.
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <exception cref="FlagNotFound">
+    ///     FlagNotFound will be thrown when the FLAG with the KEY does not exist.
+    /// </exception>
+    public void Enable(string key);
+
+    /// <summary>
     ///     Enables a FLAG by NAME and ParentId.
     /// </summary>
     /// <param name="name">NAME</param>
     /// <param name="parentId">ParentId</param>
     /// <exception cref="FlagNotFound">
-    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
+    ///     FlagNotFound will be thrown when the FLAG with the Name and ParentId does not exist.
     /// </exception>
     public void Enable(string name, Guid? parentId);
 
@@ -91,12 +100,21 @@ public interface IFlagCommandService
     public void Disable(Guid id);
 
     /// <summary>
+    ///     Disables a FLAG by KEY.
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <exception cref="FlagNotFound">
+    ///     FlagNotFound will be thrown when the FLAG with the KEY does not exist.
+    /// </exception>
+    public void Disable(string key);
+
+    /// <summary>
     ///     Disables a FLAG by NAME and ParentId.
     /// </summary>
     /// <param name="name">NAME</param>
     /// <param name="parentId">ParentId</param>
     /// <exception cref="FlagNotFound">
-    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
+    ///     FlagNotFound will be thrown when the FLAG with the Name and ParentId does not exist.
     /// </exception>
     public void Disable(string name, Guid? parentId);
 }

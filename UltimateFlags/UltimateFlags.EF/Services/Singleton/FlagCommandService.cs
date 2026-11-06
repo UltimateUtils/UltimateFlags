@@ -139,6 +139,14 @@ internal class FlagCommandService : IFlagCommandService
         flagManager.Enable(id);
     }
 
+    public void Enable(string key)
+    {
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        flagManager.Enable(key);
+    }
+
     public void Enable(string name, Guid? parentId)
     {
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
@@ -153,6 +161,14 @@ internal class FlagCommandService : IFlagCommandService
         IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
 
         flagManager.Disable(id);
+    }
+
+    public void Disable(string key)
+    {
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        flagManager.Disable(key);
     }
 
     public void Disable(string name, Guid? parentId)

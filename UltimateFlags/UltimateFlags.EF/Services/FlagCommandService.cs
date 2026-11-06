@@ -127,6 +127,11 @@ internal class FlagCommandService : IFlagCommandService
         _flagManager.Enable(id);
     }
 
+    public void Enable(string key)
+    {
+        _flagManager.Enable(key);
+    }
+
     public void Enable(string name, Guid? parentId)
     {
         _flagManager.Enable(name, parentId);
@@ -135,6 +140,11 @@ internal class FlagCommandService : IFlagCommandService
     public void Disable(Guid id)
     {
         _flagManager.Disable(id);
+    }
+
+    public void Disable(string key)
+    {
+        _flagManager.Disable(key);
     }
 
     public void Disable(string name, Guid? parentId)

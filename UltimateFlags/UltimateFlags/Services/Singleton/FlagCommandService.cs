@@ -68,6 +68,14 @@ internal class FlagCommandService : IFlagCommandService
         throw new NotImplementedException();
     }
 
+    public void Enable(string key)
+    {
+        using IServiceScope scope = _scopeFactory.CreateScope();
+        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        throw new NotImplementedException();
+    }
+
     public void Enable(string name, Guid? parentId)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();
@@ -77,6 +85,14 @@ internal class FlagCommandService : IFlagCommandService
     }
 
     public void Disable(Guid id)
+    {
+        using IServiceScope scope = _scopeFactory.CreateScope();
+        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        throw new NotImplementedException();
+    }
+
+    public void Disable(string key)
     {
         using IServiceScope scope = _scopeFactory.CreateScope();
         IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();

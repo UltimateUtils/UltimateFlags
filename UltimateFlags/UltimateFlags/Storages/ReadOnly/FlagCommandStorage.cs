@@ -64,12 +64,22 @@ public class FlagCommandStorage : IFlagCommandStorage
         throw new NotImplementedException();
     }
 
+    public int Enable(string key)
+    {
+        throw new NotImplementedException();
+    }
+
     public int Enable(string name, Guid? parentId)
     {
         throw new NotImplementedException();
     }
 
     public int Disable(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int Disable(string key)
     {
         throw new NotImplementedException();
     }

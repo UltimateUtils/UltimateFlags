@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
@@ -143,6 +142,20 @@ public class FlagCommandStorage : IFlagCommandStorage
                                 true));
     }
 
+    public int Enable(string key)
+    {
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Key == key)
+                .ExecuteUpdate(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                true));
+    }
+
     public int Enable(string name, Guid? parentId)
     {
         return
@@ -163,6 +176,20 @@ public class FlagCommandStorage : IFlagCommandStorage
             _flagDbContext
                 .Flags
                 .Where(f => f.Id == id)
+                .ExecuteUpdate(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                false));
+    }
+
+    public int Disable(string key)
+    {
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Key == key)
                 .ExecuteUpdate(
                     setters =>
                         setters

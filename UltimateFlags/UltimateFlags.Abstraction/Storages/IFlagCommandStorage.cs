@@ -84,6 +84,13 @@ public interface IFlagCommandStorage
     public int Enable(Guid id);
 
     /// <summary>
+    ///     Enables a FLAG by KEY.
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <returns>Number of enabled flags. 1 if successful. 0 otherwise.</returns>
+    public int Enable(string key);
+
+    /// <summary>
     ///     Enables a FLAG by NAME and ParentId.
     /// </summary>
     /// <param name="name">NAME</param>
@@ -97,6 +104,13 @@ public interface IFlagCommandStorage
     /// <param name="id">ID</param>
     /// <returns>Number of disabled flags. 1 if successful. 0 otherwise.</returns>
     public int Disable(Guid id);
+
+    /// <summary>
+    ///     Disables a FLAG by Key.
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <returns>Number of disabled flags. 1 if successful. 0 otherwise.</returns>
+    public int Disable(string key);
 
     /// <summary>
     ///     Disables a FLAG by NAME and ParentId.

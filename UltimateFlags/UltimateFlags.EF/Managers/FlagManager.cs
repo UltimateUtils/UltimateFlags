@@ -144,6 +144,29 @@ internal class FlagManager : IFlagManager
         };
     }
 
+    public void Enable(string key)
+    {
+        int enabledCount = _flagCommandStorage.Enable(key);
+
+        if (enabledCount == 1)
+            return;
+
+        Flag? flag = _flagQueryStorage.Read(key);
+
+        if (flag is null)
+        {
+            throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(Enable)}(id)",
+            };
+        }
+
+        throw new FlagUpdateFailed
+        {
+            Area = $"{nameof(FlagManager)}.{nameof(Enable)}(id)",
+        };
+    }
+
     public void Enable(string name, Guid? parentId)
     {
         int enabledCount = _flagCommandStorage.Enable(name, parentId);
@@ -175,6 +198,29 @@ internal class FlagManager : IFlagManager
             return;
 
         Flag? flag = _flagQueryStorage.Read(id);
+
+        if (flag is null)
+        {
+            throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagManager)}.{nameof(Disable)}(id)",
+            };
+        }
+
+        throw new FlagUpdateFailed
+        {
+            Area = $"{nameof(FlagManager)}.{nameof(Disable)}(id)",
+        };
+    }
+
+    public void Disable(string key)
+    {
+        int disabledCount = _flagCommandStorage.Disable(key);
+
+        if (disabledCount == 1)
+            return;
+
+        Flag? flag = _flagQueryStorage.Read(key);
 
         if (flag is null)
         {

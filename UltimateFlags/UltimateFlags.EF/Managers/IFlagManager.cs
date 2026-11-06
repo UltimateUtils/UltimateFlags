@@ -36,9 +36,13 @@ internal interface IFlagManager
 
     public void Enable(Guid id);
 
+    public void Enable(string key);
+
     public void Enable(string name, Guid? parentId);
 
     public void Disable(Guid id);
+
+    public void Disable(string key);
 
     public void Disable(string name, Guid? parentId);
 

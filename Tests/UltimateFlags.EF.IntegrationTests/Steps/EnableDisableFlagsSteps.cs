@@ -104,6 +104,12 @@ public class EnableDisableFlagsSteps
         _flagCommandService.Disable(name, parentId);
     }
 
+    [When("I disable a flag with {string}")]
+    public void DisableFlagWithKey(string key)
+    {
+        _flagCommandService.Disable(key);
+    }
+
     #endregion When
 
     #region Then
@@ -139,6 +145,15 @@ public class EnableDisableFlagsSteps
     public void FlagIsDisabled(string name, Guid? parentId)
     {
         FlagResponse? flag = _flagQueryService.Get(name, parentId);
+
+        Assert.That(flag, Is.Not.Null);
+        Assert.That(flag.IsOn, Is.False);
+    }
+
+    [Then("the flag with {string} is disabled")]
+    public void FlagIsDisabled(string key)
+    {
+        FlagResponse? flag = _flagQueryService.Get(key);
 
         Assert.That(flag, Is.Not.Null);
         Assert.That(flag.IsOn, Is.False);

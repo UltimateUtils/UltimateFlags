@@ -137,3 +137,48 @@ Examples:
     | Table2602b | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |
     | Table2602c | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |
     | Table2602d | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |
+
+@BeforeScenarioResetBasicFlags
+Scenario Outline: 5. Disable Flag by KEY
+
+    When I disable a flag with '<Key>'
+    Then the flag with '<Key>' is disabled
+
+Examples:
+    | Key        |
+    | MyBuilding |
+
+@BeforeScenarioResetBasicFlags
+Scenario Outline: 6. Eable Flag by KEY
+
+    Given the flag with '<Name>' and <ParentId> has been disabled
+    When I enable a flag with '<Name>' and <ParentId>
+    Then the flag with '<Name>' and <ParentId> is enabled
+
+Examples:
+    | Name       | ParentId                             |
+    | MyBuilding | <null>                               |
+    | Floor23    | 01A1A968-05EA-7445-9702-95FFA353EA91 |
+    | Room2301   | 01A1A968-66A6-7189-A0DD-95C844F16129 |
+    | Room2302   | 01A1A968-66A6-7189-A0DD-95C844F16129 |
+    | Room2303   | 01A1A968-66A6-7189-A0DD-95C844F16129 |
+    | Room2304   | 01A1A968-66A6-7189-A0DD-95C844F16129 |
+    | Floor24    | 01A1A968-05EA-7445-9702-95FFA353EA91 |
+    | Room2401   | 01A1A969-721E-713C-B658-1782772551C2 |
+    | Table2401a | 01A1A969-B33C-791C-8E3B-F770A0227ADA |
+    | Table2401b | 01A1A969-B33C-791C-8E3B-F770A0227ADA |
+    | Table2401c | 01A1A969-B33C-791C-8E3B-F770A0227ADA |
+    | Room2402   | 01A1A969-721E-713C-B658-1782772551C2 |
+    | Room2403   | 01A1A969-721E-713C-B658-1782772551C2 |
+    | Table2403a | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA |
+    | Table2403b | 01A1A96A-8CE3-727B-8E5A-83A132AD39AA |
+    | Room2404   | 01A1A969-721E-713C-B658-1782772551C2 |
+    | Room2405   | 01A1A969-721E-713C-B658-1782772551C2 |
+    | Floor25    | 01A1A968-05EA-7445-9702-95FFA353EA91 |
+    | Floor26    | 01A1A968-05EA-7445-9702-95FFA353EA91 |
+    | Room2601   | 01A1A96C-0709-7A4E-831F-FB154377E39D |
+    | Room2602   | 01A1A96C-0709-7A4E-831F-FB154377E39D |
+    | Table2602a | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |
+    | Table2602b | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |
+    | Table2602c | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |
+    | Table2602d | 01A1A96C-86DD-74B3-BF66-7641B575DA9B |

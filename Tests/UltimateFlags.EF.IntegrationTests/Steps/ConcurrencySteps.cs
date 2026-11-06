@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Reqnroll;
 using UltimateFlags.Abstraction.Contracts;
@@ -29,6 +30,8 @@ public class ConcurrencySteps
 
     private readonly IFlagCommandService _flagCommandService;
 
+    private readonly IServiceScopeFactory _serviceScopeFactory;
+
     private readonly IConfiguration _configuration;
 
     private readonly ServiceConfiguration _serviceConfiguration;
@@ -41,6 +44,7 @@ public class ConcurrencySteps
         IFlagService flagService,
         IFlagQueryService flagQueryService,
         IFlagCommandService flagCommandService,
+        IServiceScopeFactory serviceScopeFactory,
         IConfiguration configuration,
         ServiceConfiguration serviceConfiguration)
     {
@@ -51,6 +55,7 @@ public class ConcurrencySteps
         _flagService = flagService;
         _flagQueryService = flagQueryService;
         _flagCommandService = flagCommandService;
+        _serviceScopeFactory = serviceScopeFactory;
         _configuration = configuration;
         _serviceConfiguration = serviceConfiguration;
     }

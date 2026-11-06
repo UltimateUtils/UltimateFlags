@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Reqnroll;
@@ -27,6 +28,8 @@ public class GetRequiredFlagsSteps
 
     private readonly IFlagCommandService _flagCommandService;
 
+    private readonly IServiceScopeFactory _serviceScopeFactory;
+
     private readonly IConfiguration _configuration;
 
     private readonly ServiceConfiguration _serviceConfiguration;
@@ -39,6 +42,7 @@ public class GetRequiredFlagsSteps
         IFlagService flagService,
         IFlagQueryService flagQueryService,
         IFlagCommandService flagCommandService,
+        IServiceScopeFactory serviceScopeFactory,
         IConfiguration configuration,
         IOptions<ServiceConfiguration> options)
     {
@@ -49,6 +53,7 @@ public class GetRequiredFlagsSteps
         _flagService = flagService;
         _flagQueryService = flagQueryService;
         _flagCommandService = flagCommandService;
+        _serviceScopeFactory = serviceScopeFactory;
         _configuration = configuration;
         _serviceConfiguration = options.Value;
     }

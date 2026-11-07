@@ -69,38 +69,6 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddUltimateFlags<TQ, TC>(this IServiceCollection services, IConfiguration configuration)
-        where TQ : class, IFlagQueryStorage
-        where TC : class, IFlagCommandStorage
-    {
-        services._AddUltimateFlagConfiguration(configuration);
-
-        services.AddScoped<IFlagQueryStorage, TQ>();
-        services.AddScoped<IFlagCommandStorage, TC>();
-        services.AddScoped<IFlagManager, FlagManager>();
-        services.AddScoped<IFlagService, FlagService>();
-        services.AddScoped<IFlagQueryService, FlagQueryService>();
-        services.AddScoped<IFlagCommandService, FlagCommandService>();
-
-        return services;
-    }
-
-    public static IServiceCollection AddSingletonUltimateFlags<TQ, TC>(this IServiceCollection services, IConfiguration configuration)
-        where TQ : class, IFlagQueryStorage
-        where TC : class, IFlagCommandStorage
-    {
-        services._AddUltimateFlagConfiguration(configuration);
-
-        services.AddScoped<IFlagQueryStorage, TQ>();
-        services.AddScoped<IFlagCommandStorage, TC>();
-        services.AddScoped<IFlagManager, FlagManager>();
-        services.AddSingleton<IFlagService, Services.Singleton.FlagService>();
-        services.AddSingleton<IFlagQueryService, Services.Singleton.FlagQueryService>();
-        services.AddSingleton<IFlagCommandService, Services.Singleton.FlagCommandService>();
-
-        return services;
-    }
-
     private static IServiceCollection _AddUltimateFlagConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         IConfigurationSection configurationSection = configuration.GetSection(UltimateFlagConfiguration.SectionName);

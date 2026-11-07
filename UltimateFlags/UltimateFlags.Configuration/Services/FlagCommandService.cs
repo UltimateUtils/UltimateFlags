@@ -1,0 +1,76 @@
+using Microsoft.Extensions.Logging;
+using UltimateFlags.Abstraction.Contracts;
+using UltimateFlags.Abstraction.Services;
+using UltimateFlags.Configuration.Managers;
+
+namespace UltimateFlags.Configuration.Services;
+
+internal class FlagCommandService : IFlagCommandService
+{
+    private readonly ILogger<FlagCommandService> _logger;
+
+    private readonly IFlagManager _flagManager;
+
+    public FlagCommandService(
+        ILogger<FlagCommandService> logger,
+        IFlagManager flagManager)
+    {
+        _logger = logger;
+        _flagManager = flagManager;
+    }
+
+    public FlagResponse Create(FlagCreationRequest creationRequest)
+    {
+        throw new NotImplementedException();
+    }
+
+    public FlagResponse Update(Guid id, FlagUpdateRequest updateRequest)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<FlagResponse> Restore(Guid id, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Enable(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Enable(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Enable(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Disable(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Disable(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Disable(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+}

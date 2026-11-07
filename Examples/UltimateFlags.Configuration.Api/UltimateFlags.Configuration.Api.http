@@ -1,0 +1,6 @@
+@UltimateFlags_Configuration_Api_HostAddress = https://localhost:7232
+
+GET {{UltimateFlags_Configuration_Api_HostAddress}}/health-check/
+Accept: application/json
+
+###

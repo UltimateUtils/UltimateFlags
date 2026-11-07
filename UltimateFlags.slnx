@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/Examples/">
-    <Project Path="Examples/UltimateFlags.Api/UltimateFlags.Api.csproj" />
+    <Project Path="Examples/UltimateFlags.Configuration.Api/UltimateFlags.Configuration.Api.csproj" />
     <Project Path="Examples/UltimateFlags.EF.Api/UltimateFlags.EF.Api.csproj" />
   </Folder>
   <Folder Name="/Tests/">
@@ -11,6 +11,7 @@
   </Folder>
   <Folder Name="/UltimateFlags/">
     <Project Path="UltimateFlags/UltimateFlags.Abstraction/UltimateFlags.Abstraction.csproj" />
+    <Project Path="UltimateFlags/UltimateFlags.Configuration/UltimateFlags.Configuration.csproj" />
     <Project Path="UltimateFlags/UltimateFlags.EF/UltimateFlags.EF.csproj" />
     <Project Path="UltimateFlags/UltimateFlags/UltimateFlags.csproj" />
   </Folder>

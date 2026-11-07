@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.Helpers;
 
 namespace UltimateFlags.Managers;
 
@@ -29,6 +30,17 @@ internal class FlagManager : IFlagManager
 
     public bool IsOn(string key)
     {
-        throw new NotImplementedException();
+        string[] ancestorKeys = [.. key.GetAncestorKeys(inclusive: true)];
+
+        bool[] isOns =
+        [
+            .. _flagQueryStorage
+                .ReadAll(ancestorKeys)
+                /*.Where(x => x.IsOn)*/ // todo - performance check
+                .Select(x => x.IsOn)
+        ];
+
+        return isOns.Length == ancestorKeys.Length
+            && isOns.All(isOn => isOn);
     }
 }

@@ -20,6 +20,6 @@ internal class FlagService : IFlagService
 
     public bool IsOn(string key)
     {
-        throw new NotImplementedException();
+        return _flagManager.IsOn(key);
     }
 }

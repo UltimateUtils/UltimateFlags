@@ -37,7 +37,15 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public IQueryable<Flag> ReadAll(IEnumerable<string> keys)
     {
-        throw new NotImplementedException();
+        return _readAll().AsQueryable();
+
+        IEnumerable<Flag> _readAll()
+        {
+            foreach (string key in keys)
+            {
+                yield return _flagsComplex.ByKey[key];
+            }
+        }
     }
 
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted)

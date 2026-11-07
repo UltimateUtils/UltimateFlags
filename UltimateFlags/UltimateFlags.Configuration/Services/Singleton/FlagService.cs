@@ -24,6 +24,6 @@ internal class FlagService : IFlagService
         using IServiceScope scope = _scopeFactory.CreateScope();
         IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
 
-        throw new NotImplementedException();
+        return flagManager.IsOn(key);
     }
 }

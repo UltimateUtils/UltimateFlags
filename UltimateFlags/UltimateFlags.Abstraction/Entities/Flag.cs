@@ -28,9 +28,9 @@ public record Flag
 
     #region navigation
 
-    public Flag? Parent { get; init; }
+    public Flag? Parent { get; set; }
 
-    public ICollection<Flag>? Children { get; init; }
+    public ICollection<Flag>? Children { get; set; }
 
     #endregion navigation
 }

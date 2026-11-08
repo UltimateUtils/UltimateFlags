@@ -30,7 +30,17 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public Flag? Read(Guid id, bool? deleted = false, bool includeParent = false)
     {
-        throw new NotImplementedException();
+        Flag? found = _flagsComplex.ById.GetValueOrDefault(id);
+
+        if (found is null || deleted is null)
+        {
+            return found;
+        }
+
+        return
+            deleted.Value == found.DeletedAt.HasValue
+                ? found
+                : null;
     }
 
     public Flag? Read(string key)

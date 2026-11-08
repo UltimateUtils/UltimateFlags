@@ -1,7 +1,10 @@
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Contracts;
+using UltimateFlags.Abstraction.Entities;
+using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.Configuration.Managers;
+using UltimateFlags.Converters;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.Configuration.Services;
@@ -22,12 +25,19 @@ internal class FlagQueryService : IFlagQueryService
 
     public FlagResponse? Get(Guid id)
     {
-        throw new NotImplementedException();
+        return _flagManager.Read(id)?.ToContract();
     }
 
     public FlagResponse GetRequired(Guid id)
     {
-        throw new NotImplementedException();
+        Flag foundEntity =
+            _flagManager.Read(id)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequired)}(id)",
+            };
+
+        return foundEntity.ToContract();
     }
 
     public FlagResponse? Get(string name, Guid? parentId)

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UltimateFlags.Abstraction.Config;
+using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Helpers;
 
@@ -26,6 +27,11 @@ internal class FlagManager : IFlagManager
         _flagQueryStorage = flagQueryStorage;
         _flagCommandStorage = flagCommandStorage;
         _ultimateFlagConfiguration = options.Value;
+    }
+
+    public Flag? Read(Guid id, bool? deleted = false)
+    {
+        return _flagQueryStorage.Read(id, deleted);
     }
 
     public bool IsOn(string key)

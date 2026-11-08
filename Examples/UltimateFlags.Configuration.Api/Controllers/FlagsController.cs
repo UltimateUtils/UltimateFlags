@@ -27,29 +27,29 @@ public class FlagsController : ControllerBase
 
     [HttpGet]
     [Route("{id:guid}")]
-    public FlagResponse GetById([FromRoute] Guid id)
+    public FlagResponse? GetById([FromRoute] Guid id)
     {
         _logger.LogDebug("Getting flag with id: {id}", id);
 
-        return _flagQueryService.GetRequired(id);
+        return _flagQueryService.Get(id);
     }
 
     [HttpGet]
     [Route("")]
-    public FlagResponse Get([FromQuery] string name, [FromQuery] Guid? parentId)
+    public FlagResponse? Get([FromQuery] string name, [FromQuery] Guid? parentId)
     {
         _logger.LogDebug("Getting flag with name: {name}, parentId: {parentId}", name, parentId);
 
-        return _flagQueryService.GetRequired(name, parentId);
+        return _flagQueryService.Get(name, parentId);
     }
 
     [HttpGet]
     [Route("{key}")]
-    public FlagResponse Get([FromRoute] string key)
+    public FlagResponse? Get([FromRoute] string key)
     {
         _logger.LogDebug("Getting flag with key: {key}", key);
 
-        return _flagQueryService.GetRequired(key);
+        return _flagQueryService.Get(key);
     }
 
     [HttpGet]

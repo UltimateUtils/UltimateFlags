@@ -14,10 +14,11 @@ internal static class FlagsConfigExtensions
                     All = [],
                     ByKey = new Dictionary<string, Flag>(),
                     ById = new Dictionary<Guid, Flag>(),
+                    ByName = new Dictionary<(string, Guid?), Flag>(),
                 };
         }
 
-        (Flag[] allFlags, Dictionary<string, Flag> byKey, Dictionary<Guid, Flag> byId) = _GetFlagsComplex(flags);
+        (Flag[] allFlags, Dictionary<string, Flag> byKey, Dictionary<Guid, Flag> byId, Dictionary<(string, Guid?), Flag> byName) = _GetFlagsComplex(flags);
 
         return
             new FlagsComplex
@@ -25,15 +26,17 @@ internal static class FlagsConfigExtensions
                 All = allFlags,
                 ByKey = byKey,
                 ById = byId,
+                ByName = byName,
             };
     }
 
-    private static (Flag[] allFlags, Dictionary<string, Flag> byKey, Dictionary<Guid, Flag> byId) _GetFlagsComplex(IEnumerable<Flag> flags)
+    private static (Flag[] allFlags, Dictionary<string, Flag> byKey, Dictionary<Guid, Flag> byId, Dictionary<(string, Guid?), Flag> byName) _GetFlagsComplex(IEnumerable<Flag> flags)
     {
         Flag[] allFlags = [.. flags];
 
         Dictionary<string, Flag> byKey = allFlags.ToDictionary(f => f.Key);
         Dictionary<Guid, Flag> byId = allFlags.ToDictionary(f => f.Id);
+        Dictionary<(string, Guid?), Flag> byName = allFlags.ToDictionary(f => (f.Name, f.ParentId));
 
         foreach (Flag flag in allFlags)
         {
@@ -46,6 +49,6 @@ internal static class FlagsConfigExtensions
             }
         }
 
-        return (allFlags, byKey, byId);
+        return (allFlags, byKey, byId, byName);
     }
 }

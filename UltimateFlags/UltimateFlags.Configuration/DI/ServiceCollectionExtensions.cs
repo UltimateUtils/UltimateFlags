@@ -91,6 +91,7 @@ public static class ServiceCollectionExtensions
                             All = [],
                             ByKey = new Dictionary<string, Flag>(),
                             ById = new Dictionary<Guid, Flag>(),
+                            ByName = new Dictionary<(string, Guid?), Flag>(),
                         });
     }
 }

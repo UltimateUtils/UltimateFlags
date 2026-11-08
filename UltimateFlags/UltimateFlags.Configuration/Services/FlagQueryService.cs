@@ -42,7 +42,7 @@ internal class FlagQueryService : IFlagQueryService
 
     public FlagResponse? Get(string name, Guid? parentId)
     {
-        throw new NotImplementedException();
+        return _flagManager.Read(name, parentId)?.ToContract();
     }
 
     public FlagResponse GetRequired(string name, Guid? parentId)

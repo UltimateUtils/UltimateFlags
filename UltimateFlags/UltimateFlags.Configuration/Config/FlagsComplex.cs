@@ -9,4 +9,6 @@ public record FlagsComplex
     public required Dictionary<string, Flag> ByKey { get; init; }
 
     public required Dictionary<Guid, Flag> ById { get; init; }
+
+    public required Dictionary<(string, Guid?), Flag> ByName { get; init; }
 }

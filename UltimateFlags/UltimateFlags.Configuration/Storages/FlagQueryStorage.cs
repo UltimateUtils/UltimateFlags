@@ -50,7 +50,7 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public Flag? Read(string name, Guid? parentId)
     {
-        throw new NotImplementedException();
+        return _flagsComplex.ByName.GetValueOrDefault((name, parentId));
     }
 
     public IQueryable<Flag> ReadAll(IEnumerable<string> keys)

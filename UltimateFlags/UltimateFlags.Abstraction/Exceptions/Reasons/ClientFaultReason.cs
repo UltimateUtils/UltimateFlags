@@ -18,5 +18,7 @@ public enum ClientFaultReason
 
     InvalidFlagName,
 
-    ConcurrencyConflict
+    ConcurrencyConflict,
+
+    NotSupported
 }

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Contracts;
+using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.Configuration.Managers;
 
@@ -22,89 +23,56 @@ internal class FlagCommandService : IFlagCommandService
 
     public FlagResponse Create(FlagCreationRequest creationRequest)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(Services.FlagCommandService)}.{nameof(Create)}(creationRequest)", };
     }
 
     public FlagResponse Update(Guid id, FlagUpdateRequest updateRequest)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Update)}(id, updateRequest)", };
     }
 
     public IEnumerable<FlagResponse> Delete(Guid id, Guid? concurrencyToken = null)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Delete)}(id, concurrencyToken)", };
     }
 
     public IEnumerable<FlagResponse> Purge(Guid id, Guid? concurrencyToken = null)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Purge)}(id, concurrencyToken)", };
     }
 
     public IEnumerable<FlagResponse> Restore(Guid id, Guid? concurrencyToken = null)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Restore)}(id, concurrencyToken)", };
     }
 
     public void Enable(Guid id)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Enable)}(id)", };
     }
 
     public void Enable(string key)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Enable)}(key)", };
     }
 
     public void Enable(string name, Guid? parentId)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Enable)}(name, parentId)", };
     }
 
     public void Disable(Guid id)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Disable)}(id)", };
     }
 
     public void Disable(string key)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Disable)}(key)", };
     }
 
     public void Disable(string name, Guid? parentId)
     {
-        using IServiceScope scope = _scopeFactory.CreateScope();
-        IFlagManager flagManager = scope.ServiceProvider.GetRequiredService<IFlagManager>();
-
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Disable)}(name, parentId)", };
     }
 }

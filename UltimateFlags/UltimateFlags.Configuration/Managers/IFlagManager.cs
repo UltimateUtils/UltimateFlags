@@ -13,5 +13,11 @@ internal interface IFlagManager
 
     public IPagedList<Flag> GetAllDeleted(int pageNumber, int pageSize);
 
+    public IPagedList<Flag> List(
+        string? searchString,
+        bool? isOn,
+        int pageNumber,
+        int pageSize);
+
     public bool IsOn(string key);
 }

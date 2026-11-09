@@ -4,7 +4,9 @@ using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Configuration.Config;
+using UltimatePagination;
 using UltimatePagination.Abstraction;
+using UltimateUtils.Extensions;
 
 namespace UltimateFlags.Configuration.Storages;
 
@@ -92,9 +94,22 @@ public class FlagQueryStorage : IFlagQueryStorage
         }
     }
 
-    public IPagedList<Flag> List(string? searchString, bool? isOn, int pageNumber, int pageSize)
+    public IPagedList<Flag> List(
+        string? searchString,
+        bool? isOn,
+        int pageNumber,
+        int pageSize)
     {
-        throw new NotImplementedException();
+        return
+            _flagsComplex
+                .All
+                .Where(
+                    flag =>
+                        (isOn == null || flag.IsOn == isOn)
+                        && (searchString.IsNullOrEmpty()
+                            || flag.Name.Contains(searchString)))
+                .OrderBy(flag => flag.Key)
+                .Paginate(pageNumber, pageSize);
     }
 
     public bool Exists(Guid id, bool? deleted)

@@ -54,6 +54,21 @@ internal class FlagManager : IFlagManager
                 .Paginate(pageNumber, pageSize);
     }
 
+    public IPagedList<Flag> List(
+        string? searchString,
+        bool? isOn,
+        int pageNumber,
+        int pageSize)
+    {
+        return
+            _flagQueryStorage
+                .List(
+                    searchString,
+                    isOn,
+                    pageNumber,
+                    pageSize);
+    }
+
     public bool IsOn(string key)
     {
         string[] ancestorKeys = [.. key.GetAncestorKeys(inclusive: true)];

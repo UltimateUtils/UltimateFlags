@@ -88,6 +88,27 @@ internal class FlagQueryService : IFlagQueryService
         int pageNumber = 1,
         int pageSize = 20)
     {
-        throw new NotImplementedException();
+        if (!_IsValidPaginationInfo(pageNumber, pageSize))
+        {
+            throw new InvalidPaginationInfo
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(List)}(rootId, searchString, isOn, pageNumber, pageSize)",
+            };
+        }
+
+        IPagedList<Flag> foundEntities =
+            _flagManager
+                .List(
+                    searchString,
+                    isOn,
+                    pageNumber,
+                    pageSize);
+
+        return foundEntities.Convert(entity => entity.ToContract());
+    }
+
+    private static bool _IsValidPaginationInfo(int pageNumber, int pageSize)
+    {
+        return pageNumber > 0 && pageSize > 0;
     }
 }

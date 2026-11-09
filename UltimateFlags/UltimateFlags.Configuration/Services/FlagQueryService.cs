@@ -47,7 +47,14 @@ internal class FlagQueryService : IFlagQueryService
 
     public FlagResponse GetRequired(string name, Guid? parentId)
     {
-        throw new NotImplementedException();
+        Flag foundEntity =
+            _flagManager.Read(name, parentId)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequired)}(name, parentId)",
+            };
+
+        return foundEntity.ToContract();
     }
 
     public FlagResponse? Get(string key)

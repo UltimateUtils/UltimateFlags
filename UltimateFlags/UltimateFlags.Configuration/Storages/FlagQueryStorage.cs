@@ -73,7 +73,23 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive = null, DateTime? toInclusive = null)
     {
-        throw new NotImplementedException();
+        return _readAll().AsQueryable();
+
+        // todo - improve with index tree
+        IEnumerable<Flag> _readAll()
+        {
+            foreach (Flag flag in _flagsComplex.All)
+            {
+                if (!flag.DeletedAt.HasValue)
+                    continue;
+
+                if ((fromInclusive is null || fromInclusive <= flag.DeletedAt.Value)
+                    && (toInclusive is null || flag.DeletedAt.Value <= toInclusive))
+                {
+                    yield return flag;
+                }
+            }
+        }
     }
 
     public IPagedList<Flag> List(string? searchString, bool? isOn, int pageNumber, int pageSize)

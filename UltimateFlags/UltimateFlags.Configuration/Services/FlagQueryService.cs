@@ -5,6 +5,7 @@ using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.Configuration.Managers;
 using UltimateFlags.Converters;
+using UltimatePagination;
 using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.Configuration.Services;
@@ -76,7 +77,9 @@ internal class FlagQueryService : IFlagQueryService
 
     public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)
     {
-        throw new NotImplementedException();
+        IPagedList<Flag> deletedEntities = _flagManager.GetAllDeleted(pageNumber, pageSize);
+
+        return deletedEntities.Convert(entity => entity.ToContract());
     }
 
     public IPagedList<FlagResponse> List(

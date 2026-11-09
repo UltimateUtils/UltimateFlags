@@ -4,6 +4,8 @@ using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.Helpers;
+using UltimatePagination;
+using UltimatePagination.Abstraction;
 
 namespace UltimateFlags.Configuration.Managers;
 
@@ -42,6 +44,14 @@ internal class FlagManager : IFlagManager
     public Flag? Read(string key)
     {
         return _flagQueryStorage.Read(key);
+    }
+
+    public IPagedList<Flag> GetAllDeleted(int pageNumber, int pageSize)
+    {
+        return
+            _flagQueryStorage
+                .ReadAllDeleted()
+                .Paginate(pageNumber, pageSize);
     }
 
     public bool IsOn(string key)

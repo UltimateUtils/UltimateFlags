@@ -64,7 +64,14 @@ internal class FlagQueryService : IFlagQueryService
 
     public FlagResponse GetRequired(string key)
     {
-        throw new NotImplementedException();
+        Flag foundEntity =
+            _flagManager.Read(key)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequired)}(key)",
+            };
+
+        return foundEntity.ToContract();
     }
 
     public IPagedList<FlagResponse> GetAllDeleted(int pageNumber = 1, int pageSize = 20)

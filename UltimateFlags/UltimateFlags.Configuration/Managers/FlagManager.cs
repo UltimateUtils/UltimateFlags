@@ -39,6 +39,11 @@ internal class FlagManager : IFlagManager
         return _flagQueryStorage.Read(name, parentId);
     }
 
+    public Flag? Read(string key)
+    {
+        return _flagQueryStorage.Read(key);
+    }
+
     public bool IsOn(string key)
     {
         string[] ancestorKeys = [.. key.GetAncestorKeys(inclusive: true)];

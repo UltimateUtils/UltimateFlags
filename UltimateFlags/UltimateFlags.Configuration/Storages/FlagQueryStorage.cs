@@ -45,7 +45,7 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public Flag? Read(string key)
     {
-        throw new NotImplementedException();
+        return _flagsComplex.ByKey.GetValueOrDefault(key);
     }
 
     public Flag? Read(string name, Guid? parentId)

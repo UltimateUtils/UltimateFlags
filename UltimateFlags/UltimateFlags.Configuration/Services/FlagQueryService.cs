@@ -59,7 +59,7 @@ internal class FlagQueryService : IFlagQueryService
 
     public FlagResponse? Get(string key)
     {
-        throw new NotImplementedException();
+        return _flagManager.Read(key)?.ToContract();
     }
 
     public FlagResponse GetRequired(string key)

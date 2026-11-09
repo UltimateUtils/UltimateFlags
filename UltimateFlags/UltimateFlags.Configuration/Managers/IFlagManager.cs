@@ -8,5 +8,7 @@ internal interface IFlagManager
 
     public Flag? Read(string name, Guid? parentId);
 
+    public Flag? Read(string key);
+
     public bool IsOn(string key);
 }

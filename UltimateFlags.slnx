@@ -4,10 +4,10 @@
     <Project Path="Examples/UltimateFlags.EF.Api/UltimateFlags.EF.Api.csproj" />
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="Tests/UltimateFlags.Configuration.IntegrationTests/UltimateFlags.Configuration.IntegrationTests.csproj" />
+    <Project Path="Tests/UltimateFlags.Configuration.UnitTests/UltimateFlags.Configuration.UnitTests.csproj" />
     <Project Path="Tests/UltimateFlags.EF.IntegrationTests/UltimateFlags.EF.IntegrationTests.csproj" />
     <Project Path="Tests/UltimateFlags.EF.UnitTests/UltimateFlags.EF.UnitTests.csproj" />
-    <Project Path="Tests/UltimateFlags.IntegrationTests/UltimateFlags.IntegrationTests.csproj" />
-    <Project Path="Tests/UltimateFlags.UnitTests/UltimateFlags.UnitTests.csproj" />
   </Folder>
   <Folder Name="/UltimateFlags/">
     <Project Path="UltimateFlags/UltimateFlags.Abstraction/UltimateFlags.Abstraction.csproj" />

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using Reqnroll;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Services;
-using UltimateFlags.EF.IntegrationTests.Configs;
+using UltimateFlags.EF.IntegrationTests.Config;
 using UltimateFlags.EF.IntegrationTests.Db;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;

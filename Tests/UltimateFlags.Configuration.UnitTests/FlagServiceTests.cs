@@ -1,4 +1,4 @@
-﻿namespace UltimateFlags.IntegrationTests;
+﻿namespace UltimateFlags.Configuration.UnitTests;
 
 public class FlagServiceTests
 {

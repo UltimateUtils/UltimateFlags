@@ -7,7 +7,7 @@ using Reqnroll.Assist;
 using Reqnroll.Assist.ValueRetrievers;
 using Reqnroll.Microsoft.Extensions.DependencyInjection;
 using UltimateFlags.EF.DI;
-using UltimateFlags.EF.IntegrationTests.Configs;
+using UltimateFlags.EF.IntegrationTests.Config;
 using UltimateFlags.EF.IntegrationTests.Db;
 
 namespace UltimateFlags.EF.IntegrationTests.Hooks;

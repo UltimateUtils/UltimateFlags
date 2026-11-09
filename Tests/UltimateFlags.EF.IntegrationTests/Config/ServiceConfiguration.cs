@@ -1,4 +1,4 @@
-namespace UltimateFlags.EF.IntegrationTests.Configs;
+namespace UltimateFlags.EF.IntegrationTests.Config;
 
 public record ServiceConfiguration
 {

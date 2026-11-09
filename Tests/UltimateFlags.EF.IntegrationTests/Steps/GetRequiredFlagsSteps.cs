@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using Reqnroll;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Services;
-using UltimateFlags.EF.IntegrationTests.Configs;
+using UltimateFlags.EF.IntegrationTests.Config;
 using UltimateFlags.EF.IntegrationTests.Db;
 using UltimateFlags.EF.IntegrationTests.Utils;
 

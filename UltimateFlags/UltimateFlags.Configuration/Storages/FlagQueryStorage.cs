@@ -45,14 +45,14 @@ public class FlagQueryStorage : IFlagQueryStorage
                 : null;
     }
 
-    public Flag? Read(string key)
-    {
-        return _flagsComplex.ByKey.GetValueOrDefault(key);
-    }
-
     public Flag? Read(string name, Guid? parentId)
     {
         return _flagsComplex.ByName.GetValueOrDefault((name, parentId));
+    }
+
+    public Flag? Read(string key)
+    {
+        return _flagsComplex.ByKey.GetValueOrDefault(key);
     }
 
     public IQueryable<Flag> ReadAll(IEnumerable<string> keys)

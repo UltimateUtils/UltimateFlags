@@ -25,12 +25,12 @@ public class FlagQueryStorage : IFlagQueryStorage
         throw new NotImplementedException();
     }
 
-    public Flag? Read(string key)
+    public Flag? Read(string name, Guid? parentId)
     {
         throw new NotImplementedException();
     }
 
-    public Flag? Read(string name, Guid? parentId)
+    public Flag? Read(string key)
     {
         throw new NotImplementedException();
     }

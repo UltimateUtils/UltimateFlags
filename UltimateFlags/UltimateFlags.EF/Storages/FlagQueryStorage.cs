@@ -46,17 +46,6 @@ public class FlagQueryStorage : IFlagQueryStorage
                         .FirstOrDefault(flag => flag.Id == id);
     }
 
-    public Flag? Read(string key)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .FirstOrDefault(
-                    flag =>
-                        flag.Key == key);
-    }
-
     public Flag? Read(string name, Guid? parentId)
     {
         return
@@ -67,6 +56,17 @@ public class FlagQueryStorage : IFlagQueryStorage
                     flag =>
                         flag.Name == name
                         && flag.ParentId == parentId);
+    }
+
+    public Flag? Read(string key)
+    {
+        return
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .FirstOrDefault(
+                    flag =>
+                        flag.Key == key);
     }
 
     public IQueryable<Flag> ReadAll(IEnumerable<string> keys)

@@ -45,14 +45,14 @@ internal class FlagManager : IFlagManager
         return _flagQueryStorage.Read(id, deleted);
     }
 
-    public Flag? Read(string key)
-    {
-        return _flagQueryStorage.Read(key);
-    }
-
     public Flag? Read(string name, Guid? parentId)
     {
         return _flagQueryStorage.Read(name, parentId);
+    }
+
+    public Flag? Read(string key)
+    {
+        return _flagQueryStorage.Read(key);
     }
 
     public IPagedList<Flag> GetAllDeleted(int pageNumber, int pageSize)

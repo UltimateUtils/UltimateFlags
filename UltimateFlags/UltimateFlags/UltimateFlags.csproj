@@ -9,7 +9,7 @@
         <Authors>Soonil Hong</Authors>
         <Company>MySmallMapleTree</Company>
         <PackageDescription>Ultimate FeatureFlags</PackageDescription>
-        <RepositoryUrl>https://github.com/UltimateUtils/UltimateUtils</RepositoryUrl>
+        <RepositoryUrl>https://github.com/UltimateUtils/UltimateFlags</RepositoryUrl>
         <PackageTags>featureflag featuretoggle flag toggle</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>

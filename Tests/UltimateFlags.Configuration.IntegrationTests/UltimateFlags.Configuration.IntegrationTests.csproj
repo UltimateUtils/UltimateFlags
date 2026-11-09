@@ -9,6 +9,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\UltimateFlags\UltimateFlags.Configuration\UltimateFlags.Configuration.csproj"/>
+        <ProjectReference Include="..\TestsBase\TestsBase.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.4"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.14"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0"/>
@@ -25,13 +30,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\UltimateFlags\UltimateFlags.Configuration\UltimateFlags.Configuration.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="appsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

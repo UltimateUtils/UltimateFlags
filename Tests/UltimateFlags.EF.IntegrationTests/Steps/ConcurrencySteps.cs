@@ -3,12 +3,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Reqnroll;
+using TestsBase.Utils;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Config;
 using UltimateFlags.EF.IntegrationTests.Db;
-using UltimateFlags.EF.IntegrationTests.Utils;
 
 namespace UltimateFlags.EF.IntegrationTests.Steps;
 

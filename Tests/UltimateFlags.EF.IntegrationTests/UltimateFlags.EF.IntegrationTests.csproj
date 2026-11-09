@@ -20,6 +20,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\UltimateFlags\UltimateFlags.EF\UltimateFlags.EF.csproj"/>
+        <ProjectReference Include="..\TestsBase\TestsBase.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

@@ -189,7 +189,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", concurrencyToken),
                             string.Format("{0}", createdAt),
                             string.Format("{0}", updatedAt),
-                            "<null>"});
+                            string.Format("{0}", deletedAt)});
 #line 6
     await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table1, "Then ");
 #line hidden

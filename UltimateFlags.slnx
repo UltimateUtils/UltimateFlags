@@ -4,6 +4,7 @@
     <Project Path="Examples/UltimateFlags.EF.Api/UltimateFlags.EF.Api.csproj" />
   </Folder>
   <Folder Name="/Tests/">
+    <Project Path="Tests/TestsBase/TestsBase.csproj" />
     <Project Path="Tests/UltimateFlags.Configuration.IntegrationTests/UltimateFlags.Configuration.IntegrationTests.csproj" />
     <Project Path="Tests/UltimateFlags.Configuration.UnitTests/UltimateFlags.Configuration.UnitTests.csproj" />
     <Project Path="Tests/UltimateFlags.EF.IntegrationTests/UltimateFlags.EF.IntegrationTests.csproj" />

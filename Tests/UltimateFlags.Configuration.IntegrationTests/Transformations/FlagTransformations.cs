@@ -7,6 +7,18 @@ namespace UltimateFlags.Configuration.IntegrationTests.Transformations;
 public class FlagTransformations
 {
     [StepArgumentTransformation]
+    public static Guid? TransformNullableGuid(string value)
+    {
+        if (value.IsNullOrWhiteSpace() || value == "<null>")
+            return null;
+
+        if (Guid.TryParse(value, out Guid ret))
+            return ret;
+
+        throw new ArgumentException($"Invalid Guid format, {value}");
+    }
+
+    [StepArgumentTransformation]
     public IEnumerable<Guid?> TransformTableToGuidList(DataTable dataTable)
     {
         return

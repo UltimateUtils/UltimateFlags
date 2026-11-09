@@ -4,8 +4,8 @@ Feature: Get Flag feature
 Scenario Outline: 1. Get Flag by Id
     When retrieve a flag by <Id>
     Then the following flag is returned correctly
-        | Id   | ParentId   | IsOn   | Name   | Key   | Description   | ConcurrencyToken   | CreatedAt   | UpdatedAt   | DeletedAt |
-        | <Id> | <ParentId> | <IsOn> | <Name> | <Key> | <Description> | <ConcurrencyToken> | <CreatedAt> | <UpdatedAt> | <null>    |
+        | Id   | ParentId   | IsOn   | Name   | Key   | Description   | ConcurrencyToken   | CreatedAt   | UpdatedAt   | DeletedAt   |
+        | <Id> | <ParentId> | <IsOn> | <Name> | <Key> | <Description> | <ConcurrencyToken> | <CreatedAt> | <UpdatedAt> | <DeletedAt> |
 
 Examples:
     | Id                                   | ParentId                             | IsOn | Name       | Key                                    | Description   | ConcurrencyToken                     | CreatedAt                   | UpdatedAt                   | DeletedAt |

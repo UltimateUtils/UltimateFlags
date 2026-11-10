@@ -128,7 +128,12 @@ internal class FlagCommandService : IFlagCommandService
         using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
         IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
 
-        throw new NotImplementedException();
+        IEnumerable<Flag> restoredEntities = flagManager.Restore(id, concurrencyToken);
+
+        return
+            flagManager.SaveChanges() > 0
+                ? restoredEntities.ToContracts()
+                : throw new FlagRestorationFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Restore)}(id)", };
     }
 
     public void Enable(Guid id)

@@ -1,4 +1,4 @@
-namespace TestsBase.Utils;
+namespace TestsBase.Exceptions;
 
 public class NoException : Exception
 {

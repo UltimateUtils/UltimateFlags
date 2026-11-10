@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Reqnroll;
+using TestsBase.Exceptions;
 using TestsBase.Utils;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;

@@ -113,11 +113,9 @@ public class FlagQueryStorage : IFlagQueryStorage
         return
             _flagsComplex
                 .All
-                .Where(
-                    flag =>
-                        (isOn == null || flag.IsOn == isOn)
-                        && (searchString.IsNullOrEmpty()
-                            || flag.Name.Contains(searchString)))
+                .Where(f => !f.DeletedAt.HasValue)
+                .Where(f => isOn == null || f.IsOn == isOn)
+                .Where(f => searchString.IsNullOrEmpty() || f.Name.Contains(searchString))
                 .OrderBy(flag => flag.Key)
                 .Paginate(pageNumber, pageSize);
     }

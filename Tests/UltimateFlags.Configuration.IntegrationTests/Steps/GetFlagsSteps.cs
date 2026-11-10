@@ -54,6 +54,14 @@ public class GetFlagsSteps
 
     #region When
 
+    [When("retrieve all flags")]
+    public void RetrieveAllFlags()
+    {
+        FlagResponse[] actualFlags = [.. _flagQueryService.List(pageSize: int.MaxValue)];
+
+        _scenarioContext.Set(actualFlags, ContextKeys.AllFlagsKey);
+    }
+
     [When("retrieve a flag by {Guid}")]
     public void RetrieveFlagById(Guid id)
     {
@@ -90,6 +98,15 @@ public class GetFlagsSteps
 
     #region Then
 
+    [Then("all the following flags are returned correctly")]
+    public void AllFlagsAreReturnedCorrectly(DataTable table)
+    {
+        IEnumerable<FlagResponse> expectedFlags = table.CreateSet<FlagResponse>();
+        FlagResponse[] actualFlags = _scenarioContext.Get<FlagResponse[]>(ContextKeys.AllFlagsKey);
+
+        Assert.That(actualFlags, Is.EquivalentTo(expectedFlags).Using(_withOutConcurrencyToken()));
+    }
+
     [Then("the following flag is returned correctly")]
     public void FollowingFlagIsReturnedCorrectly(DataTable table)
     {
@@ -105,21 +122,6 @@ public class GetFlagsSteps
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual, Is.EqualTo(expectedFlag).Using<FlagResponse>(_withOutConcurrencyToken()));
         }
-    }
-
-    private static Func<FlagResponse, FlagResponse, bool> _withOutConcurrencyToken()
-    {
-        return
-            (actual, expected) =>
-                actual.Id == expected.Id
-                && actual.ParentId == expected.ParentId
-                && actual.IsOn == expected.IsOn
-                && actual.Name == expected.Name
-                && actual.Key == expected.Key
-                && actual.Description == expected.Description
-                && actual.CreatedAt == expected.CreatedAt
-                && actual.UpdatedAt == expected.UpdatedAt
-                && actual.DeletedAt == expected.DeletedAt;
     }
 
     [Then("null is returned")]
@@ -138,4 +140,19 @@ public class GetFlagsSteps
     }
 
     #endregion Then
+
+    private static Func<FlagResponse, FlagResponse, bool> _withOutConcurrencyToken()
+    {
+        return
+            (actual, expected) =>
+                actual.Id == expected.Id
+                && actual.ParentId == expected.ParentId
+                && actual.IsOn == expected.IsOn
+                && actual.Name == expected.Name
+                && actual.Key == expected.Key
+                && actual.Description == expected.Description
+                && actual.CreatedAt == expected.CreatedAt
+                && actual.UpdatedAt == expected.UpdatedAt
+                && actual.DeletedAt == expected.DeletedAt;
+    }
 }

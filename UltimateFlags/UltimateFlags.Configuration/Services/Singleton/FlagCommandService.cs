@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
-using UltimateFlags.Configuration.Managers;
 
 namespace UltimateFlags.Configuration.Services.Singleton;
 
@@ -11,14 +10,9 @@ internal class FlagCommandService : IFlagCommandService
 {
     private readonly ILogger<FlagCommandService> _logger;
 
-    private readonly IServiceScopeFactory _scopeFactory;
-
-    public FlagCommandService(
-        ILogger<FlagCommandService> logger,
-        IServiceScopeFactory scopeFactory)
+    public FlagCommandService(ILogger<FlagCommandService> logger)
     {
         _logger = logger;
-        _scopeFactory = scopeFactory;
     }
 
     public FlagResponse Create(FlagCreationRequest creationRequest)

@@ -1,6 +1,4 @@
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.Managers;
 
@@ -12,16 +10,12 @@ internal class FlagService : IFlagService
 
     private readonly IFlagManager _flagManager;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
     public FlagService(
         ILogger<FlagService> logger,
-        IFlagManager flagManager,
-        IOptions<UltimateFlagConfiguration> options)
+        IFlagManager flagManager)
     {
         _logger = logger;
         _flagManager = flagManager;
-        _ultimateFlagConfiguration = options.Value;
     }
 
     public bool IsOn(string key)

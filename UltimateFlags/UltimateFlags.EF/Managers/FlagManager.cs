@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
@@ -21,18 +19,14 @@ internal class FlagManager : IFlagManager
 
     private readonly IFlagCommandStorage _flagCommandStorage;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
     public FlagManager(
         ILogger<FlagManager> logger,
         IFlagQueryStorage flagQueryStorage,
-        IFlagCommandStorage flagCommandStorage,
-        IOptions<UltimateFlagConfiguration> options)
+        IFlagCommandStorage flagCommandStorage)
     {
         _logger = logger;
         _flagQueryStorage = flagQueryStorage;
         _flagCommandStorage = flagCommandStorage;
-        _ultimateFlagConfiguration = options.Value;
     }
 
     public Flag Create(Flag entity)

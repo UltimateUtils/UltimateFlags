@@ -14,15 +14,12 @@ public class FlagCommandStorage : IFlagCommandStorage
 
     private readonly FlagDbContext _flagDbContext;
 
-    private readonly IQueryable<Flag> _flags;
-
     public FlagCommandStorage(
         ILogger<FlagCommandStorage> logger,
         FlagDbContext flagDbContext)
     {
         _logger = logger;
         _flagDbContext = flagDbContext;
-        _flags = flagDbContext.Flags;
     }
 
     public Flag? Get(Guid id, bool? deleted = false, bool includeParent = false)

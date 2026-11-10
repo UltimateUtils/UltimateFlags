@@ -1,7 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.Managers;
 
@@ -13,16 +11,12 @@ internal class FlagService : IFlagService
 
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
     public FlagService(
         ILogger<FlagService> logger,
-        IServiceScopeFactory serviceScopeFactory,
-        IOptions<UltimateFlagConfiguration> options)
+        IServiceScopeFactory serviceScopeFactory)
     {
         _logger = logger;
         _serviceScopeFactory = serviceScopeFactory;
-        _ultimateFlagConfiguration = options.Value;
     }
 
     public bool IsOn(string key)

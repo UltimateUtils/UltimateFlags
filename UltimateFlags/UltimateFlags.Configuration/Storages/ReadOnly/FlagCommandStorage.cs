@@ -2,7 +2,6 @@ using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Storages;
-using UltimateFlags.Configuration.Config;
 
 namespace UltimateFlags.Configuration.Storages.ReadOnly;
 
@@ -10,14 +9,9 @@ public class FlagCommandStorage : IFlagCommandStorage
 {
     private readonly ILogger<FlagCommandStorage> _logger;
 
-    private readonly FlagsComplex _flagsComplex;
-
-    public FlagCommandStorage(
-        ILogger<FlagCommandStorage> logger,
-        FlagsComplex flagsComplex)
+    public FlagCommandStorage(ILogger<FlagCommandStorage> logger)
     {
         _logger = logger;
-        _flagsComplex = flagsComplex;
     }
 
     public Flag? Get(Guid id, bool? deleted, bool includeParent = false)

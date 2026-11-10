@@ -14,10 +14,6 @@ public class FlagQueryStorage : IFlagQueryStorage
 {
     private readonly ILogger<FlagQueryStorage> _logger;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
-    private readonly Flag[] _flags;
-
     private readonly FlagsComplex _flagsComplex;
 
     public FlagQueryStorage(
@@ -25,8 +21,6 @@ public class FlagQueryStorage : IFlagQueryStorage
         IOptionsSnapshot<UltimateFlagConfiguration> optionsSnapshot)
     {
         _logger = logger;
-        _ultimateFlagConfiguration = optionsSnapshot.Value;
-        _flags = optionsSnapshot.Value.Flags?.ToArray() ?? [];
         _flagsComplex = optionsSnapshot.Value.Flags.GetFlagsComplex();
     }
 

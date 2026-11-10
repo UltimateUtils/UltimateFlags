@@ -1,8 +1,6 @@
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
@@ -19,16 +17,12 @@ internal class FlagCommandService : IFlagCommandService
 
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    private readonly UltimateFlagConfiguration _ultimateFlagConfiguration;
-
     public FlagCommandService(
         ILogger<FlagCommandService> logger,
-        IServiceScopeFactory serviceScopeFactory,
-        IOptions<UltimateFlagConfiguration> options)
+        IServiceScopeFactory serviceScopeFactory)
     {
         _logger = logger;
         _serviceScopeFactory = serviceScopeFactory;
-        _ultimateFlagConfiguration = options.Value;
     }
 
     public FlagResponse Create(FlagCreationRequest creationRequest)

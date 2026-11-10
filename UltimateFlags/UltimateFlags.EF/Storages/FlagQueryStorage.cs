@@ -15,15 +15,12 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     private readonly FlagDbContext _flagDbContext;
 
-    private readonly IQueryable<Flag> _flags;
-
     public FlagQueryStorage(
         ILogger<FlagQueryStorage> logger,
         FlagDbContext flagDbContext)
     {
         _logger = logger;
         _flagDbContext = flagDbContext;
-        _flags = flagDbContext.Flags.AsNoTracking();
     }
 
     public Flag? Read(Guid id, bool? deleted = false, bool includeParent = false)

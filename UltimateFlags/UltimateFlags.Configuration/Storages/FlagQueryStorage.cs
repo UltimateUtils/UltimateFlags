@@ -80,7 +80,21 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted)
     {
-        throw new NotImplementedException();
+        // todo - check algorithm
+        // todo - improve performance - by adding ByParent to FlagsComplex
+
+        return _getChildren().AsQueryable();
+
+        IEnumerable<Flag> _getChildren()
+        {
+            foreach (Flag flag in _flagsComplex.All)
+            {
+                if ((deleted is null || deleted == flag.DeletedAt.HasValue) && flag.ParentId == parentId)
+                {
+                    yield return flag;
+                }
+            }
+        }
     }
 
     public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive = null, DateTime? toInclusive = null)
@@ -122,11 +136,27 @@ public class FlagQueryStorage : IFlagQueryStorage
 
     public bool Exists(Guid id, bool? deleted)
     {
-        throw new NotImplementedException();
+        // todo - check algorithm
+
+        Flag? found = _flagsComplex.ById.GetValueOrDefault(id);
+
+        if (found is null)
+            return false;
+
+        return deleted is null
+            || deleted == found.DeletedAt.HasValue;
     }
 
     public bool Exists(string name, Guid? parentId, bool? deleted)
     {
-        throw new NotImplementedException();
+        // todo - check algorithm
+
+        Flag? found = _flagsComplex.ByName.GetValueOrDefault((name, parentId));
+
+        if (found is null)
+            return false;
+
+        return deleted is null
+            || deleted == found.DeletedAt.HasValue;
     }
 }

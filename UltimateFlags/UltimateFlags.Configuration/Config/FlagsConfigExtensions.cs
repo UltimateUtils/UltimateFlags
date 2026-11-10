@@ -18,19 +18,10 @@ internal static class FlagsConfigExtensions
                 };
         }
 
-        (Flag[] allFlags, Dictionary<string, Flag> byKey, Dictionary<Guid, Flag> byId, Dictionary<(string, Guid?), Flag> byName) = _GetFlagsComplex(flags);
-
-        return
-            new FlagsComplex
-            {
-                All = allFlags,
-                ByKey = byKey,
-                ById = byId,
-                ByName = byName,
-            };
+        return _GetFlagsComplex(flags);
     }
 
-    private static (Flag[] allFlags, Dictionary<string, Flag> byKey, Dictionary<Guid, Flag> byId, Dictionary<(string, Guid?), Flag> byName) _GetFlagsComplex(IEnumerable<Flag> flags)
+    private static FlagsComplex _GetFlagsComplex(IEnumerable<Flag> flags)
     {
         Flag[] allFlags = [.. flags];
 
@@ -49,6 +40,13 @@ internal static class FlagsConfigExtensions
             }
         }
 
-        return (allFlags, byKey, byId, byName);
+        return
+            new FlagsComplex
+            {
+                All = allFlags,
+                ByKey = byKey,
+                ById = byId,
+                ByName = byName,
+            };
     }
 }

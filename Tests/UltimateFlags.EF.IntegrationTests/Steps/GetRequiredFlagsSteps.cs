@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Reqnroll;
 using TestsBase.Utils;
 using UltimateFlags.Abstraction.Contracts;
+using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Config;
 using UltimateFlags.EF.IntegrationTests.Db;
@@ -103,4 +104,16 @@ public class GetRequiredFlagsSteps
     }
 
     #endregion When
+
+    #region Then
+
+    [Then("FlagNotFound exception is thrown")]
+    public void FlagNotFoundExceptionIsThrown()
+    {
+        Exception x = _scenarioContext.Get<Exception>(ContextKeys.ThrownExceptionKey);
+
+        Assert.That(x, Is.TypeOf<FlagNotFound>());
+    }
+
+    #endregion Then
 }

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using Reqnroll;
 using TestsBase.Utils;
 using UltimateFlags.Abstraction.Contracts;
-using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.EF.IntegrationTests.Config;
 using UltimateFlags.EF.IntegrationTests.Db;
@@ -130,14 +129,6 @@ public class GetFlagsSteps
         FlagResponse? actual = _scenarioContext.Get<FlagResponse?>(ContextKeys.RetrievedFlagKey);
 
         Assert.That(actual, Is.Null);
-    }
-
-    [Then("FlagNotFound exception is thrown")]
-    public void ThenFlagNotFoundExceptionIsThrown()
-    {
-        Exception x = _scenarioContext.Get<Exception>(ContextKeys.ThrownExceptionKey);
-
-        Assert.That(x, Is.TypeOf<FlagNotFound>());
     }
 
     [Then("the flags, {string}, are returned")]

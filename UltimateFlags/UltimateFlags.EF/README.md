@@ -8,43 +8,81 @@
 This package implements feature flags using Entity Framework Core.
 
 
-## Basic Concepts
+## Core Concepts
 
-UltimateFlags supports a hierarchy between flags.
+UltimateFlags supports hierarchies between flags.
 You can use this to define relationships between features and manage many features efficiently.
 It is especially powerful in multi-tenant environments.
 Because of this, there are a few special concepts you need to understand.
 
 1. `Parent`
 
-   Every flag has its own parent flag.
-   They are linked through `ParentId`.
-   A top-level flag has `null` as its `ParentId`.
+    Every flag has its own parent flag.
+    They are linked through `ParentId`.
+    A top-level flag has `null` as its `ParentId`.
 
 
 2. The difference between `Name` and `Key`
 
-   Each flag has its own `name`.
-   Depending on how you design it, this can be the name of a feature or the name of a customer.
-   Joining all names along the flag hierarchy forms the `Key`. Each name is joined with a '.' (dot).
-   The `Key` is the decisive criterion for whether the feature is on or off.
-   Every flag has a unique `Key`.
-   Once a flag is created, its Name and Key cannot be changed.
+    Each flag has its own `Name`.
+    Depending on how you design it, this could be the name of a feature or the name of a customer.
+    Joining all the names (separated by dot, '.', character) along the flag hierarchy forms the `Key`.
+    The `Key` is the definitive criterion for determining whether a feature is on or off.
+    Every flag has a unique `Key`.
+    Once a flag is created, its `Name` and `Key` cannot be changed.
 
 
 3. Soft-delete
 
-   UltimateFlags supports soft-delete.
-   This is implemented through the `DeletedAt` property.
+    UltimateFlags supports soft-delete.
+    This is implemented through the `DeletedAt` property.
 
-   `DateTime? DeletedAt { get; set; }`
+    `DateTime? DeletedAt { get; set; }`
 
 
 4. Cascade Delete / Restore
 
-   Because UltimateFlags supports a hierarchy, deleting a flag means deleting that flag and all of its descendant flags.
-   Likewise, restoring a flag means restoring that flag and all of its ancestor flags.
+    Because UltimateFlags supports hierarchies, deleting a flag means deleting that flag and all of its descendant flags.
+    Likewise, restoring a flag means restoring that flag and all of its ancestor flags.
 
+
+5. IsOn/IsOff by Key
+
+    Every flag has its own on/off state.
+    However, to check whether a feature is on or off, you need to look at the flag's hierarchy.
+
+    Suppose you have the following flags:
+
+    --------------         -----------         ------------         --------------
+    | MyBuilding |  <----  | Floor23 |  <----  | Room2301 |  <----  | Table2301a |
+    | ON         |         | OFF     |         | ON       |         | ON         |
+    --------------         -----------         ------------         --------------
+
+    Room2301 and Table2301a are on, but because their parent Floor23 is off, all of the following method calls return false.
+
+```csharp
+IsOn("MyBuilding.Floor23");
+IsOn("MyBuilding.Floor23.Room2301");
+IsOn("MyBuilding.Floor23.Room2301.Table2301a");
+```
+
+    However, the following method call returns true.
+
+```csharp
+IsOn("MyBuilding");
+```
+
+Note:
+
+Keep in mind that "MyBuilding.Floor23" and "Floor23" are different keys.
+They refer to different flag objects.
+
+
+6. IsOn by "wrong key"
+
+    If a key that doesn't exist is given, IsOn() returns false.
+    This is a natural decision, since it asks whether the flag is on.
+    For reference, there is no IsOff() method, but you can use the Exists() method to check whether a flag with the given key exists.
 
 
 ## Usage
@@ -58,18 +96,18 @@ IFlagCommandService
 
 1. `IFlagService`
 
-   The most commonly used service. It has only one method, which checks whether the flag is on using its `key`.
-   `bool IsOn(string key)`
+    is the most commonly used service. It has only one method, which uses a `key` to check whether the flag is on.
+    `bool IsOn(string key)`
 
 
 2. `IFlagQueryService`
 
-   Provides various methods for reading flag values.
+    Provides various methods for inspecting flag values.
 
 
 3. `IFlagCommandService`
 
-   Provides various methods for changing flag values.
+    Provides various methods for changing flag values.
 
 
 
@@ -103,13 +141,13 @@ builder.Services.AddSingletonUltimateFlags<MyFlagDbContext>(
     options => options.UseNpgsql("name=ConnectionStrings:MyFlagsDb"));
 ```
 
-1. AddUltimateFlags<TContext>()
+1. AddUltimateFlags<TDbContext>()
 
     The most common way to register.
     All services are registered as `scoped`.
 
 
-2. AddSingletonUltimateFlags<TContext>()
+2. AddSingletonUltimateFlags<TDbContext>()
 
     All services are registered as `singleton`.
     If you need to use the UltimateFlags services in a singleton context, you must use this method.

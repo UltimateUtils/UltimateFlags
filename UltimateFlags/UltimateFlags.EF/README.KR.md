@@ -17,34 +17,72 @@ Multi-Tenant 환경에서 특히 힘을 발휘할 수 있습니다.
 
 1. `Parent`
 
-   모든 flag은 자신의 부모 flag을 갖습니다.
-   `ParentId`를 통해 연결됩니다.
-   최상위 flag이라면 `ParentId` 값으로 `null`을 갖습니다.
+    모든 flag은 자신의 부모 flag을 갖습니다.
+    `ParentId`를 통해 연결됩니다.
+    최상위 flag이라면 `ParentId` 값으로 `null`을 갖습니다.
 
 
 2. `Name`과 `Key`의 차이
 
-   각각의 flag은 자신의 `name`을 갖습니다.
-   이는 정하기에 따라, feature의 이름이 될 수도 있고, 고객의 이름이 될 수도 있습니다.
-   Flag들의 hierarchy를 따라 모든 이름을 연결하면 `Key`가 됩니다. 각 name은 '.'(dot)으로 연결합니다.
-   `Key`는 해당 feature가 켜져 있는지 꺼져 있는지를 정할 결정적인 기준이 됩니다.
-   모든 flag은 고유한 `Key` 값을 갖게 됩니다.
-   일단 flag을 생성한 후에는 Name과 Key 값을 변경할 수 없습니다.
+    각각의 flag은 자신의 `Name`을 갖습니다.
+    이는 정하기에 따라, feature의 이름이 될 수도 있고, 고객의 이름이 될 수도 있습니다.
+    Flag들의 hierarchy를 따라 모든 `Name`들을 dot(.) 문자로 연결하면 `Key`가 됩니다.
+    `Key`는 해당 feature가 켜져 있는지 꺼져 있는지를 정할 결정적인 기준이 됩니다.
+    모든 flag은 고유한 `Key` 값을 갖게 됩니다.
+    일단 flag을 생성한 후에는 `Name`과 `Key` 값을 변경할 수 없습니다.
 
 
 3. Soft-delete
 
-   UltimateFlags는 soft-delete을 지원합니다.
-   이는 DeletedAt 프로퍼티를 통하여 구현됩니다.
+    UltimateFlags는 soft-delete을 지원합니다.
+    이는 DeletedAt 프로퍼티를 통하여 구현됩니다.
 
-   `DateTime? DeletedAt { get; set; }`
+    `DateTime? DeletedAt { get; set; }`
 
 
 4. Cascade Delete / Restore
 
-   Hierarchy를 지원하는 UltimateFlags의 특성상, 특정 flag의 삭제는 해당 flag과 그 모든 자손 flag들의 삭제를 의미합니다.
-   마찬가지로, 특정 flag의 restore는 해당 flag과 그 모든 조상 flag들의 restore를 의미합니다.
+    Hierarchy를 지원하는 UltimateFlags의 특성상, 특정 flag의 삭제는 해당 flag과 그 모든 자손 flag들의 삭제를 의미합니다.
+    마찬가지로, 특정 flag의 restore는 해당 flag과 그 모든 조상 flag들의 restore를 의미합니다.
 
+
+5. IsOn/IsOff by Key
+
+    모든 flag은 각자의 on/off 상태를 갖습니다.
+    하지만 어떤 feature가 on 상태인지 off 상태인지 체크하려면 해당 flag의 hierarchy를 살펴봐야 합니다.
+
+    다음과 같은 flag들이 있다고 합시다.
+
+    --------------         -----------         ------------         --------------
+    | MyBuilding |  <----  | Floor23 |  <----  | Room2301 |  <----  | Table2301a |
+    | ON         |         | OFF     |         | ON       |         | ON         |
+    --------------         -----------         ------------         --------------
+
+    Room2301과 Table2301a는 on 상태이지만, Parent인 Floor23이 off 상태이므로 다음 메소드 호출은 모두 false를 반환합니다.
+
+```csharp
+IsOn("MyBuilding.Floor23");
+IsOn("MyBuilding.Floor23.Room2301");
+IsOn("MyBuilding.Floor23.Room2301.Table2301a");
+```
+
+    반면 다음 메소드 호출은 true를 반환합니다.
+
+```csharp
+IsOn("MyBuilding");
+```
+
+Note:
+
+"MyBuilding.Floor23"과 "Floor23"은 서로 다른 key임을 명심하세요.
+서로 다른 flag 객체를 지칭하는 key들입니다.
+
+
+6. IsOn by "wrong key"
+
+    존재하지 않는 key가 주어지면 IsOn()은 false를 반환합니다.
+    켜져 있는지 묻는 것이기에 자연스러운 결정입니다.
+    참고로, IsOff() 메소드는 없지만 Exists() 메소드를 통해 해당 key를 가지고 있는 flag이 존재하는지 확인해 볼 수 있습니다.
 
 
 ## 사용 방법
@@ -58,18 +96,18 @@ IFlagCommandService
 
 1. `IFlagService`
 
-   가장 많이 사용될 서비스입니다. `key`를 이용하여 해당 flag들이 켜져 있는지 확인하는 단 하나의 메소드만을 가지고 있습니다.
-   `bool IsOn(string key)`
+    가장 많이 사용될 서비스입니다. `key`를 이용하여 해당 flag들이 켜져 있는지 확인하는 단 하나의 메소드만을 가지고 있습니다.
+    `bool IsOn(string key)`
 
 
 2. `IFlagQueryService`
 
-   Flag의 값들을 확인하는 여러 method들이 있습니다.
+    Flag의 값들을 확인하는 여러 method들이 있습니다.
 
 
 3. `IFlagCommandService`
 
-   Flag의 값들을 변경하는 여러 method들이 있습니다.
+    Flag의 값들을 변경하는 여러 method들이 있습니다.
 
 
 

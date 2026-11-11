@@ -16,15 +16,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\UltimateFlags\UltimateFlags.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath=""/>
+        <None Include="README.KR.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
     <ItemGroup>
         <None Include="LICENSE" Pack="true" PackagePath=""/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\UltimateFlags\UltimateFlags.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

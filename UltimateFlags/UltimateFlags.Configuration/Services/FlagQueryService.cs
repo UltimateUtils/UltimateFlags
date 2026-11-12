@@ -109,12 +109,12 @@ internal class FlagQueryService : IFlagQueryService
 
     public Task<FlagResponse?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetAsync)}(id)", };
     }
 
     public Task<FlagResponse> GetRequiredAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetRequiredAsync)}(id)", };
     }
 
     public Task<FlagResponse?> GetAsync(
@@ -122,7 +122,7 @@ internal class FlagQueryService : IFlagQueryService
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetAsync)}(name, parentId)", };
     }
 
     public Task<FlagResponse> GetRequiredAsync(
@@ -130,17 +130,17 @@ internal class FlagQueryService : IFlagQueryService
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetRequiredAsync)}(name, parentId)", };
     }
 
     public Task<FlagResponse?> GetAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetAsync)}(key)", };
     }
 
     public Task<FlagResponse> GetRequiredAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetRequiredAsync)}(key)", };
     }
 
     public Task<IPagedList<FlagResponse>> GetAllDeletedAsync(
@@ -148,7 +148,7 @@ internal class FlagQueryService : IFlagQueryService
         int pageSize = 20,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(GetAllDeletedAsync)}(pageNumber, pageSize)", };
     }
 
     public Task<IPagedList<FlagResponse>> ListAsync(
@@ -158,7 +158,7 @@ internal class FlagQueryService : IFlagQueryService
         int pageSize = 20,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagQueryService)}.{nameof(ListAsync)}(searchString, isOn, pageNumber, pageSize)", };
     }
 
     private static bool _IsValidPaginationInfo(int pageNumber, int pageSize)

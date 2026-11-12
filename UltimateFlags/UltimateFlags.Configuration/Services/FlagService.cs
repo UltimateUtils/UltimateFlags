@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Services;
 using UltimateFlags.Configuration.Managers;
 
@@ -25,6 +26,6 @@ internal class FlagService : IFlagService
 
     public Task<bool> IsOnAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagService)}.{nameof(IsOnAsync)}(key)", };
     }
 }

@@ -71,7 +71,7 @@ internal class FlagCommandService : IFlagCommandService
 
     public Task<FlagResponse> CreateAsync(FlagCreationRequest creationRequest, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(CreateAsync)}(creationRequest)", };
     }
 
     public Task<FlagResponse> UpdateAsync(
@@ -79,7 +79,7 @@ internal class FlagCommandService : IFlagCommandService
         FlagUpdateRequest updateRequest,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(UpdateAsync)}(id, updateRequest)", };
     }
 
     public Task<IEnumerable<FlagResponse>> DeleteAsync(
@@ -87,7 +87,7 @@ internal class FlagCommandService : IFlagCommandService
         Guid? concurrencyToken = null,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(DeleteAsync)}(id, concurrencyToken)", };
     }
 
     public Task<IEnumerable<FlagResponse>> PurgeAsync(
@@ -95,7 +95,7 @@ internal class FlagCommandService : IFlagCommandService
         Guid? concurrencyToken = null,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(PurgeAsync)}(id, concurrencyToken)", };
     }
 
     public Task<IEnumerable<FlagResponse>> RestoreAsync(
@@ -103,17 +103,17 @@ internal class FlagCommandService : IFlagCommandService
         Guid? concurrencyToken = null,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(RestoreAsync)}(id, concurrencyToken)", };
     }
 
     public Task EnableAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(EnableAsync)}(id)", };
     }
 
     public Task EnableAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(EnableAsync)}(key)", };
     }
 
     public Task EnableAsync(
@@ -121,17 +121,17 @@ internal class FlagCommandService : IFlagCommandService
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(EnableAsync)}(name, parentId)", };
     }
 
     public Task DisableAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(DisableAsync)}(id)", };
     }
 
     public Task DisableAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(DisableAsync)}(key)", };
     }
 
     public Task DisableAsync(
@@ -139,6 +139,6 @@ internal class FlagCommandService : IFlagCommandService
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(DisableAsync)}(name, parentId)", };
     }
 }

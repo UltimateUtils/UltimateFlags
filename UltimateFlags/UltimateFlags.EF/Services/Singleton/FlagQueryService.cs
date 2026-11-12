@@ -132,58 +132,123 @@ internal class FlagQueryService : IFlagQueryService
         return foundEntities.Convert(entity => entity.ToContract());
     }
 
-    public Task<FlagResponse?> GetAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<FlagResponse?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        return (await flagManager.ReadAsync(id, cancellationToken: cancellationToken))?.ToContract();
     }
 
-    public Task<FlagResponse> GetRequiredAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<FlagResponse> GetRequiredAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        Flag foundEntity =
+            await flagManager.ReadAsync(id, cancellationToken: cancellationToken)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequiredAsync)}(id)",
+            };
+
+        return foundEntity.ToContract();
     }
 
-    public Task<FlagResponse?> GetAsync(
+    public async Task<FlagResponse?> GetAsync(
         string name,
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        return (await flagManager.ReadAsync(name, parentId, cancellationToken))?.ToContract();
     }
 
-    public Task<FlagResponse> GetRequiredAsync(
+    public async Task<FlagResponse> GetRequiredAsync(
         string name,
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        Flag foundEntity =
+            await flagManager.ReadAsync(name, parentId, cancellationToken)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequiredAsync)}(name, parentId)",
+            };
+
+        return foundEntity.ToContract();
     }
 
-    public Task<FlagResponse?> GetAsync(string key, CancellationToken cancellationToken = default)
+    public async Task<FlagResponse?> GetAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        return (await flagManager.ReadAsync(key, cancellationToken))?.ToContract();
     }
 
-    public Task<FlagResponse> GetRequiredAsync(string key, CancellationToken cancellationToken = default)
+    public async Task<FlagResponse> GetRequiredAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        Flag foundEntity =
+            await flagManager.ReadAsync(key, cancellationToken)
+            ?? throw new FlagNotFound
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(GetRequiredAsync)}(key)",
+            };
+
+        return foundEntity.ToContract();
     }
 
-    public Task<IPagedList<FlagResponse>> GetAllDeletedAsync(
+    public async Task<IPagedList<FlagResponse>> GetAllDeletedAsync(
         int pageNumber = 1,
         int pageSize = 20,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        IPagedList<Flag> deletedEntities = await flagManager.GetAllDeletedAsync(pageNumber, pageSize, cancellationToken);
+
+        return deletedEntities.Convert(entity => entity.ToContract());
     }
 
-    public Task<IPagedList<FlagResponse>> ListAsync(
+    public async Task<IPagedList<FlagResponse>> ListAsync(
         string? searchString = null,
         bool? isOn = null,
         int pageNumber = 1,
         int pageSize = 20,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        if (!_IsValidPaginationInfo(pageNumber, pageSize))
+        {
+            throw new InvalidPaginationInfo
+            {
+                Area = $"{nameof(FlagQueryService)}.{nameof(ListAsync)}(rootId, searchString, isOn, pageNumber, pageSize)",
+            };
+        }
+
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagManager flagManager = serviceScope.ServiceProvider.GetRequiredService<IFlagManager>();
+
+        IPagedList<Flag> foundEntities =
+            await
+                flagManager
+                    .ListAsync(
+                        searchString,
+                        isOn,
+                        pageNumber,
+                        pageSize,
+                        cancellationToken);
+
+        return foundEntities.Convert(entity => entity.ToContract());
     }
 
     private static bool _IsValidPaginationInfo(int pageNumber, int pageSize)

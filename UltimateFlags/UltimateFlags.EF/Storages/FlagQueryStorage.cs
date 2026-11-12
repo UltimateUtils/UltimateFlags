@@ -4,6 +4,7 @@ using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.EF.Db;
 using UltimatePagination;
 using UltimatePagination.Abstraction;
+using UltimatePagination.EF;
 using UltimateUtils.Extensions;
 
 namespace UltimateFlags.EF.Storages;
@@ -42,6 +43,17 @@ public class FlagQueryStorage : IFlagQueryStorage
                         .FirstOrDefault(flag => flag.Id == id);
     }
 
+    public Flag? Read(string key)
+    {
+        return
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .FirstOrDefault(
+                    flag =>
+                        flag.Key == key);
+    }
+
     public Flag? Read(string name, Guid? parentId)
     {
         return
@@ -52,17 +64,6 @@ public class FlagQueryStorage : IFlagQueryStorage
                     flag =>
                         flag.Name == name
                         && flag.ParentId == parentId);
-    }
-
-    public Flag? Read(string key)
-    {
-        return
-            _flagDbContext
-                .Flags
-                .AsNoTracking()
-                .FirstOrDefault(
-                    flag =>
-                        flag.Key == key);
     }
 
     public IQueryable<Flag> ReadAll(IEnumerable<string> keys)
@@ -150,48 +151,117 @@ public class FlagQueryStorage : IFlagQueryStorage
                     : flagsQuery.Any(flag => flag.Name == name && flag.ParentId == parentId);
     }
 
-    public Task<Flag?> ReadAsync(Guid id, bool? deleted, bool includeParent = false)
+    public Task<Flag?> ReadAsync(
+        Guid id,
+        bool? deleted,
+        bool includeParent = false,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IQueryable<Flag> flagsQuery =
+            includeParent
+                ? _flagDbContext.Flags.AsNoTracking().Include(flag => flag.Parent)
+                : _flagDbContext.Flags.AsNoTracking();
+
+        return
+            deleted is null
+                ? flagsQuery
+                    .IgnoreQueryFilters()
+                    .FirstOrDefaultAsync(flag => flag.Id == id, cancellationToken)
+                : deleted.Value
+                    ? flagsQuery
+                        .IgnoreQueryFilters()
+                        .FirstOrDefaultAsync(flag => flag.Id == id && flag.DeletedAt.HasValue, cancellationToken)
+                    : flagsQuery
+                        .FirstOrDefaultAsync(flag => flag.Id == id, cancellationToken);
     }
 
-    public Task<Flag?> ReadAsync(string key)
+    public Task<Flag?> ReadAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .FirstOrDefaultAsync(
+                    flag =>
+                        flag.Key == key,
+                    cancellationToken);
     }
 
-    public Task<Flag?> ReadAsync(string name, Guid? parentId)
+    public Task<Flag?> ReadAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .FirstOrDefaultAsync(
+                    flag =>
+                        flag.Name == name
+                        && flag.ParentId == parentId,
+                    cancellationToken);
     }
 
-    public Task<IQueryable<Flag>> ReadAllAsync(IEnumerable<string> keys)
+    public Task<IPagedList<Flag>> ListAsync(
+        string? searchString,
+        bool? isOn,
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .AsNoTracking()
+                .Where(
+                    flag =>
+                        (isOn == null || flag.IsOn == isOn)
+                        && (searchString.IsNullOrEmpty()
+                            || flag.Name.Contains(searchString)))
+                .OrderBy(flag => flag.Key)
+                .PaginateAsync(pageNumber, pageSize, cancellationToken);
     }
 
-    public Task<IQueryable<Flag>> ReadAllAsync(Guid? parentId, bool? deleted)
+    public Task<bool> ExistsAsync(
+        Guid id,
+        bool? deleted,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IQueryable<Flag> flagsQuery =
+            _flagDbContext
+                .Flags
+                .AsNoTracking();
+
+        return
+            deleted is null
+                ? flagsQuery.IgnoreQueryFilters().AnyAsync(flag => flag.Id == id, cancellationToken)
+                : deleted.Value
+                    ? flagsQuery
+                        .IgnoreQueryFilters()
+                        .AnyAsync(flag => flag.Id == id && flag.DeletedAt.HasValue, cancellationToken)
+                    : flagsQuery.AnyAsync(flag => flag.Id == id, cancellationToken);
     }
 
-    public Task<IQueryable<Flag>> ReadAllDeletedAsync(DateTime? fromInclusive = null, DateTime? toInclusive = null)
+    public Task<bool> ExistsAsync(
+        string name,
+        Guid? parentId,
+        bool? deleted,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
-    }
+        IQueryable<Flag> flagsQuery =
+            _flagDbContext
+                .Flags
+                .AsNoTracking();
 
-    public Task<IPagedList<Flag>> ListAsync(string? searchString, bool? isOn, int pageNumber, int pageSize)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> ExistsAsync(Guid id, bool? deleted)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> ExistsAsync(string name, Guid? parentId, bool? deleted)
-    {
-        throw new NotImplementedException();
+        return
+            deleted is null
+                ? flagsQuery.IgnoreQueryFilters().AnyAsync(flag => flag.Name == name && flag.ParentId == parentId, cancellationToken)
+                : deleted.Value
+                    ? flagsQuery
+                        .IgnoreQueryFilters()
+                        .AnyAsync(flag => flag.Name == name && flag.ParentId == parentId && flag.DeletedAt.HasValue, cancellationToken)
+                    : flagsQuery
+                        .AnyAsync(flag => flag.Name == name && flag.ParentId == parentId, cancellationToken);
     }
 }

@@ -146,51 +146,118 @@ internal class FlagCommandService : IFlagCommandService
         _flagManager.Disable(name, parentId);
     }
 
-    public Task<FlagResponse> CreateAsync(FlagCreationRequest creationRequest, CancellationToken cancellationToken = default)
+    public async Task<FlagResponse> CreateAsync(FlagCreationRequest creationRequest, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        _validateFlagName();
+
+        string parentKey = await _getParentKeyAsync(creationRequest.ParentId);
+
+        if (await _flagManager.ExistsAsync(creationRequest.Name, creationRequest.ParentId, deleted: null, cancellationToken))
+        {
+            throw new FlagDuplicateFound { Area = $"{nameof(FlagCommandService)}.{nameof(CreateAsync)}(creationRequest)", };
+        }
+
+        Flag createdEntity = await _flagManager.CreateAsync(creationRequest.ToEntity(parentKey), cancellationToken);
+
+        return await _flagManager.SaveChangesAsync(cancellationToken) > 0
+            ? createdEntity.ToContract()
+            : throw new FlagCreationFailed { Area = $"{nameof(FlagCommandService)}.{nameof(CreateAsync)}(creationRequest)", };
+
+        void _validateFlagName()
+        {
+            string name = creationRequest.Name;
+            if (Regex.IsMatch(name, "[. ]"))
+            {
+                throw new InvalidFlagName("Flag name may not have the following characters: dot(.), space(' ').")
+                {
+                    Area = $"{nameof(FlagCommandService)}.{nameof(CreateAsync)}(creationRequest)",
+                };
+            }
+        }
+
+        async Task<string> _getParentKeyAsync(Guid? parentId)
+        {
+            if (parentId is null)
+            {
+                return string.Empty;
+            }
+
+            // todo - improve - projection
+            Flag? parent = await _flagManager.ReadAsync(parentId.Value, cancellationToken: cancellationToken);
+            if (parent == null)
+            {
+                throw new FlagParentNotFound
+                {
+                    Area = $"{nameof(FlagCommandService)}.{nameof(CreateAsync)}(creationRequest)",
+                };
+            }
+
+            return parent.Key;
+        }
     }
 
-    public Task<FlagResponse> UpdateAsync(
+    public async Task<FlagResponse> UpdateAsync(
         Guid id,
         FlagUpdateRequest updateRequest,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        Flag updatedEntity = await _flagManager.UpdateAsync(id, updateRequest, cancellationToken);
+
+        int saveChanges = await _flagManager.SaveChangesAsync(cancellationToken);
+
+        return
+            saveChanges > 0
+                ? updatedEntity.ToContract()
+                : throw new FlagUpdateFailed { Area = $"{nameof(FlagCommandService)}.{nameof(UpdateAsync)}(id, updateRequest)", };
     }
 
-    public Task<IEnumerable<FlagResponse>> DeleteAsync(
+    public async Task<IEnumerable<FlagResponse>> DeleteAsync(
         Guid id,
         Guid? concurrencyToken = null,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IEnumerable<Flag> deletedEntities = await _flagManager.DeleteAsync(id, concurrencyToken, cancellationToken);
+
+        return
+            await _flagManager.SaveChangesAsync(cancellationToken) > 0
+                ? deletedEntities.ToContracts()
+                : throw new FlagDeletionFailed { Area = $"{nameof(FlagCommandService)}.{nameof(DeleteAsync)}(id, concurrencyToken)", };
     }
 
-    public Task<IEnumerable<FlagResponse>> PurgeAsync(
+    public async Task<IEnumerable<FlagResponse>> PurgeAsync(
         Guid id,
         Guid? concurrencyToken = null,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IEnumerable<Flag> purgedEntities = await _flagManager.PurgeAsync(id, concurrencyToken, cancellationToken);
+
+        return
+            await _flagManager.SaveChangesAsync(cancellationToken) > 0
+                ? purgedEntities.ToContracts()
+                : throw new FlagPurgeFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Purge)}(id, concurrencyToken)", };
     }
 
-    public Task<IEnumerable<FlagResponse>> RestoreAsync(
+    public async Task<IEnumerable<FlagResponse>> RestoreAsync(
         Guid id,
         Guid? concurrencyToken = null,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IEnumerable<Flag> restoredEntities = await _flagManager.RestoreAsync(id, concurrencyToken, cancellationToken);
+
+        return
+            await _flagManager.SaveChangesAsync(cancellationToken) > 0
+                ? restoredEntities.ToContracts()
+                : throw new FlagRestorationFailed { Area = $"{nameof(FlagCommandService)}.{nameof(Restore)}(id)", };
     }
 
     public Task EnableAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _flagManager.EnableAsync(id, cancellationToken);
     }
 
     public Task EnableAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _flagManager.EnableAsync(key, cancellationToken);
     }
 
     public Task EnableAsync(
@@ -198,17 +265,17 @@ internal class FlagCommandService : IFlagCommandService
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _flagManager.EnableAsync(name, parentId, cancellationToken);
     }
 
     public Task DisableAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _flagManager.DisableAsync(id, cancellationToken);
     }
 
     public Task DisableAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _flagManager.DisableAsync(key, cancellationToken);
     }
 
     public Task DisableAsync(
@@ -216,6 +283,6 @@ internal class FlagCommandService : IFlagCommandService
         Guid? parentId,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _flagManager.DisableAsync(name, parentId, cancellationToken);
     }
 }

@@ -27,25 +27,27 @@ internal interface IFlagQueryStorage
 
     public bool Exists(string name, Guid? parentId, bool? deleted = false);
 
-    public Task<Flag?> ReadAsync(Guid id, bool? deleted = false, bool includeParent = false);
+    public Task<Flag?> ReadAsync(
+        Guid id,
+        bool? deleted = false,
+        bool includeParent = false,
+        CancellationToken cancellationToken = default);
 
-    public Task<Flag?> ReadAsync(string key);
+    public Task<Flag?> ReadAsync(string key, CancellationToken cancellationToken = default);
 
-    public Task<Flag?> ReadAsync(string name, Guid? parentId);
-
-    public Task<IQueryable<Flag>> ReadAllAsync(IEnumerable<string> keys);
-
-    public Task<IQueryable<Flag>> ReadAllAsync(Guid? parentId, bool? deleted = false);
-
-    public Task<IQueryable<Flag>> ReadAllDeletedAsync(DateTime? fromInclusive = null, DateTime? toInclusive = null);
+    public Task<Flag?> ReadAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default);
 
     public Task<IPagedList<Flag>> ListAsync(
         string? searchString,
         bool? isOn,
         int pageNumber,
-        int pageSize);
+        int pageSize,
+        CancellationToken cancellationToken = default);
 
-    public Task<bool> ExistsAsync(Guid id, bool? deleted = false);
+    public Task<bool> ExistsAsync(Guid id, bool? deleted = false, CancellationToken cancellationToken = default);
 
-    public Task<bool> ExistsAsync(string name, Guid? parentId, bool? deleted = false);
+    public Task<bool> ExistsAsync(string name, Guid? parentId, bool? deleted = false, CancellationToken cancellationToken = default);
 }

@@ -52,7 +52,7 @@ public class FlagCommandStorage : IFlagCommandStorage
                         && flag.ParentId == parentId);
     }
 
-    public IEnumerable<Flag> GetAll(Guid? parentId, bool? deleted)
+    public IQueryable<Flag> GetAll(Guid? parentId, bool? deleted)
     {
         IQueryable<Flag> flagsQuery = _flagDbContext.Flags;
 
@@ -213,78 +213,151 @@ public class FlagCommandStorage : IFlagCommandStorage
         return _flagDbContext.SaveChanges();
     }
 
-    public Task<Flag?> GetAsync(Guid id, bool? deleted, bool includeParent = false)
+    public Task<Flag?> GetAsync(
+        Guid id,
+        bool? deleted,
+        bool includeParent = false,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IQueryable<Flag> flagsQuery =
+            includeParent
+                ? _flagDbContext.Flags.Include(f => f.Parent)
+                : _flagDbContext.Flags;
+
+        return
+            deleted is null
+                ? flagsQuery.IgnoreQueryFilters().FirstOrDefaultAsync(f => f.Id == id, cancellationToken)
+                : deleted.Value
+                    ? flagsQuery
+                        .IgnoreQueryFilters()
+                        .FirstOrDefaultAsync(
+                            flag =>
+                                flag.Id == id
+                                && flag.DeletedAt.HasValue,
+                            cancellationToken)
+                    : flagsQuery.FirstOrDefaultAsync(flag => flag.Id == id, cancellationToken);
     }
 
-    public Task<Flag?> GetAsync(string name, Guid? parentId)
+    public Task<Flag?> GetAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .FirstOrDefaultAsync(
+                    flag =>
+                        flag.Name == name
+                        && flag.ParentId == parentId,
+                    cancellationToken);
     }
 
-    public Task<IEnumerable<Flag>> GetAllAsync(Guid? parentId, bool? deleted)
+    public async Task<Flag> CreateAsync(Flag flag, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        EntityEntry<Flag> created = await _flagDbContext.Flags.AddAsync(flag, cancellationToken);
+
+        return created.Entity;
     }
 
-    public Task<Flag> CreateAsync(Flag flag)
+    public Task<int> EnableAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Id == id)
+                .ExecuteUpdateAsync(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                true),
+                    cancellationToken);
     }
 
-    public Task<Flag> UpdateAsync(Flag flag, Guid? concurrencyToken = null)
+    public Task<int> EnableAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Key == key)
+                .ExecuteUpdateAsync(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                true),
+                    cancellationToken);
     }
 
-    public Task<Flag> DeleteAsync(Flag flag, Guid? concurrencyToken = null)
+    public Task<int> EnableAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Name == name && f.ParentId == parentId)
+                .ExecuteUpdateAsync(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                true),
+                    cancellationToken);
     }
 
-    public Task<Flag> PurgeAsync(Flag flag, Guid? concurrencyToken = null)
+    public Task<int> DisableAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Id == id)
+                .ExecuteUpdateAsync(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                false),
+                    cancellationToken);
     }
 
-    public Task<Flag> RestoreAsync(Flag flag, Guid? concurrencyToken = null)
+    public Task<int> DisableAsync(string key, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Key == key)
+                .ExecuteUpdateAsync(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                false),
+                    cancellationToken);
     }
 
-    public Task<int> EnableAsync(Guid id)
+    public Task<int> DisableAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return
+            _flagDbContext
+                .Flags
+                .Where(f => f.Name == name && f.ParentId == parentId)
+                .ExecuteUpdateAsync(
+                    setters =>
+                        setters
+                            .SetProperty(
+                                f => f.IsOn,
+                                false),
+                    cancellationToken);
     }
 
-    public Task<int> EnableAsync(string key)
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> EnableAsync(string name, Guid? parentId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> DisableAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> DisableAsync(string key)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> DisableAsync(string name, Guid? parentId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> SaveChangesAsync()
-    {
-        throw new NotImplementedException();
+        return _flagDbContext.SaveChangesAsync(cancellationToken);
     }
 }

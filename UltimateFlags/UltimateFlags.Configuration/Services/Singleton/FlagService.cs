@@ -26,4 +26,9 @@ internal class FlagService : IFlagService
 
         return flagManager.IsOn(key);
     }
+
+    public Task<bool> IsOnAsync(string key, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 }

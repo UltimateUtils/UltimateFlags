@@ -132,7 +132,64 @@ internal class FlagQueryService : IFlagQueryService
         return foundEntities.Convert(entity => entity.ToContract());
     }
 
-    private static bool _IsValidPaginationInfo(int pageNumber, int pageSize)
+    public Task<FlagResponse?> GetAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FlagResponse> GetRequiredAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FlagResponse?> GetAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FlagResponse> GetRequiredAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FlagResponse?> GetAsync(string key, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FlagResponse> GetRequiredAsync(string key, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IPagedList<FlagResponse>> GetAllDeletedAsync(
+        int pageNumber = 1,
+        int pageSize = 20,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IPagedList<FlagResponse>> ListAsync(
+        string? searchString = null,
+        bool? isOn = null,
+        int pageNumber = 1,
+        int pageSize = 20,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static bool _IsValidPaginationInfo(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default)
     {
         return pageNumber > 0 && pageSize > 0;
     }

@@ -86,4 +86,97 @@ public interface IFlagQueryService
         bool? isOn = null,
         int pageNumber = 1,
         int pageSize = 20);
+
+    /// <summary>
+    ///     Retrieves a FLAG by the ID.
+    /// </summary>
+    /// <param name="id">ID</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contract if found / null if not found</returns>
+    public Task<FlagResponse?> GetAsync(Guid id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Retrieves a FLAG by ID.
+    /// </summary>
+    /// <param name="id">ID</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contract</returns>
+    /// <exception cref="FlagNotFound">
+    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
+    /// </exception>
+    public Task<FlagResponse> GetRequiredAsync(Guid id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Retrieves a FLAG by NAME and ParentId.
+    /// </summary>
+    /// <param name="name">NAME</param>
+    /// <param name="parentId">ParentId</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contract if found / null if not found</returns>
+    public Task<FlagResponse?> GetAsync(string name, Guid? parentId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Retrieves a FLAG by NAME and ParentId.
+    /// </summary>
+    /// <param name="name">NAME</param>
+    /// <param name="parentId">ParentId</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contract</returns>
+    /// <exception cref="FlagNotFound">
+    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
+    /// </exception>
+    public Task<FlagResponse> GetRequiredAsync(string name, Guid? parentId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Retrieves a FLAG by KEY.
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contract if found / null if not found</returns>
+    public Task<FlagResponse?> GetAsync(string key, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Retrieves a FLAG by KEY.
+    /// </summary>
+    /// <param name="key">KEY</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contract</returns>
+    /// <exception cref="FlagNotFound">
+    ///     FlagNotFound will be thrown when the FLAG with the ID does not exist.
+    /// </exception>
+    public Task<FlagResponse> GetRequiredAsync(string key, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Retrieves deleted FLAGs
+    /// </summary>
+    /// <param name="pageNumber">PageNumber</param>
+    /// <param name="pageSize">PageSize</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>PagedList of deleted FLAGs</returns>
+    public Task<IPagedList<FlagResponse>> GetAllDeletedAsync(
+        int pageNumber = 1,
+        int pageSize = 20,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Searches and retrieves FLAGs.
+    /// </summary>
+    /// <remarks>
+    ///     When the search string is passed in,
+    ///     The FLAG NAME will be searched.
+    ///     When the ParentId is passed in,
+    ///     the search will be only for the specified FLAG and children recursively.
+    /// </remarks>
+    /// <param name="searchString">Search string</param>
+    /// <param name="isOn">Is ON by key</param>
+    /// <param name="pageNumber">Page Number</param>
+    /// <param name="pageSize">Page Size</param>
+    /// <param name="cancellationToken">CancellationToken</param>
+    /// <returns>Response contracts</returns>
+    public Task<IPagedList<FlagResponse>> ListAsync(
+        string? searchString = null,
+        bool? isOn = null,
+        int pageNumber = 1,
+        int pageSize = 20,
+        CancellationToken cancellationToken = default);
 }

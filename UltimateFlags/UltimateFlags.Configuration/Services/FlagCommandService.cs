@@ -68,4 +68,77 @@ internal class FlagCommandService : IFlagCommandService
     {
         throw new NotSupported { Area = $"{nameof(FlagCommandService)}.{nameof(Disable)}(name, parentId)", };
     }
+
+    public Task<FlagResponse> CreateAsync(FlagCreationRequest creationRequest, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FlagResponse> UpdateAsync(
+        Guid id,
+        FlagUpdateRequest updateRequest,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<FlagResponse>> DeleteAsync(
+        Guid id,
+        Guid? concurrencyToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<FlagResponse>> PurgeAsync(
+        Guid id,
+        Guid? concurrencyToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<FlagResponse>> RestoreAsync(
+        Guid id,
+        Guid? concurrencyToken = null,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EnableAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EnableAsync(string key, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EnableAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(string key, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(
+        string name,
+        Guid? parentId,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -5,100 +5,25 @@ namespace UltimateFlags.Configuration.Storages;
 
 internal interface IFlagQueryStorage
 {
-    /// <summary>
-    ///     Retrieves a readonly FLAG with NO TRACKING by the ID.
-    /// </summary>
-    /// <remarks>
-    ///     This method has NO TRACKING when used with EF context.
-    ///     With non-EF context, this method is the same as Get().
-    /// </remarks>
-    /// <param name="id">ID</param>
-    /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
-    /// <param name="includeParent">Include Parent</param>
-    /// <returns>FLAG entity if found / null if not found</returns>
     public Flag? Read(Guid id, bool? deleted = false, bool includeParent = false);
 
-    /// <summary>
-    ///     Retrieves a readonly FLAG with NO TRACKING by the KEY.
-    /// </summary>
-    /// <remarks>
-    ///     This method has No TRACKING when used with EF context.
-    ///     With non-EF context, this method is the same as Get().
-    /// </remarks>
-    /// <param name="key">KEY</param>
-    /// <returns>FLAG entity if found / null if not found</returns>
     public Flag? Read(string key);
 
-    /// <summary>
-    ///     Retrieves a readonly FLAG with NO TRACKING by the NAME and the ParentId.
-    /// </summary>
-    /// <remarks>
-    ///     This method has No TRACKING when used with EF context.
-    ///     With non-EF context, this method is the same as Get().
-    /// </remarks>
-    /// <param name="name">NAME</param>
-    /// <param name="parentId">ParentId</param>
-    /// <returns>FLAG entity if found / null if not found</returns>
     public Flag? Read(string name, Guid? parentId);
 
-    /// <summary>
-    ///     Retrieves flags by KEYs.
-    ///     If the key is not found, it is ignored.
-    /// </summary>
-    /// <param name="keys">KEYs</param>
-    /// <returns>FLAGs that has any of the KEYs</returns>
     public IQueryable<Flag> ReadAll(IEnumerable<string> keys);
 
-    /// <summary>
-    ///     Retrieves children of the specified FLAG.
-    /// </summary>
-    /// <param name="parentId">ParentID</param>
-    /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
-    /// <returns>Children of the specified FLAG</returns>
     public IQueryable<Flag> ReadAll(Guid? parentId, bool? deleted = false);
 
-    /// <summary>
-    ///     Retrieves deleted flags by their deleted time.
-    /// </summary>
-    /// <param name="fromInclusive">FROM deleted time (inclusive)</param>
-    /// <param name="toInclusive">TO deleted time (inclusive)</param>
-    /// <returns></returns>
     public IQueryable<Flag> ReadAllDeleted(DateTime? fromInclusive = null, DateTime? toInclusive = null);
 
-    /// <summary>
-    ///     Searches and retrieves FLAGs.
-    /// </summary>
-    /// <remarks>
-    ///     When the search string is passed in,
-    ///     The FLAG NAME will be searched.
-    ///     When the ParentId is passed in,
-    ///     the search will be only for the specified FLAG and children recursively.
-    /// </remarks>
-    /// <param name="searchString">Search String</param>
-    /// <param name="isOn">Is ON by key</param>
-    /// <param name="pageNumber">Page Number</param>
-    /// <param name="pageSize">Page Size</param>
-    /// <returns>Entities of the FLAGs with the specified   string in their NAMEs under the specified FLAG by ID</returns>
     public IPagedList<Flag> List(
         string? searchString,
         bool? isOn,
         int pageNumber,
         int pageSize);
 
-    /// <summary>
-    ///     Checks if the specified flag exists.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
-    /// <returns>TRUE if the flag exists. FALSE otherwise.</returns>
     public bool Exists(Guid id, bool? deleted = false);
 
-    /// <summary>
-    ///     Checks if the specified flag exists.
-    /// </summary>
-    /// <param name="name">NAME</param>
-    /// <param name="parentId">ParentID</param>
-    /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
-    /// <returns>TRUE if the flag exists. FALSE otherwise.</returns>
     public bool Exists(string name, Guid? parentId, bool? deleted = false);
 }

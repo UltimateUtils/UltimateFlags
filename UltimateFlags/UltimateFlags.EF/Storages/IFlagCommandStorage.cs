@@ -4,135 +4,63 @@ namespace UltimateFlags.EF.Storages;
 
 internal interface IFlagCommandStorage
 {
-    /// <summary>
-    ///     Retrieves a FLAG with TRACKING by the ID.
-    /// </summary>
-    /// <remarks>
-    ///     This method has TRACKING when used with EF context.
-    ///     With non-EF context, this method is the same as Read().
-    /// </remarks>
-    /// <param name="id">ID</param>
-    /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
-    /// <param name="includeParent">Include Parent</param>
-    /// <returns>FLAG entity if found / null if not found</returns>
     public Flag? Get(Guid id, bool? deleted = false, bool includeParent = false);
 
-    /// <summary>
-    ///     Retrieves a FLAG with TRACKING by the NAME and the ParentId.
-    /// </summary>
-    /// <remarks>
-    ///     This method has TRACKING when used with EF context.
-    ///     With non-EF context, this method is the same as Read().
-    /// </remarks>
-    /// <param name="name">NAME</param>
-    /// <param name="parentId">ParentId</param>
-    /// <returns>FLAG entity if found / null if not found</returns>
     public Flag? Get(string name, Guid? parentId);
 
-    /// <summary>
-    ///     Retrieves children of the specified FLAG.
-    /// </summary>
-    /// <param name="parentId">ParentID</param>
-    /// <param name="deleted">Checks both deleted and undeleted flags if null</param>
-    /// <returns>Children of the specified FLAG</returns>
     public IEnumerable<Flag> GetAll(Guid? parentId, bool? deleted = false);
 
-    /// <summary>
-    ///     Creates a FLAG.
-    /// </summary>
-    /// <param name="flag">An entity of the FLAG</param>
-    /// <returns>An entity of the created FLAG</returns>
     public Flag Create(Flag flag);
 
-    /// <summary>
-    ///     Updates a FLAG.
-    /// </summary>
-    /// <param name="flag">An entity of the FLAG</param>
-    /// <param name="concurrencyToken">ConcurrencyToken</param>
-    /// <returns>An entity of the updated FLAG</returns>
     public Flag Update(Flag flag, Guid? concurrencyToken = null);
 
-    /// <summary>
-    ///     Soft-deletes a FLAG.
-    /// </summary>
-    /// <param name="flag">ID</param>
-    /// <param name="concurrencyToken">ConcurrencyToken</param>
-    /// <returns>An entity of the deleted FLAG</returns>
     public Flag Delete(Flag flag, Guid? concurrencyToken = null);
 
-    /// <summary>
-    ///     Purges/Hard-deletes a FLAG.
-    /// </summary>
-    /// <param name="flag">FLAG</param>
-    /// <param name="concurrencyToken">ConcurrencyToken</param>
-    /// <returns>Entity of purged/hard-deleted flag.</returns>
     public Flag Purge(Flag flag, Guid? concurrencyToken = null);
 
-    /// <summary>
-    ///     Restores single deleted FLAG
-    /// </summary>
-    /// <param name="flag">FLAG</param>
-    /// <param name="concurrencyToken">ConcurrencyToken</param>
-    /// <returns>Entity of restored flag.</returns>
     public Flag Restore(Flag flag, Guid? concurrencyToken = null);
 
-    /// <summary>
-    ///     Enables a FLAG by ID.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <returns>Number of enabled flags. 1 if successful. 0 otherwise.</returns>
     public int Enable(Guid id);
 
-    /// <summary>
-    ///     Enables a FLAG by KEY.
-    /// </summary>
-    /// <param name="key">KEY</param>
-    /// <returns>Number of enabled flags. 1 if successful. 0 otherwise.</returns>
     public int Enable(string key);
 
-    /// <summary>
-    ///     Enables a FLAG by NAME and ParentId.
-    /// </summary>
-    /// <param name="name">NAME</param>
-    /// <param name="parentId">ParentId</param>
-    /// <returns>Number of enabled flags. 1 if successful. 0 otherwise.</returns>
     public int Enable(string name, Guid? parentId);
 
-    /// <summary>
-    ///     Disables a FLAG by ID.
-    /// </summary>
-    /// <param name="id">ID</param>
-    /// <returns>Number of disabled flags. 1 if successful. 0 otherwise.</returns>
     public int Disable(Guid id);
 
-    /// <summary>
-    ///     Disables a FLAG by Key.
-    /// </summary>
-    /// <param name="key">KEY</param>
-    /// <returns>Number of disabled flags. 1 if successful. 0 otherwise.</returns>
     public int Disable(string key);
 
-    /// <summary>
-    ///     Disables a FLAG by NAME and ParentId.
-    /// </summary>
-    /// <param name="name">NAME</param>
-    /// <param name="parentId">ParentId</param>
-    /// <returns>Number of disabled flags. 1 if successful. 0 otherwise.</returns>
     public int Disable(string name, Guid? parentId);
 
-    /// <summary>
-    ///     Saves changes to the database.
-    /// </summary>
-    /// <remarks>
-    ///     If you implement for non-EF context, follow either approaches below:
-    ///     1. Do nothing with this method
-    ///         - Keep this implementation empty (not throwing NotImplementedException)
-    ///         - Save changes to the DB immediately when you make changes in Create(), Update(), Delete(), Enable() and Disable().
-    ///
-    ///     2. You can make the implementation just like the DbContext.SaveChanges().
-    ///         - Save DB changes with this method call.
-    ///         - FlagService's Create, Update, Delete, Enable and Disable methods will call SaveChanges() at the end of their implementations.
-    /// </remarks>
-    /// <returns>The number of state entries written to the database</returns>
     public int SaveChanges();
+
+    public Task<Flag?> GetAsync(Guid id, bool? deleted = false, bool includeParent = false);
+
+    public Task<Flag?> GetAsync(string name, Guid? parentId);
+
+    public Task<IEnumerable<Flag>> GetAllAsync(Guid? parentId, bool? deleted = false);
+
+    public Task<Flag> CreateAsync(Flag flag);
+
+    public Task<Flag> UpdateAsync(Flag flag, Guid? concurrencyToken = null);
+
+    public Task<Flag> DeleteAsync(Flag flag, Guid? concurrencyToken = null);
+
+    public Task<Flag> PurgeAsync(Flag flag, Guid? concurrencyToken = null);
+
+    public Task<Flag> RestoreAsync(Flag flag, Guid? concurrencyToken = null);
+
+    public Task<int> EnableAsync(Guid id);
+
+    public Task<int> EnableAsync(string key);
+
+    public Task<int> EnableAsync(string name, Guid? parentId);
+
+    public Task<int> DisableAsync(Guid id);
+
+    public Task<int> DisableAsync(string key);
+
+    public Task<int> DisableAsync(string name, Guid? parentId);
+
+    public Task<int> SaveChangesAsync();
 }

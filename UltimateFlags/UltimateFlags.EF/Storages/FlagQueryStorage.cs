@@ -149,4 +149,49 @@ public class FlagQueryStorage : IFlagQueryStorage
                     ? flagsQuery.IgnoreQueryFilters().Any(flag => flag.Name == name && flag.ParentId == parentId && flag.DeletedAt.HasValue)
                     : flagsQuery.Any(flag => flag.Name == name && flag.ParentId == parentId);
     }
+
+    public Task<Flag?> ReadAsync(Guid id, bool? deleted, bool includeParent = false)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag?> ReadAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag?> ReadAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IQueryable<Flag>> ReadAllAsync(IEnumerable<string> keys)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IQueryable<Flag>> ReadAllAsync(Guid? parentId, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IQueryable<Flag>> ReadAllDeletedAsync(DateTime? fromInclusive = null, DateTime? toInclusive = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IPagedList<Flag>> ListAsync(string? searchString, bool? isOn, int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> ExistsAsync(Guid id, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> ExistsAsync(string name, Guid? parentId, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
 }

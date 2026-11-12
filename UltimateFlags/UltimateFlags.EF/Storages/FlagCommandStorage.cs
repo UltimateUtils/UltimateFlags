@@ -212,4 +212,79 @@ public class FlagCommandStorage : IFlagCommandStorage
     {
         return _flagDbContext.SaveChanges();
     }
+
+    public Task<Flag?> GetAsync(Guid id, bool? deleted, bool includeParent = false)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag?> GetAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Flag>> GetAllAsync(Guid? parentId, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag> CreateAsync(Flag flag)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag> UpdateAsync(Flag flag, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag> DeleteAsync(Flag flag, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag> PurgeAsync(Flag flag, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag> RestoreAsync(Flag flag, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> EnableAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> EnableAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> EnableAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> DisableAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> DisableAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> DisableAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> SaveChangesAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

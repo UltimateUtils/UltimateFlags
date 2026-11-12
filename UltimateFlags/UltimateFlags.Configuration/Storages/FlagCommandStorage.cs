@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
-using UltimateFlags.Abstraction.Storages;
 
 namespace UltimateFlags.Configuration.Storages;
 

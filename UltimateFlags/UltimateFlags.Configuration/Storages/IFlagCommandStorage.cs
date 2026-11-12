@@ -1,8 +1,8 @@
 using UltimateFlags.Abstraction.Entities;
 
-namespace UltimateFlags.Abstraction.Storages;
+namespace UltimateFlags.Configuration.Storages;
 
-public interface IFlagCommandStorage
+internal interface IFlagCommandStorage
 {
     /// <summary>
     ///     Retrieves a FLAG with TRACKING by the ID.

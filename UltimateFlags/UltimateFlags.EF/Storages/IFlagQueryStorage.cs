@@ -1,9 +1,9 @@
 using UltimateFlags.Abstraction.Entities;
 using UltimatePagination.Abstraction;
 
-namespace UltimateFlags.Abstraction.Storages;
+namespace UltimateFlags.EF.Storages;
 
-public interface IFlagQueryStorage
+internal interface IFlagQueryStorage
 {
     /// <summary>
     ///     Retrieves a readonly FLAG with NO TRACKING by the ID.

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UltimateFlags.Abstraction.Config;
 using UltimateFlags.Abstraction.Services;
-using UltimateFlags.Abstraction.Storages;
 using UltimateFlags.EF.Db;
 using UltimateFlags.EF.Managers;
 using UltimateFlags.EF.Services;

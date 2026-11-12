@@ -4,7 +4,7 @@ using UltimateFlags.Abstraction.Contracts;
 using UltimateFlags.Abstraction.Entities;
 using UltimateFlags.Abstraction.Exceptions.ClientFaults;
 using UltimateFlags.Abstraction.Exceptions.ServerFaults;
-using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.EF.Storages;
 using UltimateFlags.Helpers;
 using UltimatePagination;
 using UltimatePagination.Abstraction;

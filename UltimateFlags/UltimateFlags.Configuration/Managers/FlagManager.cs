@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 using UltimateFlags.Abstraction.Entities;
-using UltimateFlags.Abstraction.Storages;
+using UltimateFlags.Configuration.Storages;
 using UltimateFlags.Helpers;
 using UltimatePagination;
 using UltimatePagination.Abstraction;

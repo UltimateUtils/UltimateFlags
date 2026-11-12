@@ -165,10 +165,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 5
-    await testRunner.WhenAsync(string.Format("retrieve a flag by {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 6
+    await testRunner.WhenAsync(string.Format("I retrieve a flag by Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -179,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table1.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -190,8 +190,8 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", createdAt),
                             string.Format("{0}", updatedAt),
                             string.Format("{0}", deletedAt)});
-#line 6
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table1, "Then ");
+#line 7
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table3, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -211,7 +211,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("2. Get Flag by incorrect Id", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 38
+#line 39
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -221,10 +221,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 39
-    await testRunner.WhenAsync(string.Format("retrieve a flag by {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 41
+    await testRunner.WhenAsync(string.Format("I retrieve a flag by Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 40
+#line 42
     await testRunner.ThenAsync("null is returned", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -276,7 +276,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("3. Get Flag by name", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 48
+#line 50
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -286,10 +286,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 49
+#line 52
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\' and {1}", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -300,7 +300,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -311,8 +311,8 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", createdAt),
                             string.Format("{0}", updatedAt),
                             "<null>"});
-#line 50
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table2, "Then ");
+#line 53
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table4, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -333,7 +333,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("4. Get Flag by incorrect name", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 82
+#line 85
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -343,10 +343,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 83
+#line 87
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\' and {1}", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 84
+#line 88
     await testRunner.ThenAsync("null is returned", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -398,7 +398,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("5. Get Flag by Key", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 92
+#line 96
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -408,10 +408,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 93
+#line 98
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -422,7 +422,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -433,8 +433,8 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", createdAt),
                             string.Format("{0}", updatedAt),
                             "<null>"});
-#line 94
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table3, "Then ");
+#line 99
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table5, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -454,7 +454,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("6. Get Flag by incorrect Key", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 126
+#line 131
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -464,10 +464,10 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 127
+#line 133
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 128
+#line 134
     await testRunner.ThenAsync("null is returned", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
@@ -501,7 +501,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("7. Get all deleted flags", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 137
+#line 143
 this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -511,13 +511,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 139
+#line 145
     await testRunner.GivenAsync(string.Format("the flags, \'{0}\', have been deleted", deletedFlagIds), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 140
+#line 146
     await testRunner.WhenAsync("I retrieve all deleted flags", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 141
+#line 147
     await testRunner.ThenAsync(string.Format("the flags, \'{0}\', are returned", expectedDeletedIdsResponse), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }

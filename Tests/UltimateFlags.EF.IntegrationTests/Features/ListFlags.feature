@@ -1,8 +1,8 @@
 @BeforeFeatureResetBasicFlags
-Feature: List feature
+Feature: List Flags feature
 
 Scenario: 1. List Flags
-    When retrieve all flags
+    When I list all flags
     Then all the following flags are returned correctly
         | Id                                   | ParentId                             | IsOn | Name       | Key                                    | Description   | ConcurrencyToken                     | CreatedAt                   | UpdatedAt                   | DeletedAt |
         | 01A1A968-05EA-7445-9702-95FFA353EA91 | <null>                               | TRUE | MyBuilding | MyBuilding                             | my building   | C04D5590-AC01-48D2-957E-2F3D37E3F70F | 2026-09-30 03:37:26.0661723 | 2026-09-30 03:37:26.0661723 | <null>    |

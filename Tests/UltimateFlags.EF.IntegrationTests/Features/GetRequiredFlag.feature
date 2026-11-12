@@ -2,7 +2,7 @@
 Feature: GetRequired Flag feature
 
 Scenario Outline: 1. GetRequired Flag by Id
-    When get a required flag by <Id>
+    When I get a required flag by Id, <Id>
     Then the following flag is returned correctly
         | Id   | ParentId   | IsOn   | Name   | Key   | Description   | ConcurrencyToken   | CreatedAt   | UpdatedAt   | DeletedAt |
         | <Id> | <ParentId> | <IsOn> | <Name> | <Key> | <Description> | <ConcurrencyToken> | <CreatedAt> | <UpdatedAt> | <null>    |
@@ -36,7 +36,7 @@ Examples:
     | 01A1A96D-3A5D-7188-B085-19561F94D850 | 01A1A96C-86DD-74B3-BF66-7641B575DA9B | TRUE | Table2602d | MyBuilding.Floor26.Room2602.Table2602d | table #2602 d | 4F8F0842-4B70-4C3F-9B29-8DBDAC978268 | 2026-10-17 20:36:30.3876072 | 2026-10-17 20:36:30.3876072 | <null>    |
 
 Scenario Outline: 2. GetRequired Flag by incorrect Id
-    When get a required flag by <Id>
+    When I get a required flag by Id, <Id>
     Then FlagNotFound exception is thrown
 
 Examples:

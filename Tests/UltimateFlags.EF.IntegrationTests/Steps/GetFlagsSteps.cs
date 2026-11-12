@@ -60,18 +60,34 @@ public class GetFlagsSteps
 
     #region When
 
-    [When("retrieve all flags")]
-    public void RetrieveAllFlags()
+    [When("I list all flags")]
+    public void ListAllFlags()
     {
         FlagResponse[] actualFlags = [.. _flagQueryService.List(pageSize: int.MaxValue)];
 
         _scenarioContext.Set(actualFlags, ContextKeys.AllFlagsKey);
     }
 
-    [When("retrieve a flag by {Guid}")]
-    public void RetrieveFlagBy(Guid id)
+    [When("I list async all flags")]
+    public async Task ListAsyncAllFlagsAsync()
+    {
+        FlagResponse[] actualFlags = [.. await _flagQueryService.ListAsync(pageSize: int.MaxValue)];
+
+        _scenarioContext.Set(actualFlags, ContextKeys.AllFlagsKey);
+    }
+
+    [When("I retrieve a flag by Id, {Guid}")]
+    public void RetrieveFlagById(Guid id)
     {
         FlagResponse? actual = _flagQueryService.Get(id);
+
+        _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+    }
+
+    [When("I retrieve async a flag by Id, {Guid}")]
+    public async Task RetrieveAsyncFlagByIdAsync(Guid id)
+    {
+        FlagResponse? actual = await _flagQueryService.GetAsync(id);
 
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
@@ -84,6 +100,14 @@ public class GetFlagsSteps
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
 
+    [When("I retrieve async a flag by {string} and {Guid}")]
+    public async Task RetrieveAsyncFlagByAsync(string name, Guid? parentId)
+    {
+        FlagResponse? actual = await _flagQueryService.GetAsync(name, parentId);
+
+        _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+    }
+
     [When("I retrieve a flag by {string}")]
     public void RetrieveFlagByMyBuilding(string key)
     {
@@ -92,10 +116,26 @@ public class GetFlagsSteps
         _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
     }
 
+    [When("I retrieve async a flag by {string}")]
+    public async Task RetrieveAsyncFlagByMyBuildingAsync(string key)
+    {
+        FlagResponse? actual = await _flagQueryService.GetAsync(key);
+
+        _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+    }
+
     [When("I retrieve all deleted flags")]
     public void RetrieveAllDeletedFlags()
     {
         FlagResponse[] deletedFlags = [.. _flagQueryService.GetAllDeleted()];
+
+        _scenarioContext.Set(deletedFlags);
+    }
+
+    [When("I retrieve async all deleted flags")]
+    public async Task RetrieveAsyncAllDeletedFlagsAsync()
+    {
+        FlagResponse[] deletedFlags = [.. await _flagQueryService.GetAllDeletedAsync()];
 
         _scenarioContext.Set(deletedFlags);
     }

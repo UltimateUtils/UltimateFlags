@@ -76,6 +76,15 @@ public class EnableDisableFlagsSteps
         flagCommandService.Disable(name, parentId);
     }
 
+    [Given("the flag with {string} has been disabled")]
+    public void FlagWithKeyHasBeenDisabled(string key)
+    {
+        using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
+        IFlagCommandService flagCommandService = serviceScope.ServiceProvider.GetRequiredService<IFlagCommandService>();
+
+        flagCommandService.Disable(key);
+    }
+
     #endregion Given
 
     #region When
@@ -86,10 +95,22 @@ public class EnableDisableFlagsSteps
         _flagCommandService.Enable(id);
     }
 
+    [When("I enable async a flag '{Guid}'")]
+    public async Task EnableFlagAsync(Guid id)
+    {
+        await _flagCommandService.EnableAsync(id);
+    }
+
     [When("I disable a flag '{Guid}'")]
     public void DisableFlag(Guid id)
     {
         _flagCommandService.Disable(id);
+    }
+
+    [When("I disable async a flag '{Guid}'")]
+    public async Task DisableFlagAsync(Guid id)
+    {
+        await _flagCommandService.DisableAsync(id);
     }
 
     [When("I enable a flag with {string} and {Guid}")]
@@ -98,16 +119,46 @@ public class EnableDisableFlagsSteps
         _flagCommandService.Enable(name, parentId);
     }
 
+    [When("I enable async a flag with {string} and {Guid}")]
+    public async Task EnableAsyncFlagWithNameAndParentIdAsync(string name, Guid? parentId)
+    {
+        await _flagCommandService.EnableAsync(name, parentId);
+    }
+
+    [When("I enable a flag with {string}")]
+    public void EnableFlagWithKey(string key)
+    {
+        _flagCommandService.Enable(key);
+    }
+
+    [When("I enable async a flag with {string}")]
+    public async Task EnableAsyncFlagWithKeyAsync(string key)
+    {
+        await _flagCommandService.EnableAsync(key);
+    }
+
     [When("I disable a flag with {string} and {Guid}")]
     public void DisableFlagWithNameAndParentId(string name, Guid? parentId)
     {
         _flagCommandService.Disable(name, parentId);
     }
 
+    [When("I disable async a flag with {string} and {Guid}")]
+    public async Task DisableAsyncFlagWithNameAndParentIdAsync(string name, Guid? parentId)
+    {
+        await _flagCommandService.DisableAsync(name, parentId);
+    }
+
     [When("I disable a flag with {string}")]
     public void DisableFlagWithKey(string key)
     {
         _flagCommandService.Disable(key);
+    }
+
+    [When("I disable async a flag with {string}")]
+    public async Task DisableAsyncFlagWithKeyAsync(string key)
+    {
+        await _flagCommandService.DisableAsync(key);
     }
 
     #endregion When
@@ -148,6 +199,15 @@ public class EnableDisableFlagsSteps
 
         Assert.That(flag, Is.Not.Null);
         Assert.That(flag.IsOn, Is.False);
+    }
+
+    [Then("the flag with {string} is enabled")]
+    public void FlagIsEnabled(string key)
+    {
+        FlagResponse? flag = _flagQueryService.Get(key);
+
+        Assert.That(flag, Is.Not.Null);
+        Assert.That(flag.IsOn, Is.True);
     }
 
     [Then("the flag with {string} is disabled")]

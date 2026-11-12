@@ -61,12 +61,26 @@ public class GetRequiredFlagsSteps
 
     #region When
 
-    [When("get a required flag by {Guid}")]
+    [When("I get a required flag by Id, {Guid}")]
     public void GetRequiredFlagById(Guid id)
     {
         try
         {
             FlagResponse actual = _flagQueryService.GetRequired(id);
+            _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I get async a required flag by Id, {Guid}")]
+    public async Task GetRequiredAsyncFlagByIdAsync(Guid id)
+    {
+        try
+        {
+            FlagResponse actual = await _flagQueryService.GetRequiredAsync(id);
             _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
         }
         catch (Exception e)
@@ -89,12 +103,40 @@ public class GetRequiredFlagsSteps
         }
     }
 
+    [When("I get async a required flag by {string} and {Guid}")]
+    public async Task GetRequiredAsyncFlagByNameAsync(string name, Guid? parentId)
+    {
+        try
+        {
+            FlagResponse actual = await _flagQueryService.GetRequiredAsync(name, parentId);
+            _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
     [When("I get a required flag by {string}")]
-    public void GetRequiredFlagBy(string key)
+    public void GetRequiredFlagByKey(string key)
     {
         try
         {
             FlagResponse actual = _flagQueryService.GetRequired(key);
+            _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I get async a required flag by {string}")]
+    public async Task GetRequiredAsyncFlagByKeyAsync(string key)
+    {
+        try
+        {
+            FlagResponse actual = await _flagQueryService.GetRequiredAsync(key);
             _scenarioContext.Set(actual, ContextKeys.RetrievedFlagKey);
         }
         catch (Exception e)

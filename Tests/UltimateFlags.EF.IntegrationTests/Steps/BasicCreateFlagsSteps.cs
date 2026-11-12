@@ -62,11 +62,21 @@ public class BasicCreateFlagsSteps
     #region When
 
     [When("I create the following flag")]
-    public void CreateTheFollowingFlag(DataTable table)
+    public void CreateFollowingFlag(DataTable table)
     {
         FlagCreationRequest flagToInsert = table.CreateInstance<FlagCreationRequest>();
 
         FlagResponse x = _flagCommandService.Create(flagToInsert);
+
+        _scenarioContext.Set(x.Id, ContextKeys.NewlyAddedFlagIdKey);
+    }
+
+    [When("I create async the following flag")]
+    public async Task CreateAsyncFollowingFlagAsync(DataTable table)
+    {
+        FlagCreationRequest flagToInsert = table.CreateInstance<FlagCreationRequest>();
+
+        FlagResponse x = await _flagCommandService.CreateAsync(flagToInsert);
 
         _scenarioContext.Set(x.Id, ContextKeys.NewlyAddedFlagIdKey);
     }

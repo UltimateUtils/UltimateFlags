@@ -142,23 +142,23 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table1.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 6
-    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table1, "When ");
+    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table17, "When ");
 #line hidden
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table2.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 9
-    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table2, "Then ");
+    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table18, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

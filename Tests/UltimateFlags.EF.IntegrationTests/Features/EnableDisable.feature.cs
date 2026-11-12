@@ -105,7 +105,7 @@ namespace UltimateFlags.EF.IntegrationTests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/EnableDisable.feature.ndjson", 128);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/EnableDisable.feature.ndjson", 104);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -410,32 +410,8 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
         [global::NUnit.Framework.TestAttribute()]
         [global::NUnit.Framework.DescriptionAttribute("6. Eable Flag by KEY")]
         [global::NUnit.Framework.CategoryAttribute("BeforeScenarioResetBasicFlags")]
-        [global::NUnit.Framework.TestCaseAttribute("MyBuilding", "<null>", "101", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Floor23", "01A1A968-05EA-7445-9702-95FFA353EA91", "102", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2301", "01A1A968-66A6-7189-A0DD-95C844F16129", "103", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2302", "01A1A968-66A6-7189-A0DD-95C844F16129", "104", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2303", "01A1A968-66A6-7189-A0DD-95C844F16129", "105", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2304", "01A1A968-66A6-7189-A0DD-95C844F16129", "106", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Floor24", "01A1A968-05EA-7445-9702-95FFA353EA91", "107", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2401", "01A1A969-721E-713C-B658-1782772551C2", "108", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2401a", "01A1A969-B33C-791C-8E3B-F770A0227ADA", "109", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2401b", "01A1A969-B33C-791C-8E3B-F770A0227ADA", "110", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2401c", "01A1A969-B33C-791C-8E3B-F770A0227ADA", "111", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2402", "01A1A969-721E-713C-B658-1782772551C2", "112", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2403", "01A1A969-721E-713C-B658-1782772551C2", "113", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2403a", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "114", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2403b", "01A1A96A-8CE3-727B-8E5A-83A132AD39AA", "115", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2404", "01A1A969-721E-713C-B658-1782772551C2", "116", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2405", "01A1A969-721E-713C-B658-1782772551C2", "117", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Floor25", "01A1A968-05EA-7445-9702-95FFA353EA91", "118", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Floor26", "01A1A968-05EA-7445-9702-95FFA353EA91", "119", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2601", "01A1A96C-0709-7A4E-831F-FB154377E39D", "120", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Room2602", "01A1A96C-0709-7A4E-831F-FB154377E39D", "121", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2602a", "01A1A96C-86DD-74B3-BF66-7641B575DA9B", "122", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2602b", "01A1A96C-86DD-74B3-BF66-7641B575DA9B", "123", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2602c", "01A1A96C-86DD-74B3-BF66-7641B575DA9B", "124", null)]
-        [global::NUnit.Framework.TestCaseAttribute("Table2602d", "01A1A96C-86DD-74B3-BF66-7641B575DA9B", "125", null)]
-        public async global::System.Threading.Tasks.Task _6_EableFlagByKEY(string name, string parentId, string @__pickleIndex, string[] exampleTags)
+        [global::NUnit.Framework.TestCaseAttribute("MyBuilding", "101", null)]
+        public async global::System.Threading.Tasks.Task _6_EableFlagByKEY(string key, string @__pickleIndex, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "BeforeScenarioResetBasicFlags"};
@@ -445,8 +421,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             }
             string[] tagsOfScenario = @__tags;
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Name", name);
-            argumentsOfScenario.Add("ParentId", parentId);
+            argumentsOfScenario.Add("Key", key);
             string pickleIndex = @__pickleIndex;
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("6. Eable Flag by KEY", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
@@ -462,13 +437,13 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             {
                 await this.ScenarioStartAsync();
 #line 154
-    await testRunner.GivenAsync(string.Format("the flag with \'{0}\' and {1} has been disabled", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+    await testRunner.GivenAsync(string.Format("the flag with \'{0}\' has been disabled", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 155
-    await testRunner.WhenAsync(string.Format("I enable a flag with \'{0}\' and {1}", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync(string.Format("I enable a flag with \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 156
-    await testRunner.ThenAsync(string.Format("the flag with \'{0}\' and {1} is enabled", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+    await testRunner.ThenAsync(string.Format("the flag with \'{0}\' is enabled", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

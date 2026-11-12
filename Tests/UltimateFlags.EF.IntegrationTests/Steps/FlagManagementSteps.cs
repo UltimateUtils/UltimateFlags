@@ -91,11 +91,21 @@ public class FlagManagementSteps
     #region When
 
     [When("I update a flag with the Id, {Guid}, as follows")]
-    public void UpdateAFlagWithTheIdAsFollows(Guid id, DataTable table)
+    public void UpdateFlagWithTheIdAsFollows(Guid id, DataTable table)
     {
         FlagUpdateRequest flagUpdateRequest = table.CreateInstance<FlagUpdateRequest>();
 
         FlagResponse updateResponse = _flagCommandService.Update(id, flagUpdateRequest);
+
+        _scenarioContext.Set(updateResponse, ContextKeys.UpdateResponseKey);
+    }
+
+    [When("I update async a flag with the Id, {Guid}, as follows")]
+    public async Task UpdateAsyncFlagWithTheIdAsFollowsAsync(Guid id, DataTable table)
+    {
+        FlagUpdateRequest flagUpdateRequest = table.CreateInstance<FlagUpdateRequest>();
+
+        FlagResponse updateResponse = await _flagCommandService.UpdateAsync(id, flagUpdateRequest);
 
         _scenarioContext.Set(updateResponse, ContextKeys.UpdateResponseKey);
     }
@@ -107,10 +117,24 @@ public class FlagManagementSteps
         _scenarioContext.Set(deletedFlags);
     }
 
+    [When("I delete async a flag with the Id, {Guid}")]
+    public async Task DeleteAsyncFlagWithTheIdAsync(Guid id)
+    {
+        IEnumerable<FlagResponse> deletedFlags = await _flagCommandService.DeleteAsync(id);
+        _scenarioContext.Set(deletedFlags);
+    }
+
     [When("I purge the flag with the Id, {Guid}")]
-    public void PurgeTheFlagWithId(Guid id)
+    public void PurgeFlagWithId(Guid id)
     {
         IEnumerable<FlagResponse> purgedFlags = _flagCommandService.Purge(id);
+        _scenarioContext.Set(purgedFlags);
+    }
+
+    [When("I purge async the flag with the Id, {Guid}")]
+    public async Task PurgeAsyncFlagWithIdAsync(Guid id)
+    {
+        IEnumerable<FlagResponse> purgedFlags = await _flagCommandService.PurgeAsync(id);
         _scenarioContext.Set(purgedFlags);
     }
 
@@ -118,6 +142,13 @@ public class FlagManagementSteps
     public void RestoreFlag(Guid idToRestore)
     {
         IEnumerable<FlagResponse> restoredFlags = _flagCommandService.Restore(idToRestore);
+        _scenarioContext.Set(restoredFlags);
+    }
+
+    [When("I restore async the flag, {Guid}")]
+    public async Task RestoreFlagAsync(Guid idToRestore)
+    {
+        IEnumerable<FlagResponse> restoredFlags = await _flagCommandService.RestoreAsync(idToRestore);
         _scenarioContext.Set(restoredFlags);
     }
 

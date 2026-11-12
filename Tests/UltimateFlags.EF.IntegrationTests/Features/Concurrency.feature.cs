@@ -143,25 +143,25 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description",
                             "ConcurrencyToken"});
-                table1.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description),
                             string.Format("{0}", concurrencyToken)});
 #line 6
-    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table1, "When ");
+    await testRunner.WhenAsync(string.Format("I update a flag with the Id, {0}, as follows", id), ((string)(null)), table7, "When ");
 #line hidden
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table2.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 9
-    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table2, "Then ");
+    await testRunner.ThenAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table8, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -205,28 +205,28 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 23
     await testRunner.GivenAsync(string.Format("I have retrieved a flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description",
                             "ConcurrencyToken"});
-                table3.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description),
                             string.Format("{0}", concurrencyToken)});
 #line 24
-    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table3, "When ");
+    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table9, "When ");
 #line hidden
 #line 27
     await testRunner.ThenAsync("no exception is thrown", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description"});
-                table4.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description)});
 #line 28
-    await testRunner.AndAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table4, "And ");
+    await testRunner.AndAsync(string.Format("flag data with the Id, {0}, is updated properly", id), ((string)(null)), table10, "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -270,16 +270,16 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 42
     await testRunner.GivenAsync(string.Format("I have retrieved a flag, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
                             "IsOn",
                             "Description",
                             "ConcurrencyToken"});
-                table5.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             string.Format("{0}", isOn),
                             string.Format("{0}", description),
                             string.Format("{0}", concurrencyToken)});
 #line 43
-    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table5, "When ");
+    await testRunner.WhenAsync("I update the retrieved flag with the following properties", ((string)(null)), table11, "When ");
 #line hidden
 #line 46
     await testRunner.ThenAsync("ConcurrencyConflict exception is thrown", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

@@ -1,6 +1,6 @@
 Feature: Basic Create feature
 
-Scenario: 1. Create Flags
+Scenario: 1. Create Flag
     Given DB has the following flags
         | Id                                   | Name       | Key                | IsOn | Description | ParentId                             | CreatedAt                   | UpdatedAt                   | DeletedAt |
         | 01A1A968-05EA-7445-9702-95FFA353EA91 | MyBuilding | MyBuilding         | TRUE | my building | <null>                               | 2026-09-30 03:37:26.0661723 | 2026-09-30 03:37:26.0661723 | <null>    |

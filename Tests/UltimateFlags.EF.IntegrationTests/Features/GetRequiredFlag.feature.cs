@@ -166,7 +166,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             {
                 await this.ScenarioStartAsync();
 #line 5
-    await testRunner.WhenAsync(string.Format("get a required flag by {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync(string.Format("I get a required flag by Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
                 global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "Id",
@@ -222,7 +222,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             {
                 await this.ScenarioStartAsync();
 #line 39
-    await testRunner.WhenAsync(string.Format("get a required flag by {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync(string.Format("I get a required flag by Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 40
     await testRunner.ThenAsync("FlagNotFound exception is thrown", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

@@ -2,7 +2,8 @@
 Feature: Get Flag feature
 
 Scenario Outline: 1. Get Flag by Id
-    When retrieve a flag by <Id>
+
+    When I retrieve a flag by Id, <Id>
     Then the following flag is returned correctly
         | Id   | ParentId   | IsOn   | Name   | Key   | Description   | ConcurrencyToken   | CreatedAt   | UpdatedAt   | DeletedAt   |
         | <Id> | <ParentId> | <IsOn> | <Name> | <Key> | <Description> | <ConcurrencyToken> | <CreatedAt> | <UpdatedAt> | <DeletedAt> |
@@ -36,7 +37,8 @@ Examples:
     | 01A1A96D-3A5D-7188-B085-19561F94D850 | 01A1A96C-86DD-74B3-BF66-7641B575DA9B | TRUE | Table2602d | MyBuilding.Floor26.Room2602.Table2602d | table #2602 d | 4F8F0842-4B70-4C3F-9B29-8DBDAC978268 | 2026-10-17 20:36:30.3876072 | 2026-10-17 20:36:30.3876072 | <null>    |
 
 Scenario Outline: 2. Get Flag by incorrect Id
-    When retrieve a flag by <Id>
+
+    When I retrieve a flag by Id, <Id>
     Then null is returned
 
 Examples:
@@ -46,6 +48,7 @@ Examples:
     | CA81F335-6C3D-4A6F-9E98-6AA998509EB7 |
 
 Scenario Outline: 3. Get Flag by name
+
     When I retrieve a flag by '<Name>' and <ParentId>
     Then the following flag is returned correctly
         | Id   | ParentId   | IsOn   | Name   | Key   | Description   | ConcurrencyToken   | CreatedAt   | UpdatedAt   | DeletedAt |
@@ -80,6 +83,7 @@ Examples:
     | 01A1A96D-3A5D-7188-B085-19561F94D850 | 01A1A96C-86DD-74B3-BF66-7641B575DA9B | TRUE | Table2602d | MyBuilding.Floor26.Room2602.Table2602d | table #2602 d | 4F8F0842-4B70-4C3F-9B29-8DBDAC978268 | 2026-10-17 20:36:30.3876072 | 2026-10-17 20:36:30.3876072 | <null>    |
 
 Scenario Outline: 4. Get Flag by incorrect name
+
     When I retrieve a flag by '<Name>' and <ParentId>
     Then null is returned
 
@@ -90,6 +94,7 @@ Examples:
     | Table2602d   | CA81F335-6C3D-4A6F-9E98-6AA998509EB7 |
 
 Scenario Outline: 5. Get Flag by Key
+
     When I retrieve a flag by '<Key>'
     Then the following flag is returned correctly
         | Id   | ParentId   | IsOn   | Name   | Key   | Description   | ConcurrencyToken   | CreatedAt   | UpdatedAt   | DeletedAt |
@@ -124,6 +129,7 @@ Examples:
     | 01A1A96D-3A5D-7188-B085-19561F94D850 | 01A1A96C-86DD-74B3-BF66-7641B575DA9B | TRUE | Table2602d | MyBuilding.Floor26.Room2602.Table2602d | table #2602 d | 4F8F0842-4B70-4C3F-9B29-8DBDAC978268 | 2026-10-17 20:36:30.3876072 | 2026-10-17 20:36:30.3876072 | <null>    |
 
 Scenario Outline: 6. Get Flag by incorrect Key
+
     When I retrieve a flag by '<Key>'
     Then null is returned
 

@@ -75,7 +75,7 @@ public class ConcurrencySteps
     #region When
 
     [When("I update the retrieved flag with the following properties")]
-    public void UpdateTheRetrievedFlagWithTheFollowingProperties(DataTable table)
+    public void UpdateRetrievedFlagWithTheFollowingProperties(DataTable table)
     {
         FlagResponse? retrievedFlag = _scenarioContext.Get<FlagResponse?>(ContextKeys.RetrievedFlagKey);
 
@@ -95,12 +95,48 @@ public class ConcurrencySteps
         }
     }
 
+    [When("I update async the retrieved flag with the following properties")]
+    public async Task UpdateAsyncRetrievedFlagWithTheFollowingPropertiesAsync(DataTable table)
+    {
+        FlagResponse? retrievedFlag = _scenarioContext.Get<FlagResponse?>(ContextKeys.RetrievedFlagKey);
+
+        Assert.That(retrievedFlag, Is.Not.Null);
+
+        FlagUpdateRequest flagUpdateRequest = table.CreateInstance<FlagUpdateRequest>();
+
+        try
+        {
+            FlagResponse updateResponse = await _flagCommandService.UpdateAsync(retrievedFlag.Id, flagUpdateRequest);
+            _scenarioContext.Set(updateResponse, ContextKeys.UpdateResponseKey);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
     [When("I delete a flag, {Guid}, with a ConcurrencyToken, {Guid}")]
     public void DeleteFlagWithConcurrencyToken(Guid id, Guid? concurrencyToken)
     {
         try
         {
             IEnumerable<FlagResponse> deletedFlags = _flagCommandService.Delete(id, concurrencyToken);
+            _scenarioContext.Set(deletedFlags);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I delete async a flag, {Guid}, with a ConcurrencyToken, {Guid}")]
+    public async Task DeleteAsyncFlagWithConcurrencyTokenAsync(Guid id, Guid? concurrencyToken)
+    {
+        try
+        {
+            IEnumerable<FlagResponse> deletedFlags = await _flagCommandService.DeleteAsync(id, concurrencyToken);
             _scenarioContext.Set(deletedFlags);
             _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
         }
@@ -128,12 +164,45 @@ public class ConcurrencySteps
         }
     }
 
+    [When("I purge async the flag, {Guid}, with the correct concurrency token")]
+    public async Task PurgeAsyncFlagWithCorrectConcurrencyTokenAsync(Guid id)
+    {
+        try
+        {
+            IEnumerable<FlagResponse> deletedFlags = _scenarioContext.Get<IEnumerable<FlagResponse>>();
+            Guid concurrencyToken = deletedFlags.First(f => f.Id == id).ConcurrencyToken;
+
+            IEnumerable<FlagResponse> purgedFlags = await _flagCommandService.PurgeAsync(id, concurrencyToken);
+            _scenarioContext.Set(purgedFlags);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
     [When("I purge the flag, {Guid}, with a concurrency token, {Guid}")]
     public void PurgeFlagWithCorrectConcurrencyToken(Guid id, Guid concurrencyToken)
     {
         try
         {
             IEnumerable<FlagResponse> purgedFlags = _flagCommandService.Purge(id, concurrencyToken);
+            _scenarioContext.Set(purgedFlags);
+            _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
+        }
+        catch (Exception e)
+        {
+            _scenarioContext.Set(e, ContextKeys.ThrownExceptionKey);
+        }
+    }
+
+    [When("I purge async the flag, {Guid}, with a concurrency token, {Guid}")]
+    public async Task PurgeAsyncFlagWithCorrectConcurrencyTokenAsync(Guid id, Guid concurrencyToken)
+    {
+        try
+        {
+            IEnumerable<FlagResponse> purgedFlags = await _flagCommandService.PurgeAsync(id, concurrencyToken);
             _scenarioContext.Set(purgedFlags);
             _scenarioContext.Set(new NoException(), ContextKeys.ThrownExceptionKey);
         }

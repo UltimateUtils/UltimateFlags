@@ -49,4 +49,48 @@ internal interface IFlagManager
     public bool IsOn(string key);
 
     public int SaveChanges();
+
+    public Task<Flag> CreateAsync(Flag entity);
+
+    public Task<Flag?> ReadAsync(Guid id, bool? deleted = false);
+
+    public Task<Flag?> ReadAsync(string name, Guid? parentId);
+
+    public Task<Flag?> ReadAsync(string key);
+
+    public Task<IPagedList<Flag>> GetAllDeletedAsync(int pageNumber, int pageSize);
+
+    public Task<IPagedList<Flag>> ListAsync(
+        string? searchString,
+        bool? isOn,
+        int pageNumber,
+        int pageSize);
+
+    public Task<Flag> UpdateAsync(Guid id, FlagUpdateRequest updateRequest);
+
+    public Task<List<Flag>> DeleteAsync(Guid id, Guid? concurrencyToken = null);
+
+    public Task<List<Flag>> PurgeAsync(Guid id, Guid? concurrencyToken = null);
+
+    public Task<List<Flag>> RestoreAsync(Guid id, Guid? concurrencyToken = null);
+
+    public Task<bool> ExistsAsync(Guid id, bool? deleted = false);
+
+    public Task<bool> ExistsAsync(string name, Guid? parentId, bool? deleted = false);
+
+    public Task EnableAsync(Guid id);
+
+    public Task EnableAsync(string key);
+
+    public Task EnableAsync(string name, Guid? parentId);
+
+    public Task DisableAsync(Guid id);
+
+    public Task DisableAsync(string key);
+
+    public Task DisableAsync(string name, Guid? parentId);
+
+    public Task<bool> IsOnAsync(string key);
+
+    public Task<int> SaveChangesAsync();
 }

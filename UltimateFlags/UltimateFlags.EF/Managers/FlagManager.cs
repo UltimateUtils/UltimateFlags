@@ -291,6 +291,106 @@ internal class FlagManager : IFlagManager
         }
     }
 
+    public Task<Flag> CreateAsync(Flag entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag?> ReadAsync(Guid id, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag?> ReadAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag?> ReadAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IPagedList<Flag>> GetAllDeletedAsync(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IPagedList<Flag>> ListAsync(string? searchString, bool? isOn, int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Flag> UpdateAsync(Guid id, FlagUpdateRequest updateRequest)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Flag>> DeleteAsync(Guid id, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Flag>> PurgeAsync(Guid id, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Flag>> RestoreAsync(Guid id, Guid? concurrencyToken = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> ExistsAsync(Guid id, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> ExistsAsync(string name, Guid? parentId, bool? deleted)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EnableAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EnableAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EnableAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DisableAsync(string name, Guid? parentId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> IsOnAsync(string key)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> SaveChangesAsync()
+    {
+        throw new NotImplementedException();
+    }
+
     private IEnumerable<Flag> _Delete(Guid id, Guid? concurrencyToken)
     {
         Flag rootToDelete =

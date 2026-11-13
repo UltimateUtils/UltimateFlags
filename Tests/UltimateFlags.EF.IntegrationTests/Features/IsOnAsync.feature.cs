@@ -226,16 +226,16 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
             else
             {
                 await this.ScenarioStartAsync();
-                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "Id"});
-                table2.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             "01A1A968-66A6-7189-A0DD-95C844F16129"});
-                table2.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             "01A1A96B-9FAF-76FB-9661-4360CEB07A73"});
-                table2.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             "01A1A96C-86DD-74B3-BF66-7641B575DA9B"});
 #line 40
-    await testRunner.GivenAsync("I have turned off the following flags", ((string)(null)), table2, "Given ");
+    await testRunner.GivenAsync("I have turned off the following flags", ((string)(null)), table1, "Given ");
 #line hidden
 #line 45
     await testRunner.WhenAsync(string.Format("I call async IsOn by key, \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");

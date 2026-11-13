@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFlagCommandStorage, FlagCommandStorage>();
         services.AddScoped<IFlagManager, FlagManager>();
         services.AddScoped<IFlagService, FlagService>();
+        services.AddScoped<IFlagCacheService, FlagCacheService>();
         services.AddScoped<IFlagQueryService, FlagQueryService>();
         services.AddScoped<IFlagCommandService, FlagCommandService>();
 
@@ -34,6 +35,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFlagCommandStorage, Storages.ReadOnly.FlagCommandStorage>();
         services.AddScoped<IFlagManager, FlagManager>();
         services.AddScoped<IFlagService, FlagService>();
+        services.AddScoped<IFlagCacheService, FlagCacheService>();
         services.AddScoped<IFlagQueryService, FlagQueryService>();
         services.AddScoped<IFlagCommandService, FlagCommandService>();
 
@@ -48,6 +50,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFlagCommandStorage, FlagCommandStorage>();
         services.AddScoped<IFlagManager, FlagManager>();
         services.AddSingleton<IFlagService, Services.Singleton.FlagService>();
+        services.AddSingleton<IFlagCacheService, Services.Singleton.FlagCacheService>();
         services.AddSingleton<IFlagQueryService, Services.Singleton.FlagQueryService>();
         services.AddSingleton<IFlagCommandService, Services.Singleton.FlagCommandService>();
 
@@ -62,6 +65,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFlagCommandStorage, Storages.ReadOnly.FlagCommandStorage>();
         services.AddScoped<IFlagManager, FlagManager>();
         services.AddSingleton<IFlagService, Services.Singleton.FlagService>();
+        services.AddSingleton<IFlagCacheService, Services.Singleton.FlagCacheService>();
         services.AddSingleton<IFlagQueryService, Services.Singleton.FlagQueryService>();
         services.AddSingleton<IFlagCommandService, Services.Singleton.FlagCommandService>();
 

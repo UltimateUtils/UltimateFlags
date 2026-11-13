@@ -22,6 +22,8 @@ public class IsOnSteps
 
     private readonly IFlagService _flagService;
 
+    private readonly IFlagCacheService _flagCacheService;
+
     private readonly IFlagQueryService _flagQueryService;
 
     private readonly IFlagCommandService _flagCommandService;
@@ -38,6 +40,7 @@ public class IsOnSteps
         ScenarioContext scenarioContext,
         MyFlagDbContext flagDbContext,
         IFlagService flagService,
+        IFlagCacheService flagCacheService,
         IFlagQueryService flagQueryService,
         IFlagCommandService flagCommandService,
         IServiceScopeFactory serviceScopeFactory,
@@ -49,6 +52,7 @@ public class IsOnSteps
         _scenarioContext = scenarioContext;
         _flagDbContext = flagDbContext;
         _flagService = flagService;
+        _flagCacheService = flagCacheService;
         _flagQueryService = flagQueryService;
         _flagCommandService = flagCommandService;
         _serviceScopeFactory = serviceScopeFactory;
@@ -72,6 +76,12 @@ public class IsOnSteps
         }
     }
 
+    [Given("cache has been cleared")]
+    public void CacheHasBeenCleared()
+    {
+        _flagCacheService.Clear();
+    }
+
     #endregion Given
 
     #region When
@@ -84,10 +94,26 @@ public class IsOnSteps
         _scenarioContext.Set(actual);
     }
 
+    [When("I call IsOn cache by key, {string}")]
+    public void CallIsOnCacheByKeyMyBuilding(string key)
+    {
+        bool actual = _flagCacheService.IsOn(key);
+
+        _scenarioContext.Set(actual);
+    }
+
     [When("I call async IsOn by key, {string}")]
     public async Task CallAsyncIsOnByKeyMyBuildingAsync(string key)
     {
         bool actual = await _flagService.IsOnAsync(key);
+
+        _scenarioContext.Set(actual);
+    }
+
+    [When("I call async IsOn cache by key, {string}")]
+    public async Task CallAsyncIsOnCacheByKeyMyBuildingAsync(string key)
+    {
+        bool actual = await _flagCacheService.IsOnAsync(key);
 
         _scenarioContext.Set(actual);
     }

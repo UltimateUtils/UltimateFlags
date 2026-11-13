@@ -13,16 +13,20 @@ public class FlagsController : ControllerBase
 
     private readonly IFlagService _flagService;
 
+    private readonly IFlagCacheService _flagCacheService;
+
     private readonly IFlagQueryService _flagQueryService;
 
     public FlagsController(
         ILogger<FlagsController> logger,
         IFlagService flagService,
+        IFlagCacheService flagCacheService,
         IFlagQueryService flagQueryService)
     {
         _logger = logger;
         _flagService = flagService;
         _flagQueryService = flagQueryService;
+        _flagCacheService = flagCacheService;
     }
 
     [HttpGet]
@@ -102,6 +106,7 @@ public class FlagsController : ControllerBase
     {
         _logger.LogDebug("Checking flag with key: {key}", key);
 
-        return _flagService.IsOn(key);
+        return _flagCacheService.IsOn(key);
+        // return _flagService.IsOn(key);
     }
 }

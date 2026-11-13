@@ -54,7 +54,8 @@ Because of this, there are a few special concepts you need to understand.
     Suppose you have the following flags:
 
     --------------         -----------         ------------         --------------
-    | MyBuilding |  <----  | Floor23 |  <----  | Room2301 |  <----  | Table2301a |
+    | MyBuilding |         | Floor23 |         | Room2301 |         | Table2301a |
+    |            | <====== |         | <====== |          | <====== |            |
     | ON         |         | OFF     |         | ON       |         | ON         |
     --------------         -----------         ------------         --------------
 
@@ -78,7 +79,7 @@ Keep in mind that "MyBuilding.Floor23" and "Floor23" are different keys.
 They refer to different flag objects.
 
 
-6. IsOn by "wrong key"
+6. IsOn by "non-existent key"
 
     If a key that doesn't exist is given, IsOn() returns false.
     This is a natural decision, since it asks whether the flag is on.
@@ -87,17 +88,19 @@ They refer to different flag objects.
 
 ## Usage
 
-There are three services in total.
-```csharp
+There are four services in total.
+```
 IFlagService
 IFlagQueryService
 IFlagCommandService
+IFlagCacheService
 ```
 
 1. `IFlagService`
 
-    is the most commonly used service. It has only one method, which uses a `key` to check whether the flag is on.
+    is the most commonly used service. It has a pair of methods, which use a `key` to check whether the flag is on.
     `bool IsOn(string key)`
+    `Task<bool> IsOnAsync(string key, CancellationToken cancellationToken = default)`
 
 
 2. `IFlagQueryService`
@@ -109,6 +112,32 @@ IFlagCommandService
 
     Provides various methods for changing flag values.
 
+
+4. `IFlagCacheService`
+
+    Provides a pair of methods that return the same results as the methods of `IFlagService`, except that the results are stored in a memory cache. They return results the fastest by using the cache.
+    It also provides the following two methods for removing cached values.
+
+```csharp
+public void Evict(string key); // Remove a single cache item
+public void Clear();           // Remove all cached items
+```
+
+    The maximum cache duration can be set through configuration.
+    When using environment variables, set the following value:
+
+    `UltimateFlags:CacheTimeLimitInSec` (Windows)
+    `UltimateFlags__CacheTimeLimitInSec` (Linux)
+
+    When configuring it in `appsettings.json`, it should look like this:
+
+```json
+{
+    "UltimateFlags": {
+        "CacheTimeLimitInSec": 60
+    }
+}
+```
 
 
 ## DI Registration

@@ -133,7 +133,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 5
     await testRunner.WhenAsync("I list async all flags", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -144,7 +144,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "<null>",
                             "TRUE",
@@ -155,7 +155,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:37:26.0661723",
                             "2026-09-30 03:37:26.0661723",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A968-66A6-7189-A0DD-95C844F16129",
                             "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "TRUE",
@@ -166,7 +166,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:38:26.5139868",
                             "2026-09-30 03:38:26.5139868",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A968-9C22-77AF-9C71-14455B6B3F66",
                             "01A1A968-66A6-7189-A0DD-95C844F16129",
                             "TRUE",
@@ -177,7 +177,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:38:50.2655434",
                             "2026-09-30 03:38:50.2655434",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A968-CB3C-7BBB-96D1-537EFB7333A9",
                             "01A1A968-66A6-7189-A0DD-95C844F16129",
                             "TRUE",
@@ -188,7 +188,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:38:58.7826112",
                             "2026-09-30 03:38:58.7826112",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A969-105B-7F0E-9AB4-19E973672346",
                             "01A1A968-66A6-7189-A0DD-95C844F16129",
                             "TRUE",
@@ -199,7 +199,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:39:01.7470543",
                             "2026-09-30 03:39:01.7470543",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A969-5107-7075-A5F9-9ED622B2AAEB",
                             "01A1A968-66A6-7189-A0DD-95C844F16129",
                             "TRUE",
@@ -210,7 +210,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:39:04.4400251",
                             "2026-09-30 03:39:04.4400251",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A969-721E-713C-B658-1782772551C2",
                             "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "TRUE",
@@ -221,7 +221,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:41:02.8863859",
                             "2026-09-30 03:41:02.8863859",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A969-B33C-791C-8E3B-F770A0227ADA",
                             "01A1A969-721E-713C-B658-1782772551C2",
                             "TRUE",
@@ -232,7 +232,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:41:32.8614085",
                             "2026-09-30 03:41:32.8614085",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96A-109B-7B54-976C-324E4484F7A1",
                             "01A1A969-B33C-791C-8E3B-F770A0227ADA",
                             "TRUE",
@@ -243,7 +243,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:42:10.6716511",
                             "2026-09-30 03:42:10.6716511",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96A-27E0-7F76-B371-57E854A1675A",
                             "01A1A969-B33C-791C-8E3B-F770A0227ADA",
                             "TRUE",
@@ -254,7 +254,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:42:13.7318341",
                             "2026-09-30 03:42:13.7318341",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96A-4DD2-73E7-8851-A9D5079B1E45",
                             "01A1A969-B33C-791C-8E3B-F770A0227ADA",
                             "TRUE",
@@ -265,7 +265,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:42:16.7083398",
                             "2026-09-30 03:42:16.7083398",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96A-82B1-75B4-BD87-9894CE2E36B8",
                             "01A1A969-721E-713C-B658-1782772551C2",
                             "TRUE",
@@ -276,7 +276,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:43:00.2007052",
                             "2026-09-30 03:43:00.2007052",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96A-8CE3-727B-8E5A-83A132AD39AA",
                             "01A1A969-721E-713C-B658-1782772551C2",
                             "TRUE",
@@ -287,7 +287,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:43:19.7272716",
                             "2026-09-30 03:43:19.7272716",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96A-C1CA-72B2-8BE0-3E8B96A5BC90",
                             "01A1A96A-8CE3-727B-8E5A-83A132AD39AA",
                             "TRUE",
@@ -298,7 +298,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:43:49.1854194",
                             "2026-09-30 03:43:49.1854194",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96B-351F-7D60-BABF-8EE3F9D6AEE2",
                             "01A1A96A-8CE3-727B-8E5A-83A132AD39AA",
                             "TRUE",
@@ -309,7 +309,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:43:52.2221069",
                             "2026-09-30 03:43:52.2221069",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96B-68FE-77FE-9BD8-C4C03814C7EF",
                             "01A1A969-721E-713C-B658-1782772551C2",
                             "TRUE",
@@ -320,7 +320,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:44:24.5148005",
                             "2026-09-30 03:44:24.5148005",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96B-7D1E-7EFB-88F2-06ADE45F5888",
                             "01A1A969-721E-713C-B658-1782772551C2",
                             "TRUE",
@@ -331,7 +331,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:44:33.9484467",
                             "2026-09-30 03:44:33.9484467",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96B-9FAF-76FB-9661-4360CEB07A73",
                             "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "TRUE",
@@ -342,7 +342,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:45:23.2836617",
                             "2026-09-30 03:45:23.2836617",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96C-0709-7A4E-831F-FB154377E39D",
                             "01A1A968-05EA-7445-9702-95FFA353EA91",
                             "TRUE",
@@ -353,7 +353,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:45:45.9977765",
                             "2026-09-30 03:45:45.9977765",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96C-2145-7840-88C7-A03F45928635",
                             "01A1A96C-0709-7A4E-831F-FB154377E39D",
                             "TRUE",
@@ -364,7 +364,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:46:10.4785162",
                             "2026-09-30 03:46:10.4785162",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96C-86DD-74B3-BF66-7641B575DA9B",
                             "01A1A96C-0709-7A4E-831F-FB154377E39D",
                             "TRUE",
@@ -375,7 +375,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:46:17.4000942",
                             "2026-09-30 03:46:17.4000942",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96C-B820-7EB4-BE78-ECA52CAA1ED9",
                             "01A1A96C-86DD-74B3-BF66-7641B575DA9B",
                             "TRUE",
@@ -386,7 +386,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:46:38.2760252",
                             "2026-09-30 03:46:38.2760252",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96C-F21A-7D7F-B77B-79BB617C30ED",
                             "01A1A96C-86DD-74B3-BF66-7641B575DA9B",
                             "TRUE",
@@ -397,7 +397,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-09-30 03:46:44.7748539",
                             "2026-09-30 03:46:44.7748539",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96D-000F-7AAA-9517-0E9A9C6528E7",
                             "01A1A96C-86DD-74B3-BF66-7641B575DA9B",
                             "TRUE",
@@ -408,7 +408,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-10-17 20:36:30.3876071",
                             "2026-10-17 20:36:30.3876071",
                             "<null>"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "01A1A96D-3A5D-7188-B085-19561F94D850",
                             "01A1A96C-86DD-74B3-BF66-7641B575DA9B",
                             "TRUE",
@@ -420,7 +420,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "2026-10-17 20:36:30.3876072",
                             "<null>"});
 #line 6
-    await testRunner.ThenAsync("all the following flags are returned correctly", ((string)(null)), table1, "Then ");
+    await testRunner.ThenAsync("all the following flags are returned correctly", ((string)(null)), table2, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

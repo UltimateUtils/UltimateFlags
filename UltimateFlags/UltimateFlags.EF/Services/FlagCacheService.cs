@@ -35,8 +35,8 @@ internal class FlagCacheService : IFlagCacheService
             new MemoryCacheEntryOptions
             {
                 Size = 1,
-                SlidingExpiration = TimeSpan.FromSeconds(3),
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(_ultimateFlagConfiguration.CacheLimitInSec),
+                // SlidingExpiration = TimeSpan.FromSeconds(3),
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(_ultimateFlagConfiguration.CacheTimeLimitInSec),
             };
     }
 

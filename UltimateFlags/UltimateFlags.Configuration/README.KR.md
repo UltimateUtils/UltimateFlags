@@ -60,7 +60,8 @@ Multi-Tenant 환경에서 특히 힘을 발휘할 수 있습니다.
     다음과 같은 flag들이 있다고 합시다.
 
     --------------         -----------         ------------         --------------
-    | MyBuilding |  <----  | Floor23 |  <----  | Room2301 |  <----  | Table2301a |
+    | MyBuilding |         | Floor23 |         | Room2301 |         | Table2301a |
+    |            | <====== |         | <====== |          | <====== |            |
     | ON         |         | OFF     |         | ON       |         | ON         |
     --------------         -----------         ------------         --------------
 
@@ -84,26 +85,28 @@ Note:
 서로 다른 flag 객체를 지칭하는 key들입니다.
 
 
-6. IsOn by "wrong key"
+6. IsOn by "non-existent key"
 
     존재하지 않는 key가 주어지면 IsOn()은 false를 반환합니다.
-    켜져 있는지 묻는 것이기에 자연스러운 결정입니다.
+    켜져 있는지 묻는 것이기에 이는 자연스러운 결정입니다.
     참고로, IsOff() 메소드는 없지만 Exists() 메소드를 통해 해당 key를 가지고 있는 flag이 존재하는지 확인해 볼 수 있습니다.
 
 
 ## 사용 방법
 
-필요한 서비스는 총 3개입니다.
-```csharp
+필요한 서비스는 총 4개입니다.
+```
 IFlagService
 IFlagQueryService
 IFlagCommandService
+IFlagCacheService
 ```
 
 1. `IFlagService`
 
-    가장 많이 사용될 서비스입니다. `key`를 이용하여 해당 feature가 켜져 있는지 확인하는 단 하나의 메소드만을 가지고 있습니다.
+    가장 많이 사용될 서비스입니다. `key`를 이용하여 해당 flag이 켜져 있는지 확인하는 한 쌍의 메소드들을 가지고 있습니다.
     `bool IsOn(string key)`
+    `Task<bool> IsOnAsync(string key, CancellationToken cancellationToken)`
 
 
 2. `IFlagQueryService`
@@ -117,6 +120,32 @@ IFlagCommandService
     Configuration의 값들을 이용하기 때문입니다. Flag 값 변경을 원하면 configuration에 직접 접근하여 변경해야 합니다.
     UltimateFlags 서비스를 이용하여 변경할 수는 없습니다. 해당 기능을 원하시면 `UltimateFlags.EF` 등의 다른 패키지 사용을 고려해보세요.
 
+
+4. `IFlagCacheService`
+
+    `IFlagService`의 메소드들과 같은 결과를 반환하는 한 쌍의 메소드들이 있습니다. 단, memory cache를 통하여 결과값을 저장합니다. Cache를 통하여 가장 빠른 결과를 반환합니다.
+   Cache된 값들을 제거하는 다음 두 메소드도 제공합니다.
+
+```csharp
+public void Evict(string key); // 하나의 cache 아이템 제거
+public void Clear();           // cache된 모든 아이템 제거
+```
+
+    Cache의 최대 유지 시간은 configuration을 통해서 설정할 수 있습니다.
+    환경변수를 이용할 경우 다음 값을 설정하면 됩니다.
+
+    `UltimateFlags:CacheTimeLimitInSec` (Windows)
+    `UltimateFlags__CacheTimeLimitInSec` (Linux)
+
+    `appsettings.json`에 설정하는 경우 다음과 같은 모양으로 설정되어야 합니다.
+
+```json
+{
+    "UltimateFlags": {
+        "CacheTimeLimitInSec": 60
+    }
+}
+```
 
 
 ## DI 등록

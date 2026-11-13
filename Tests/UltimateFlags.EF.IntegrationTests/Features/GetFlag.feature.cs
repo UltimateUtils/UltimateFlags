@@ -168,7 +168,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 6
     await testRunner.WhenAsync(string.Format("I retrieve a flag by Id, {0}", id), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -179,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table3.AddRow(new string[] {
+                table1.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -191,7 +191,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             string.Format("{0}", deletedAt)});
 #line 7
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table3, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table1, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -289,7 +289,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 52
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\' and {1}", name, parentId), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table4 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -300,7 +300,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table4.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -312,7 +312,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 53
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table4, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table2, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -411,7 +411,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line 98
     await testRunner.WhenAsync(string.Format("I retrieve a flag by \'{0}\'", key), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table3 = new global::Reqnroll.Table(new string[] {
                             "Id",
                             "ParentId",
                             "IsOn",
@@ -422,7 +422,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             "CreatedAt",
                             "UpdatedAt",
                             "DeletedAt"});
-                table5.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             string.Format("{0}", id),
                             string.Format("{0}", parentId),
                             string.Format("{0}", isOn),
@@ -434,7 +434,7 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
                             string.Format("{0}", updatedAt),
                             "<null>"});
 #line 99
-    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table5, "Then ");
+    await testRunner.ThenAsync("the following flag is returned correctly", ((string)(null)), table3, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

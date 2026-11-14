@@ -5,12 +5,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>UltimateFlags.Configuration</PackageId>
-        <Version>0.0.7</Version>
+        <Version>0.0.8</Version>
         <Authors>Soonil Hong</Authors>
         <Company>MySmallMapleTree</Company>
         <PackageDescription>Ultimate FeatureFlags Configuration</PackageDescription>
         <RepositoryUrl>https://github.com/UltimateUtils/UltimateFlags</RepositoryUrl>
-        <PackageTags>featureflag featuretoggle flag toggle</PackageTags>
+        <PackageTags>FeatureFlag FeatureToggle Feature Flag Toggle</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     </PropertyGroup>

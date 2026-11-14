@@ -5,14 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>UltimateFlags.Abstraction</PackageId>
-        <Version>0.0.6</Version>
+        <Version>0.0.7</Version>
         <Authors>Soonil Hong</Authors>
         <Company>MySmallMapleTree</Company>
         <PackageDescription>Ultimate FeatureFlags Abstraction</PackageDescription>
         <RepositoryUrl>https://github.com/UltimateUtils/UltimateFlags</RepositoryUrl>
         <PackageTags>featureflag featuretoggle flag toggle</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="LICENSE" Pack="true" PackagePath=""/>
+        <None Include="LICENSE.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
     <ItemGroup>
